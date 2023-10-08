@@ -1,0 +1,7 @@
+/* JavaFX CSS - Leave this comment until you have a
+ * t least create one rule which uses -fx-Property
+ */
+ 
+ #board-grid {
+	-fx-background-image: url(file:res/textures/merel_background.png);
+}
