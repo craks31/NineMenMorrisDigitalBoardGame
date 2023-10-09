@@ -1,63 +1,35 @@
-package sprint1_0.product;
+package sprint1_0.product.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
-  public static final int NUM_POSITIONS_OF_BOARD = 24;
-  private List<Position> blankPositionList;
-  private List<Position> filledPositionList;
-  private MasterPlayer player1;
-  private MasterPlayer player2;
-  
-  public List<Position> getBlankPositionList() {
-    return blankPositionList;
+import javafx.scene.shape.Circle;
+import sprint1_0.product.model.Board;
+import sprint1_0.product.model.MasterPlayer;
+import sprint1_0.product.model.Position;
+import sprint1_0.product.model.PositionCircle;
+
+public class BoardInitService {
+  public void initPlayers(Board board,List<Circle> player1Coins, List<Circle> player2Coins ) {
+	  MasterPlayer player1 = new MasterPlayer();
+	  player1.setCoins(player1Coins);
+	  MasterPlayer player2 = new MasterPlayer();
+	  player2.setCoins(player2Coins);
+	  board.setPlayer1(player1);
+	  board.setPlayer2(player2);
   }
 
-  public void setBlankPositionList(List<Position> blankPositionList) {
-    this.blankPositionList = blankPositionList;
-  }
+  public Board setUpBoard(List<PositionCircle> positionCircleList, List<Circle> player1Coins, List<Circle> player2Coins) {
 
-  public List<Position> getFilledPositionList() {
-    return filledPositionList;
-  }
+    Board board = new Board();
 
-  public void setFilledPositionList(List<Position> filledPositionList) {
-    this.filledPositionList = filledPositionList;
-  }
+    List<PositionCircle> blankCircles = positionCircleList;
 
-  public MasterPlayer getPlayer1() {
-    return player1;
-  }
-
-  public void setPlayer1(MasterPlayer player1) {
-    this.player1 = player1;
-  }
-
-  public MasterPlayer getPlayer2() {
-    return player2;
-  }
-
-  public void setPlayer2(MasterPlayer player2) {
-    this.player2 = player2;
-  }
-
-  public static int getNumPositionsOfBoard() {
-    return NUM_POSITIONS_OF_BOARD;
-  }
-
-  public void initPlayers() {
-	  player1 = new MasterPlayer();
-	  player2 = new MasterPlayer();
-	  
-	  player1.getPlayerColor();
-	  
-  }
-  public void setUpBoard() {
-	  
-	GUI boardGUI = new GUI();
-    List<PositionCircle> blankCircles = boardGUI.getPositionCircleList();
-    for (int i = 0; i < NUM_POSITIONS_OF_BOARD; i++) {
-      Position blankPosition = (Position) blankCircles.get(i);
+    List<Position> blankPositionList = new ArrayList<>();
+    for (int i = 0; i < board.NUM_POSITIONS_OF_BOARD; i++) {
+      PositionCircle blankPositionCircle = blankCircles.get(i);
+      Position blankPosition = new Position();
+      blankPosition.setPositionCircle(blankPositionCircle);
       blankPositionList.add(blankPosition);
       blankPosition.setPositionId(i);
     }
@@ -149,6 +121,9 @@ public class Board {
 
     blankPositionList.get(23).setLeft(blankPositionList.get(22));
     blankPositionList.get(23).setUp(blankPositionList.get(14));
-    setBlankPositionList(blankPositionList);
+    
+    board.setBlankPositionList(blankPositionList);
+    initPlayers(board, player1Coins, player2Coins);
+    return board;
   }
 }

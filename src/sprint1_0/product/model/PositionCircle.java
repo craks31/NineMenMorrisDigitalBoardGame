@@ -1,4 +1,4 @@
-package sprint1_0.product;
+package sprint1_0.product.model;
 
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;

@@ -1,4 +1,4 @@
-package sprint1_0.product;
+package sprint1_0.product.ui;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,14 +9,18 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sprint1_0.product.controller.GameController;
+import sprint1_0.product.model.PositionCircle;
 
-public class GUI extends Application {
+public class GameManagerGUI extends Application {
 
  private List<PositionCircle> positionCircleList;
  
@@ -24,7 +28,21 @@ public class GUI extends Application {
  
  private List<Circle> player2Coins;
  
+ private Text displayTextTurn;
  
+ private Circle displayCircleTurn;
+
+public Text getDisplayTextTurn() {
+return displayTextTurn;}
+
+public void setDisplayTextTurn(Text displayTextTurn) {
+this.displayTextTurn = displayTextTurn;}
+
+public Circle getDisplayCircleTurn() {
+return displayCircleTurn;}
+
+public void setDisplayCircleTurn(Circle displayCircleTurn) {
+this.displayCircleTurn = displayCircleTurn;}
 
 public List<Circle> getPlayer1Coins() {
 return player1Coins;}
@@ -38,7 +56,7 @@ return player2Coins;}
 public void setPlayer2Coins(List<Circle> player2Coins) {
 this.player2Coins = player2Coins;}
 
-public GUI() {
+public GameManagerGUI() {
     super();
   }
 
@@ -48,30 +66,34 @@ public GUI() {
 
       // Setting title to Window Pop-up.
       primaryStage.setTitle("Nine Men Morris Digital Board Game");
-      // scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+     
 		Scene scene = new Scene(boardInit(),700,600);
 	      //setting color to the scene 
-		scene.setFill(Color.ROSYBROWN); 
-
-
-       
+		scene.setFill(Color.ROSYBROWN);  
       primaryStage.setScene(scene);
       primaryStage.show();
+      GameController gameController = new GameController();
+      gameController.init(positionCircleList, player1Coins, player2Coins);
+      Color color = gameController.decidePlayerTurn(player1Coins, player2Coins);
       
-      EventHandler<javafx.scene.input.MouseEvent> eventHandler = 
-    		   new EventHandler<javafx.scene.input.MouseEvent>() { 
-    		   
-    		   @Override 
-    		   public void handle(javafx.scene.input.MouseEvent e) { 
-    			   
-    		      getPlayer1Coins().get(0).setFill(Color.DARKSLATEBLUE);             
-    		   } 
-    		};    
+     ((Group)scene.getRoot()).getChildren();
+      EventHandler<javafx.scene.input.MouseEvent> eventHandler =
+          new EventHandler<javafx.scene.input.MouseEvent>() {
 
-    		for(int i=0; i<getPlayer1Coins().size();i++) {
-    			//Adding the event handler 
-    			getPlayer1Coins().get(i).addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, eventHandler);
-    		}
+            @Override
+            public void handle(javafx.scene.input.MouseEvent e) {
+
+            
+            ((Circle) e.getSource()).setFill(color);
+            }
+          };
+      for (int i = 0; i < positionCircleList.size(); i++) {
+        // Adding the event handler
+    	  positionCircleList
+            .get(i)
+            .addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, eventHandler);
+      }
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -83,6 +105,17 @@ public GUI() {
 
   private Group boardInit() throws FileNotFoundException {
 	  
+	Button button = new Button("NEW GAME"); 
+	
+	button.setLayoutX(30);
+	button.setLayoutY(30);
+	
+	Text displayText = new Text();
+	displayText.setText("Who's Turn ?");
+	displayText.setX(200);
+	displayText.setY(80);
+	displayText.setFont(Font.font(30));
+	Circle displayCircle = new Circle(400.0d,70.0d,16.0d, Color.BLACK);
     Image myImage = new Image(new FileInputStream(".\\resources\\images\\nmbg.png"));
 
     // Setting the image view
@@ -170,7 +203,8 @@ public GUI() {
     text2.setX(25);
     text2.setY(380);
     
-		Group board = new Group(text1, text2, imageView);
+		Group board = new Group(text1, text2, button, displayCircle,
+			displayText,imageView);
 		positionCircleList.forEach(board.getChildren()::add);
 	    for(int i=0;i<9;i++) {
 	    	Circle c1;
@@ -201,6 +235,10 @@ public GUI() {
 
   public void setPositionCircleList(List<PositionCircle> positionCircleList) {
     this.positionCircleList = positionCircleList;
+  }
+  
+  public void playerTurnDisplayBox(Group board) {
+	  
   }
   
 }
