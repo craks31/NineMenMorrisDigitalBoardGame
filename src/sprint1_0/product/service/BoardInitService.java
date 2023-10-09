@@ -3,27 +3,25 @@ package sprint1_0.product.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.shape.Circle;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.MasterPlayer;
 import sprint1_0.product.model.Position;
 import sprint1_0.product.model.PositionCircle;
 
 public class BoardInitService {
-  public void initPlayers(Board board,List<Circle> player1Coins, List<Circle> player2Coins ) {
-	  MasterPlayer player1 = new MasterPlayer();
-	  player1.setCoins(player1Coins);
-	  MasterPlayer player2 = new MasterPlayer();
-	  player2.setCoins(player2Coins);
-	  board.setPlayer1(player1);
-	  board.setPlayer2(player2);
+  
+  public Board giveNewBoard() {
+	  Board newBoard = new Board();
+	  MasterPlayer p1 = new MasterPlayer();
+	  MasterPlayer p2 = new MasterPlayer();
+	  newBoard.setPlayer1(p1);
+	  newBoard.setPlayer2(p2);
+  return newBoard;
   }
 
-  public Board setUpBoard(List<PositionCircle> positionCircleList, List<Circle> player1Coins, List<Circle> player2Coins) {
+  public void setUpBoard(Board board) {
 
-    Board board = new Board();
-
-    List<PositionCircle> blankCircles = positionCircleList;
+    List<PositionCircle> blankCircles = board.getPositionCircleList();
 
     List<Position> blankPositionList = new ArrayList<>();
     for (int i = 0; i < board.NUM_POSITIONS_OF_BOARD; i++) {
@@ -123,7 +121,5 @@ public class BoardInitService {
     blankPositionList.get(23).setUp(blankPositionList.get(14));
     
     board.setBlankPositionList(blankPositionList);
-    initPlayers(board, player1Coins, player2Coins);
-    return board;
   }
 }

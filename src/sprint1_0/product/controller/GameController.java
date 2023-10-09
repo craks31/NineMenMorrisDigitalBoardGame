@@ -1,25 +1,30 @@
 package sprint1_0.product.controller;
 
-import java.util.List;
+import java.util.Random;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import sprint1_0.product.model.Board;
-import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.service.BoardInitService;
+import sprint1_0.product.service.CoinPlacementService;
 
 public class GameController {
-	
-	public void init(List<PositionCircle> positionCircleList, List<Circle> player1Coins, List<Circle> player2Coins) {
-		BoardInitService boardInitService = new BoardInitService();
-		startGame(boardInitService.setUpBoard(positionCircleList, player1Coins, player2Coins));
+	Board board;
+	BoardInitService boardInitService = new BoardInitService();
+	CoinPlacementService coinPlacementService = new CoinPlacementService();
+	public void init(Board board) {
+		this.board = board;
+		boardInitService.setUpBoard(board);		
 	}
 	
 	public void startGame(Board board) {}
 
-  public Color decidePlayerTurn(List<Circle> player1Coins, List<Circle> player2Coins) {
-    
-    return Color.BLUEVIOLET;
+  public Color decidePlayerTurn(Board board) {
+	  return coinPlacementService.decidePlayerColorTurn(board);
+
+  }
+  
+  public Board getNewBoard() {
+	  return boardInitService.giveNewBoard();
   }
 	
 	

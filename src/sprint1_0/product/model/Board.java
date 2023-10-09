@@ -2,14 +2,51 @@ package sprint1_0.product.model;
 
 import java.util.List;
 
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+
 public class Board {
-  public final int NUM_POSITIONS_OF_BOARD = 24;
+	
+  public Board() {
+    super();
+  }
+
+public final int NUM_POSITIONS_OF_BOARD = 24;
   private List<Position> blankPositionList;
   private List<Position> filledPositionList;
   private MasterPlayer player1;
   private MasterPlayer player2;
+  private List<PositionCircle> positionCircleList;
+
   
-  public List<Position> getBlankPositionList() {
+  private Text displayTextTurn;
+  
+  private Circle displayCircleTurn;
+  
+  public List<PositionCircle> getPositionCircleList() {
+return positionCircleList;}
+
+public void setPositionCircleList(List<PositionCircle> positionCircleList) {
+this.positionCircleList = positionCircleList;}
+
+
+
+public Text getDisplayTextTurn() {
+return displayTextTurn;}
+
+public void setDisplayTextTurn(Text displayTextTurn) {
+this.displayTextTurn = displayTextTurn;}
+
+public Circle getDisplayCircleTurn() {
+return displayCircleTurn;}
+
+public void setDisplayCircleTurn(Circle displayCircleTurn) {
+this.displayCircleTurn = displayCircleTurn;}
+
+public int getNUM_POSITIONS_OF_BOARD() {
+return NUM_POSITIONS_OF_BOARD;}
+
+public List<Position> getBlankPositionList() {
     return blankPositionList;
   }
 
