@@ -26,7 +26,8 @@ public class GameManagerGUI extends Application {
 	public static final Color player1Color = Color.CORNFLOWERBLUE;
 	public static final Color player2Color = Color.GREEN;
 	Button decideButton;
-	Button newGameButton;
+	Button startNewGameButton;
+	Button resetGameButton;
 
 	public GameManagerGUI() {
 		super();
@@ -51,11 +52,23 @@ public class GameManagerGUI extends Application {
 
 				@Override
 				public void handle(javafx.scene.input.MouseEvent e) {
-					gameController.startNewGame(board, decideButton);
+					decideButton.setDisable(false);
+					startNewGameButton.setDisable(true);
+					resetGameButton.setDisable(false);
+				}
+			};
+			startNewGameButton.setOnMouseClicked(newGameButtonEventHandler);
+
+			EventHandler<javafx.scene.input.MouseEvent> resetGameButtonEventHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+
+				@Override
+				public void handle(javafx.scene.input.MouseEvent e) {
+					gameController.resetGame(board);
 
 				}
 			};
-			newGameButton.setOnMouseClicked(newGameButtonEventHandler);
+			resetGameButton.setOnMouseClicked(resetGameButtonEventHandler);
+			
 			EventHandler<javafx.scene.input.MouseEvent> decideButtonEventHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
 
 				@Override
@@ -65,13 +78,14 @@ public class GameManagerGUI extends Application {
 
 					displayPlayerTurn(board, color);
 					decideButton.setDisable(true);
+					gameController.startGame(board);
 				}
 			};
 
 			// Adding the event handler
 			decideButton.setOnMouseClicked(decideButtonEventHandler);
 
-			gameController.startGame(board);
+//			gameController.startGame(board);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,15 +98,23 @@ public class GameManagerGUI extends Application {
 
 	private Group boardGUIInit(Board board) throws FileNotFoundException {
 
-		newGameButton = new Button("NEW GAME");
+		startNewGameButton = new Button("NEW GAME");
 
-		newGameButton.setLayoutX(15);
-		newGameButton.setLayoutY(280);
+		startNewGameButton.setLayoutX(15);
+		startNewGameButton.setLayoutY(280);
+		
+		resetGameButton = new Button("RESET GAME");
+
+		resetGameButton.setLayoutX(15);
+		resetGameButton.setLayoutY(320);
+		resetGameButton.setDisable(true);
+		
 
 		decideButton = new Button("DECIDE");
 
 		decideButton.setLayoutX(480);
 		decideButton.setLayoutY(55);
+		decideButton.setDisable(true);
 
 		Text displayText = new Text();
 		displayText.setText("Who's Turn ?");
@@ -185,7 +207,7 @@ public class GameManagerGUI extends Application {
 		text2.setX(25);
 		text2.setY(380);
 
-		Group boardGroup = new Group(text1, text2, newGameButton, decideButton, displayCircle, displayText, imageView);
+		Group boardGroup = new Group(text1, text2, startNewGameButton,resetGameButton, decideButton, displayCircle, displayText, imageView);
 		positionCircleList.forEach(boardGroup.getChildren()::add);
 		for (int i = 0; i < 9; i++) {
 			Circle c1;
@@ -209,6 +231,9 @@ public class GameManagerGUI extends Application {
 		board.getPlayer2().setPlayerColor(player1Color);
 		board.setDisplayTextTurn(displayText);
 		board.setDisplayCircleTurn(displayCircle);
+		board.setDecideButton(decideButton);
+		board.setStartNewGameButton(startNewGameButton);
+		board.setResetGameButton(resetGameButton);
 		return boardGroup;
 	}
 
