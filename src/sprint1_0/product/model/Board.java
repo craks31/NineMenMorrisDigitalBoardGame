@@ -2,9 +2,7 @@ package sprint1_0.product.model;
 
 import java.util.List;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -15,19 +13,26 @@ public class Board {
 	}
 
 	public final int NUM_POSITIONS_OF_BOARD = 24;
+	
 	private List<Position> blankPositionList;
+	
 	private List<Position> filledPositionList;
+	
 	private MasterPlayer player1;
+	
 	private MasterPlayer player2;
+	
 	private List<PositionCircle> positionCircleList;
 
 	private Text displayTextTurn;
 
 	private Circle displayCircleTurn;
+	
 	private Button decideButton;
+	
 	private Button startNewGameButton;
+	
 	private Button resetGameButton;
-	private EventHandler<MouseEvent> coinFillerEventHandler;
 
 	public List<PositionCircle> getPositionCircleList() {
 		return positionCircleList;
@@ -112,12 +117,6 @@ public class Board {
 	public void setResetGameButton(Button resetGameButton) {
 		this.resetGameButton = resetGameButton;
 	}
-	public EventHandler<MouseEvent> getCoinFillerEventHandler()
-	{
-		return getCoinFillerEventHandler();
-	}
-	public void setCoinFillerEventHandler(EventHandler<MouseEvent> coinFillerEventHandler) {
-		this.coinFillerEventHandler = coinFillerEventHandler;
-	}
+
 	
 }

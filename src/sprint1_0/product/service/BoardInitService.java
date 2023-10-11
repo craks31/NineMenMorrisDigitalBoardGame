@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.MasterPlayer;
@@ -13,14 +11,14 @@ import sprint1_0.product.model.Position;
 import sprint1_0.product.model.PositionCircle;
 
 public class BoardInitService {
-  
+
   public Board giveNewBoard() {
-	  Board newBoard = new Board();
-	  MasterPlayer p1 = new MasterPlayer();
-	  MasterPlayer p2 = new MasterPlayer();
-	  newBoard.setPlayer1(p1);
-	  newBoard.setPlayer2(p2);
-  return newBoard;
+    Board newBoard = new Board();
+    MasterPlayer p1 = new MasterPlayer();
+    MasterPlayer p2 = new MasterPlayer();
+    newBoard.setPlayer1(p1);
+    newBoard.setPlayer2(p2);
+    return newBoard;
   }
 
   public void setUpBoard(Board board) {
@@ -123,25 +121,46 @@ public class BoardInitService {
 
     blankPositionList.get(23).setLeft(blankPositionList.get(22));
     blankPositionList.get(23).setUp(blankPositionList.get(14));
-    
+
     board.setBlankPositionList(blankPositionList);
   }
 
-public void resetBoard(Board board) {
-	
-	board.getDecideButton().setDisable(true);
-	board.getStartNewGameButton().setDisable(false);
-	board.getResetGameButton().setDisable(true);
-	board.getDisplayTextTurn().setText("Who's Turn?");
-	board.getDisplayCircleTurn().setFill(Color.BLACK);
-	for(int i=0;i<board.getPositionCircleList().size();i++) {
-		board.getPositionCircleList().get(i).setFill(Color.ROSYBROWN);
-		board.getPositionCircleList().get(i).removeEventHandler(MouseEvent.MOUSE_CLICKED, board.getCoinFillerEventHandler());
+  public void resetGame(Board board) {
+    EventHandler<javafx.scene.input.MouseEvent> resetGameButtonEventHandler =
+        new EventHandler<javafx.scene.input.MouseEvent>() {
 
-	}
-			
-	
-	
-}
+          @Override
+          public void handle(javafx.scene.input.MouseEvent e) {
+            board.getDecideButton().setDisable(true);
+            board.getStartNewGameButton().setDisable(false);
+            board.getResetGameButton().setDisable(true);
+            board.getDisplayTextTurn().setText("Who's Turn?");
+            board.getDisplayCircleTurn().setFill(Color.BLACK);
+            for (int i = 0; i < board.getPositionCircleList().size(); i++) {
+              board.getPositionCircleList().get(i).setFill(Color.ROSYBROWN);
+              board
+                  .getPositionCircleList()
+                  .get(i)
+                  .setDisable(true);
+                  
+            }
+          }
+        };
+    board.getResetGameButton().setOnMouseClicked(resetGameButtonEventHandler);
+  }
+
+  public void newGame(Board board) {
+    EventHandler<javafx.scene.input.MouseEvent> newGameButtonEventHandler =
+        new EventHandler<javafx.scene.input.MouseEvent>() {
+
+          @Override
+          public void handle(javafx.scene.input.MouseEvent e) {
+            board.getDecideButton().setDisable(false);
+            board.getStartNewGameButton().setDisable(true);
+            board.getResetGameButton().setDisable(false);
+          }
+        };
+    board.getStartNewGameButton().setOnMouseClicked(newGameButtonEventHandler);
+  }
   
 }
