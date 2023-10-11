@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -28,6 +29,7 @@ public class GameManagerGUI extends Application {
   Button decideButton;
   Button startNewGameButton;
   Button resetGameButton;
+  EventHandler<MouseEvent> resetGameButtonEventHandler;
 
   public GameManagerGUI() {
     super();
@@ -37,20 +39,6 @@ public class GameManagerGUI extends Application {
   public void start(Stage primaryStage) throws Exception {
 
     gameInit(primaryStage);
-    EventHandler<javafx.scene.input.MouseEvent> resetGameButtonEventHandler =
-        new EventHandler<javafx.scene.input.MouseEvent>() {
-
-          @Override
-          public void handle(javafx.scene.input.MouseEvent e) {
-            try {
-              gameInit(primaryStage);
-            } catch (Exception e1) {
-              e1.printStackTrace();
-            }
-          }
-        };
-
-    resetGameButton.setOnMouseClicked(resetGameButtonEventHandler);
   }
 
   public static void main(String[] args) {
@@ -245,5 +233,21 @@ public class GameManagerGUI extends Application {
 
     // Start Game After Deciding
     gameController.startGame(board, decidedColor);
+
+    resetGameButtonEventHandler =
+        new EventHandler<javafx.scene.input.MouseEvent>() {
+
+          @Override
+          public void handle(javafx.scene.input.MouseEvent e) {
+            try {
+
+              gameInit(primaryStage);
+
+            } catch (Exception e1) {
+              e1.printStackTrace();
+            }
+          }
+        };
+    resetGameButton.setOnMouseClicked(resetGameButtonEventHandler);
   }
 }

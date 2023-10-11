@@ -45,18 +45,28 @@ public class CoinPlacementService {
 
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
+            if (!board.getPlayer1().getCoins().isEmpty()
+                || !board.getPlayer2().getCoins().isEmpty()) {
+              ((Circle) e.getSource()).setFill(board.getDisplayCircleTurn().getFill());
 
-            ((Circle) e.getSource()).setFill(board.getDisplayCircleTurn().getFill());
-            if (board.getDisplayCircleTurn().getFill().equals(GameConstants.player1Color)) {
-              board.getDisplayCircleTurn().setFill(GameConstants.player2Color);
-              displayPlayerTurn(board, GameConstants.player2Color);
-            } else {
-              board.getDisplayCircleTurn().setFill(GameConstants.player1Color);
-              displayPlayerTurn(board, GameConstants.player1Color);
+              if (board.getDisplayCircleTurn().getFill().equals(GameConstants.player1Color)) {
+                // IF PLAYER1 TURN
+                displayPlayerTurn(board, GameConstants.player2Color);
+                board.getPlayer1().getCoins().get(0).setFill(Color.ROSYBROWN);
+                ;
+                board.getPlayer1().getCoins().remove(0);
+              } else {
+                // IF PLAYER2 TURN
+                displayPlayerTurn(board, GameConstants.player1Color);
+                board.getPlayer2().getCoins().get(0).setFill(Color.ROSYBROWN);
+                ;
+                board.getPlayer2().getCoins().remove(0);
+              }
+              ((Circle) e.getSource()).setDisable(true);
             }
-            ((Circle) e.getSource()).setDisable(true);
           }
         };
+
     for (int i = 0; i < board.getBlankPositionList().size(); i++) {
       // Adding the event handler
       board.getBlankPositionList().get(i).getPositionCircle().setDisable(false);
