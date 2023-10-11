@@ -49,16 +49,16 @@ public class CoinPlacementService {
                 || !board.getPlayer2().getCoins().isEmpty()) {
               ((Circle) e.getSource()).setFill(board.getDisplayCircleTurn().getFill());
 
-              if (board.getDisplayCircleTurn().getFill().equals(GameConstants.player1Color)) {
+              if (board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER1COLOR)) {
                 // IF PLAYER1 TURN
-                displayPlayerTurn(board, GameConstants.player2Color);
-                board.getPlayer1().getCoins().get(0).setFill(Color.ROSYBROWN);
+                displayPlayerTurn(board, GameConstants.PLAYER2COLOR);
+                board.getPlayer1().getCoins().get(0).setFill( GameConstants.BACKGROUNDCOLOR);
                 ;
                 board.getPlayer1().getCoins().remove(0);
               } else {
                 // IF PLAYER2 TURN
-                displayPlayerTurn(board, GameConstants.player1Color);
-                board.getPlayer2().getCoins().get(0).setFill(Color.ROSYBROWN);
+                displayPlayerTurn(board, GameConstants.PLAYER1COLOR);
+                board.getPlayer2().getCoins().get(0).setFill( GameConstants.BACKGROUNDCOLOR);
                 ;
                 board.getPlayer2().getCoins().remove(0);
               }
@@ -80,7 +80,7 @@ public class CoinPlacementService {
   }
 
   public void displayPlayerTurn(Board board, Color color) {
-    if (color.equals(GameConstants.player1Color)) {
+    if (color.equals(GameConstants.PLAYER1COLOR)) {
       board.getDisplayCircleTurn().setFill(color);
       board.getDisplayTextTurn().setText("PLAYER 1'S TURN");
     } else {
