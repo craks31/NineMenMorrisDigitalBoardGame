@@ -1,7 +1,6 @@
 package sprint1_0.product.controller;
 
-import java.util.Random;
-
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.service.BoardInitService;
@@ -16,7 +15,9 @@ public class GameController {
 		boardInitService.setUpBoard(board);		
 	}
 	
-	public void startGame(Board board) {}
+public void startGame(Board board) {
+	coinPlacementService.placeCoins(board);
+}
 
   public Color decidePlayerTurn(Board board) {
 	  return coinPlacementService.decidePlayerColorTurn(board);
@@ -25,6 +26,10 @@ public class GameController {
   
   public Board getNewBoard() {
 	  return boardInitService.giveNewBoard();
+  }
+  
+  public Board placeCoins(Board board, EventHandler eventHandler) {
+	  return board;
   }
 	
 	

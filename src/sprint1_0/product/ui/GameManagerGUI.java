@@ -34,8 +34,8 @@ Button newGameButton;
   @Override
   public void start(Stage primaryStage) throws Exception {
     try {
-    	GameController gameController = new GameController();
-    	Board board = gameController.getNewBoard();
+      GameController gameController = new GameController();
+      Board board = gameController.getNewBoard();
       // Setting title to Window Pop-up.
       primaryStage.setTitle("Nine Men Morris Digital Board Game");
 
@@ -44,48 +44,28 @@ Button newGameButton;
       scene.setFill(Color.ROSYBROWN);
       primaryStage.setScene(scene);
       primaryStage.show();
-      
+
       gameController.init(board);
       EventHandler<javafx.scene.input.MouseEvent> decideButtonEventHandler =
-              new EventHandler<javafx.scene.input.MouseEvent>() {
-
-                @Override
-                public void handle(javafx.scene.input.MouseEvent e) {
-
-                	 Color color = gameController.decidePlayerTurn(board);
-                	 if(color.equals(player1Color)) {
-                   	  board.getDisplayCircleTurn().setFill(color);
-                   	  board.getDisplayTextTurn().setText("PLAYER 1'S TURN");
-                     }
-                     else {
-                   	  board.getDisplayCircleTurn().setFill(color);
-                   	  board.getDisplayTextTurn().setText("PLAYER 2'S TURN");
-                     }
-                }
-              };
-          
-            // Adding the event handler
-        	  decideButton.setOnMouseClicked(decideButtonEventHandler);
-          
-      
-
-      ((Group) scene.getRoot()).getChildren();
-      EventHandler<javafx.scene.input.MouseEvent> coinFillerEventHandler =
           new EventHandler<javafx.scene.input.MouseEvent>() {
 
             @Override
             public void handle(javafx.scene.input.MouseEvent e) {
 
-              ((Circle) e.getSource()).setFill(board.getDisplayCircleTurn().getFill());
+              Color color = gameController.decidePlayerTurn(board);
+
+              displayPlayerTurn(board, color);
+              decideButton.setDisable(true);
             }
           };
-      for (int i = 0; i < board.getPositionCircleList().size(); i++) {
-        // Adding the event handler
-    	  board.getPositionCircleList()
-            .get(i)
-            .addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, coinFillerEventHandler);
-      }
 
+       
+      // Adding the event handler
+      decideButton.setOnMouseClicked(decideButtonEventHandler);
+
+      
+      gameController.startGame(board);
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -97,11 +77,11 @@ Button newGameButton;
 
   private Group boardGUIInit(Board board) throws FileNotFoundException {
 
-	newGameButton = new Button("NEW GAME");
+    newGameButton = new Button("NEW GAME");
 
     newGameButton.setLayoutX(30);
     newGameButton.setLayoutY(30);
-    
+
     decideButton = new Button("DECIDE");
 
     decideButton.setLayoutX(300);
@@ -198,7 +178,8 @@ Button newGameButton;
     text2.setX(25);
     text2.setY(380);
 
-    Group boardGroup = new Group(text1, text2, newGameButton, decideButton,displayCircle, displayText, imageView);
+    Group boardGroup =
+        new Group(text1, text2, newGameButton, decideButton, displayCircle, displayText, imageView);
     positionCircleList.forEach(boardGroup.getChildren()::add);
     for (int i = 0; i < 9; i++) {
       Circle c1;
@@ -225,5 +206,13 @@ Button newGameButton;
     return boardGroup;
   }
 
-  public void playerTurnDisplayBox(Group board) {}
+  public void displayPlayerTurn(Board board, Color color) {
+    if (color.equals(player1Color)) {
+      board.getDisplayCircleTurn().setFill(color);
+      board.getDisplayTextTurn().setText("PLAYER 1'S TURN");
+    } else {
+      board.getDisplayCircleTurn().setFill(color);
+      board.getDisplayTextTurn().setText("PLAYER 2'S TURN");
+    }
+  }
 }
