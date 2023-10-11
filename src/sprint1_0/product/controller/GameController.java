@@ -1,6 +1,7 @@
 package sprint1_0.product.controller;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.service.BoardInitService;
@@ -31,6 +32,12 @@ public void startGame(Board board) {
   public Board placeCoins(Board board, EventHandler eventHandler) {
 	  return board;
   }
+
+public void startNewGame(Board board,Button newGameButton) {
+	// TODO Auto-generated method stub
+	
+	 boardInitService.resetBoard(board,newGameButton);
+}
 	
 	
 }

@@ -23,196 +23,202 @@ import sprint1_0.product.model.PositionCircle;
 
 public class GameManagerGUI extends Application {
 
-public static final Color player1Color = Color.CORNFLOWERBLUE;
-public static final Color player2Color = Color.GREEN;
-Button decideButton;
-Button newGameButton;
-  public GameManagerGUI() {
-    super();
-  }
+	public static final Color player1Color = Color.CORNFLOWERBLUE;
+	public static final Color player2Color = Color.GREEN;
+	Button decideButton;
+	Button newGameButton;
 
-  @Override
-  public void start(Stage primaryStage) throws Exception {
-    try {
-      GameController gameController = new GameController();
-      Board board = gameController.getNewBoard();
-      // Setting title to Window Pop-up.
-      primaryStage.setTitle("Nine Men Morris Digital Board Game");
+	public GameManagerGUI() {
+		super();
+	}
 
-      Scene scene = new Scene(boardGUIInit(board), 700, 600);
-      // setting color to the scene
-      scene.setFill(Color.ROSYBROWN);
-      primaryStage.setScene(scene);
-      primaryStage.show();
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		try {
+			GameController gameController = new GameController();
+			Board board = gameController.getNewBoard();
+			// Setting title to Window Pop-up.
+			primaryStage.setTitle("Nine Men Morris Digital Board Game");
 
-      gameController.init(board);
-      EventHandler<javafx.scene.input.MouseEvent> decideButtonEventHandler =
-          new EventHandler<javafx.scene.input.MouseEvent>() {
+			Scene scene = new Scene(boardGUIInit(board), 700, 600);
+			// setting color to the scene
+			scene.setFill(Color.ROSYBROWN);
+			primaryStage.setScene(scene);
+			primaryStage.show();
 
-            @Override
-            public void handle(javafx.scene.input.MouseEvent e) {
+			gameController.init(board);
+			EventHandler<javafx.scene.input.MouseEvent> newGameButtonEventHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
 
-              Color color = gameController.decidePlayerTurn(board);
+				@Override
+				public void handle(javafx.scene.input.MouseEvent e) {
+					gameController.startNewGame(board, decideButton);
 
-              displayPlayerTurn(board, color);
-              decideButton.setDisable(true);
-            }
-          };
+				}
+			};
+			newGameButton.setOnMouseClicked(newGameButtonEventHandler);
+			EventHandler<javafx.scene.input.MouseEvent> decideButtonEventHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
 
-       
-      // Adding the event handler
-      decideButton.setOnMouseClicked(decideButtonEventHandler);
+				@Override
+				public void handle(javafx.scene.input.MouseEvent e) {
 
-      
-      gameController.startGame(board);
-      
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+					Color color = gameController.decidePlayerTurn(board);
 
-  public static void main(String[] args) {
-    launch(args);
-  }
+					displayPlayerTurn(board, color);
+					decideButton.setDisable(true);
+				}
+			};
 
-  private Group boardGUIInit(Board board) throws FileNotFoundException {
+			// Adding the event handler
+			decideButton.setOnMouseClicked(decideButtonEventHandler);
 
-    newGameButton = new Button("NEW GAME");
+			gameController.startGame(board);
 
-    newGameButton.setLayoutX(30);
-    newGameButton.setLayoutY(30);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    decideButton = new Button("DECIDE");
+	public static void main(String[] args) {
+		launch(args);
+	}
 
-    decideButton.setLayoutX(300);
-    decideButton.setLayoutY(30);
+	private Group boardGUIInit(Board board) throws FileNotFoundException {
 
-    Text displayText = new Text();
-    displayText.setText("Who's Turn ?");
-    displayText.setX(200);
-    displayText.setY(80);
-    displayText.setFont(Font.font(30));
-    Circle displayCircle = new Circle(490.0d, 70.0d, 16.0d, Color.BLACK);
-    Image myImage = new Image(new FileInputStream(".\\resources\\images\\nmbg.png"));
+		newGameButton = new Button("NEW GAME");
 
-    // Setting the image view
-    ImageView imageView = new ImageView(myImage);
+		newGameButton.setLayoutX(15);
+		newGameButton.setLayoutY(280);
 
-    imageView.setX(145);
-    imageView.setY(145);
+		decideButton = new Button("DECIDE");
 
-    // setting the fit height and width of the image view
-    imageView.setFitHeight(410);
-    imageView.setFitWidth(410);
+		decideButton.setLayoutX(480);
+		decideButton.setLayoutY(55);
 
-    // Setting the preserve ratio of the image view
-    imageView.setPreserveRatio(true);
+		Text displayText = new Text();
+		displayText.setText("Who's Turn ?");
+		displayText.setX(230);
+		displayText.setY(80);
+		displayText.setFont(Font.font(30));
+		Circle displayCircle = new Circle(185.0d, 70.0d, 16.0d, Color.BLACK);
+		Image myImage = new Image(new FileInputStream(".\\resources\\images\\nmbg.png"));
 
-    List<PositionCircle> positionCircleList = new ArrayList<>();
+		// Setting the image view
+		ImageView imageView = new ImageView(myImage);
 
-    List<Circle> player1Coins = new ArrayList<>();
+		imageView.setX(145);
+		imageView.setY(145);
 
-    List<Circle> player2Coins = new ArrayList<>();
+		// setting the fit height and width of the image view
+		imageView.setFitHeight(410);
+		imageView.setFitWidth(410);
 
-    // outermost circle
-    PositionCircle o1c1r1 = new PositionCircle(175.0d, 175.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o1c1r2 = new PositionCircle(175.0d, 175.0d * 2, 16.0d, Color.ROSYBROWN);
-    PositionCircle o1c1r3 = new PositionCircle(175.0d, 175.0d * 3, 16.0d, Color.ROSYBROWN);
-    PositionCircle o1c2r1 = new PositionCircle(175.0d * 2, 175.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o1c2r3 = new PositionCircle(175.0d * 2, 175.0d * 3, 16.0d, Color.ROSYBROWN);
-    PositionCircle o1c3r1 = new PositionCircle(175.0d * 3, 175.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o1c3r2 = new PositionCircle(175.0d * 3, 175.0d * 2, 16.0d, Color.ROSYBROWN);
-    PositionCircle o1c3r3 = new PositionCircle(175.0d * 3, 175.0d * 3, 16.0d, Color.ROSYBROWN);
+		// Setting the preserve ratio of the image view
+		imageView.setPreserveRatio(true);
 
-    positionCircleList.add(o1c1r1);
-    positionCircleList.add(o1c1r2);
-    positionCircleList.add(o1c1r3);
-    positionCircleList.add(o1c2r1);
-    positionCircleList.add(o1c2r3);
-    positionCircleList.add(o1c3r1);
-    positionCircleList.add(o1c3r2);
-    positionCircleList.add(o1c3r3);
+		List<PositionCircle> positionCircleList = new ArrayList<>();
 
-    PositionCircle o2c1r1 = new PositionCircle(235.0d, 235.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o2c1r2 = new PositionCircle(235.0d, 350.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o2c1r3 = new PositionCircle(235.0d, 465.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o2c2r1 = new PositionCircle(350.0d, 235.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o2c2r3 = new PositionCircle(350.0d, 465.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o2c3r1 = new PositionCircle(465.0d, 235.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o2c3r2 = new PositionCircle(465.0d, 350.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o2c3r3 = new PositionCircle(465.0d, 465.0d, 16.0d, Color.ROSYBROWN);
+		List<Circle> player1Coins = new ArrayList<>();
 
-    positionCircleList.add(o2c1r1);
-    positionCircleList.add(o2c1r2);
-    positionCircleList.add(o2c1r3);
-    positionCircleList.add(o2c2r1);
-    positionCircleList.add(o2c2r3);
-    positionCircleList.add(o2c3r1);
-    positionCircleList.add(o2c3r2);
-    positionCircleList.add(o2c3r3);
+		List<Circle> player2Coins = new ArrayList<>();
 
-    PositionCircle o3c1r1 = new PositionCircle(295.0d, 295.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o3c1r2 = new PositionCircle(295.0d, 350.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o3c1r3 = new PositionCircle(295.0d, 405.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o3c2r1 = new PositionCircle(350.0d, 295.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o3c2r3 = new PositionCircle(350.0d, 405.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o3c3r1 = new PositionCircle(405.0d, 295.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o3c3r2 = new PositionCircle(405.0d, 350.0d, 16.0d, Color.ROSYBROWN);
-    PositionCircle o3c3r3 = new PositionCircle(405.0d, 405.0d, 16.0d, Color.ROSYBROWN);
+		// outermost circle
+		PositionCircle o1c1r1 = new PositionCircle(175.0d, 175.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o1c1r2 = new PositionCircle(175.0d, 175.0d * 2, 16.0d, Color.ROSYBROWN);
+		PositionCircle o1c1r3 = new PositionCircle(175.0d, 175.0d * 3, 16.0d, Color.ROSYBROWN);
+		PositionCircle o1c2r1 = new PositionCircle(175.0d * 2, 175.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o1c2r3 = new PositionCircle(175.0d * 2, 175.0d * 3, 16.0d, Color.ROSYBROWN);
+		PositionCircle o1c3r1 = new PositionCircle(175.0d * 3, 175.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o1c3r2 = new PositionCircle(175.0d * 3, 175.0d * 2, 16.0d, Color.ROSYBROWN);
+		PositionCircle o1c3r3 = new PositionCircle(175.0d * 3, 175.0d * 3, 16.0d, Color.ROSYBROWN);
 
-    positionCircleList.add(o3c1r1);
-    positionCircleList.add(o3c1r2);
-    positionCircleList.add(o3c1r3);
-    positionCircleList.add(o3c2r1);
-    positionCircleList.add(o3c2r3);
-    positionCircleList.add(o3c3r1);
-    positionCircleList.add(o3c3r2);
-    positionCircleList.add(o3c3r3);
-    Text text1 = new Text();
-    text1.setText("PLAYER 1");
-    text1.setX(25);
-    text1.setY(180);
+		positionCircleList.add(o1c1r1);
+		positionCircleList.add(o1c1r2);
+		positionCircleList.add(o1c1r3);
+		positionCircleList.add(o1c2r1);
+		positionCircleList.add(o1c2r3);
+		positionCircleList.add(o1c3r1);
+		positionCircleList.add(o1c3r2);
+		positionCircleList.add(o1c3r3);
 
-    Text text2 = new Text();
-    text2.setText("PLAYER 2");
-    text2.setX(25);
-    text2.setY(380);
+		PositionCircle o2c1r1 = new PositionCircle(235.0d, 235.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o2c1r2 = new PositionCircle(235.0d, 350.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o2c1r3 = new PositionCircle(235.0d, 465.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o2c2r1 = new PositionCircle(350.0d, 235.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o2c2r3 = new PositionCircle(350.0d, 465.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o2c3r1 = new PositionCircle(465.0d, 235.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o2c3r2 = new PositionCircle(465.0d, 350.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o2c3r3 = new PositionCircle(465.0d, 465.0d, 16.0d, Color.ROSYBROWN);
 
-    Group boardGroup =
-        new Group(text1, text2, newGameButton, decideButton, displayCircle, displayText, imageView);
-    positionCircleList.forEach(boardGroup.getChildren()::add);
-    for (int i = 0; i < 9; i++) {
-      Circle c1;
-      Circle c2;
-      if (i < 5) {
-        c1 = new Circle(25.0d + (i * 25), 200.0d, 10.0d, player1Color);
-        c2 = new Circle(25.0d + (i * 25), 400.0d, 10.0d, player2Color);
-      } else {
-        c1 = new Circle(25.0d + ((i - 5) * 25), 225.0d, 10.0d, player1Color);
-        c2 = new Circle(25.0d + ((i - 5) * 25), 425.0d, 10.0d, player2Color);
-      }
-      player1Coins.add(c1);
-      player2Coins.add(c2);
-    }
-    player1Coins.forEach(boardGroup.getChildren()::add);
-    player2Coins.forEach(boardGroup.getChildren()::add);
-    board.setPositionCircleList(positionCircleList);
-    board.getPlayer1().setCoins(player1Coins);
-    board.getPlayer1().setPlayerColor(player1Color);
-    board.getPlayer2().setCoins(player2Coins);
-    board.getPlayer2().setPlayerColor(player1Color);
-    board.setDisplayTextTurn(displayText);
-    board.setDisplayCircleTurn(displayCircle);
-    return boardGroup;
-  }
+		positionCircleList.add(o2c1r1);
+		positionCircleList.add(o2c1r2);
+		positionCircleList.add(o2c1r3);
+		positionCircleList.add(o2c2r1);
+		positionCircleList.add(o2c2r3);
+		positionCircleList.add(o2c3r1);
+		positionCircleList.add(o2c3r2);
+		positionCircleList.add(o2c3r3);
 
-  public void displayPlayerTurn(Board board, Color color) {
-    if (color.equals(player1Color)) {
-      board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText("PLAYER 1'S TURN");
-    } else {
-      board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText("PLAYER 2'S TURN");
-    }
-  }
+		PositionCircle o3c1r1 = new PositionCircle(295.0d, 295.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o3c1r2 = new PositionCircle(295.0d, 350.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o3c1r3 = new PositionCircle(295.0d, 405.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o3c2r1 = new PositionCircle(350.0d, 295.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o3c2r3 = new PositionCircle(350.0d, 405.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o3c3r1 = new PositionCircle(405.0d, 295.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o3c3r2 = new PositionCircle(405.0d, 350.0d, 16.0d, Color.ROSYBROWN);
+		PositionCircle o3c3r3 = new PositionCircle(405.0d, 405.0d, 16.0d, Color.ROSYBROWN);
+
+		positionCircleList.add(o3c1r1);
+		positionCircleList.add(o3c1r2);
+		positionCircleList.add(o3c1r3);
+		positionCircleList.add(o3c2r1);
+		positionCircleList.add(o3c2r3);
+		positionCircleList.add(o3c3r1);
+		positionCircleList.add(o3c3r2);
+		positionCircleList.add(o3c3r3);
+		Text text1 = new Text();
+		text1.setText("PLAYER 1");
+		text1.setX(25);
+		text1.setY(180);
+
+		Text text2 = new Text();
+		text2.setText("PLAYER 2");
+		text2.setX(25);
+		text2.setY(380);
+
+		Group boardGroup = new Group(text1, text2, newGameButton, decideButton, displayCircle, displayText, imageView);
+		positionCircleList.forEach(boardGroup.getChildren()::add);
+		for (int i = 0; i < 9; i++) {
+			Circle c1;
+			Circle c2;
+			if (i < 5) {
+				c1 = new Circle(25.0d + (i * 25), 200.0d, 10.0d, player1Color);
+				c2 = new Circle(25.0d + (i * 25), 400.0d, 10.0d, player2Color);
+			} else {
+				c1 = new Circle(25.0d + ((i - 5) * 25), 225.0d, 10.0d, player1Color);
+				c2 = new Circle(25.0d + ((i - 5) * 25), 425.0d, 10.0d, player2Color);
+			}
+			player1Coins.add(c1);
+			player2Coins.add(c2);
+		}
+		player1Coins.forEach(boardGroup.getChildren()::add);
+		player2Coins.forEach(boardGroup.getChildren()::add);
+		board.setPositionCircleList(positionCircleList);
+		board.getPlayer1().setCoins(player1Coins);
+		board.getPlayer1().setPlayerColor(player1Color);
+		board.getPlayer2().setCoins(player2Coins);
+		board.getPlayer2().setPlayerColor(player1Color);
+		board.setDisplayTextTurn(displayText);
+		board.setDisplayCircleTurn(displayCircle);
+		return boardGroup;
+	}
+
+	public void displayPlayerTurn(Board board, Color color) {
+		if (color.equals(player1Color)) {
+			board.getDisplayCircleTurn().setFill(color);
+			board.getDisplayTextTurn().setText("PLAYER 1'S TURN");
+		} else {
+			board.getDisplayCircleTurn().setFill(color);
+			board.getDisplayTextTurn().setText("PLAYER 2'S TURN");
+		}
+	}
 }

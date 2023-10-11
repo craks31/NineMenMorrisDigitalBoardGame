@@ -12,10 +12,11 @@ public class CoinPlacementService {
 	
 public Color decidePlayerColorTurn(Board board) {
     Random rand = new Random();
-    int max = 2;
-    int min = 1;
-    int num = rand.nextInt((max-min+1)+min);
-    if(num==1){
+//    int max = 2;
+//    int min = 1;
+//    int num = rand.nextInt(2)+1;
+    boolean isPlayer1=rand.nextBoolean();
+    if(isPlayer1){
     	return board.getPlayer1().getPlayerColor();
     }
     else {

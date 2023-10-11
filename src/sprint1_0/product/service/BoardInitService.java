@@ -3,6 +3,8 @@ package sprint1_0.product.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.MasterPlayer;
 import sprint1_0.product.model.Position;
@@ -122,4 +124,19 @@ public class BoardInitService {
     
     board.setBlankPositionList(blankPositionList);
   }
+
+public void resetBoard(Board board,Button newGameButton) {
+	// TODO Auto-generated method stub
+	
+	newGameButton.setDisable(false);
+	board.getDisplayTextTurn().setText("Who's Turn?");
+	board.getDisplayCircleTurn().setFill(Color.BLACK);
+	for(int i=0;i<board.getPositionCircleList().size();i++) {
+		board.getPositionCircleList().get(i).setFill(Color.ROSYBROWN);
+	}
+			
+	
+	
+}
+  
 }
