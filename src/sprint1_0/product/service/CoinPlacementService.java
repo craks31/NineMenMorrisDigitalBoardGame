@@ -54,6 +54,7 @@ public class CoinPlacementService {
               board.getDisplayCircleTurn().setFill(GameConstants.player1Color);
               displayPlayerTurn(board, GameConstants.player1Color);
             }
+            ((Circle) e.getSource()).setDisable(true);
           }
         };
     for (int i = 0; i < board.getBlankPositionList().size(); i++) {
