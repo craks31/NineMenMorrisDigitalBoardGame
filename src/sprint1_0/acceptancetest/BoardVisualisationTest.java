@@ -25,20 +25,25 @@ public class BoardVisualisationTest extends ApplicationTest {
     stage.toFront();
     rootNode = gameManagerGUI.getScene().getRoot();
   }
-
+//hasNewGmaeButton
   @Test
   public void hasNewGameButton() {
     Button button = from(rootNode).lookup("#newGameButton").query();
     assertEquals("NEW GAME", button.getText());
   }
-
+//hasDecideButton
   @Test
   public void hasDecideButton() {
     Button button = from(rootNode).lookup("#decideButton").query();
     assertEquals("DECIDE", button.getText());
   }
   // hasresetbutton
-
+  @Test
+  public void hasresetButton() {
+    Button button = from(rootNode).lookup("#resetGameButton").query();
+    assertEquals("RESET GAME", button.getText());
+  }
+//is resetButtonDisabled
   @Test
   public void isDecidedButtonDisabled() {
 
@@ -47,20 +52,43 @@ public class BoardVisualisationTest extends ApplicationTest {
   }
 
   // isresetButtondisabled
+  @Test
+  public void isresetButtonDisabled() {
 
-  // isnewbuttonenabled
+    Button button = from(rootNode).lookup("#resetGameButton").query();
+    assertEquals(true, button.isDisabled());
+  }
+
+
+  // isnewGamebuttonenabled
 
   @Test
-  public void onClickofNewButtonIsDecidedButtonEnabled() {
+  public void onClickofNewGameButtonIsDecidedButtonEnabled() {
     Button newGameButton = from(rootNode).lookup("#newGameButton").query();
     Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(newGameButton);
     assertEquals(false, decideButton.isDisabled());
   }
 
-  // onClickofNewButtonIsNewButtonDisbled()
+  // onClickofNewGameButtonIsdecideButtonDisbled()
+  @Test
+  public void onClickofNewGameButtonIsDecideButtonDisabled() {
+    Button newGameButton = from(rootNode).lookup("#newGameButton").query();
+    Button decideButton = from(rootNode).lookup("#decideButton").query();
+    clickOn(newGameButton);
+    assertEquals(false, decideButton.isDisabled());
+  }
 
-  // onClickofNewButtonIsResetButtonEnabled()
+
+  // onClickofNewGameButtonIsResetGameButtonEnabled()
+  @Test
+  public void onClickofNewGameButtonIsResetGameButtonDisabled() {
+    Button newGameButton = from(rootNode).lookup("#newGameButton").query();
+    Button resetGameButton = from(rootNode).lookup("#resetGameButton").query();
+    clickOn(newGameButton);
+    assertEquals(false, resetGameButton.isDisabled());
+  }
+  
 
   // checkDisplayText
 
