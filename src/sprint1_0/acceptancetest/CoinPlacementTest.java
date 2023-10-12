@@ -19,6 +19,10 @@ import sprint1_0.product.model.Board;
 import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.ui.GameManagerGUI;
 
+/**
+ * @author rakesh
+ *
+ */
 public class CoinPlacementTest extends ApplicationTest {
 
   private Board board;
@@ -103,7 +107,16 @@ public class CoinPlacementTest extends ApplicationTest {
   // displayAndColortestAfterPlacementForPlayer1
   
   @Test
-  public void testDisplayColorAndTextAfrwePlayer1Move() {
+  public void testDisplayColorAndTextAfterPlayer1Move() {
+    PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
+    Color displayColorBefore = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
+    Text displayTextBefore = from(rootNode).lookup("#displayText").query();
+    clickOn(positionCircle);
+    if (displayColorBefore.equals(GameConstants.PLAYER1COLOR))
+      assertNotEquals(GameConstants.PLAYER2COLOR, positionCircle.getFill());
+  }
+  @Test
+  public void testDisplayColorAndTextAfterPlayer2Move() {
     PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
     Color displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
     Text displayText = from(rootNode).lookup("#displayText").query();
@@ -111,7 +124,6 @@ public class CoinPlacementTest extends ApplicationTest {
     if (displayColor.equals(GameConstants.PLAYER1COLOR))
       assertNotEquals(GameConstants.PLAYER2COLOR, positionCircle.getFill());
   }
-  
   // displayAndColortestAfterPlacementForPlayer2
   
   // player1 coin decrease test

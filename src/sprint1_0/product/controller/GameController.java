@@ -5,6 +5,10 @@ import sprint1_0.product.model.Board;
 import sprint1_0.product.service.BoardInitService;
 import sprint1_0.product.service.CoinPlacementService;
 
+/**
+ * @author rakesh
+ *
+ */
 public class GameController {
   Board board;
   BoardInitService boardInitService = new BoardInitService();

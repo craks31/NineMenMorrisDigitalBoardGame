@@ -5,6 +5,10 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * @author rakesh
+ *
+ */
 public class MasterPlayer {
   private Color playerColor;
   private List<Circle> coins;

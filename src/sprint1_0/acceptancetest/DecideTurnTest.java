@@ -8,6 +8,10 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sprint1_0.product.ui.GameManagerGUI;
 
+/**
+ * @author rakesh
+ *
+ */
 public class DecideTurnTest extends ApplicationTest{
 	
 	private GameManagerGUI gameManagerGUI = new GameManagerGUI();

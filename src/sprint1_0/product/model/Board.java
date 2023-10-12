@@ -6,8 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
-public class Board {
-
+/**
+ * @author rakesh
+ *
+ */
+public class Board { 
 	public Board() {
 		super();
 	}

@@ -2,6 +2,10 @@ package sprint1_0.product.model;
 
 import javafx.scene.paint.Paint;
 
+/**
+ * @author rakesh
+ *
+ */
 public class Position extends PositionCircle {
 
   private int positionId;

@@ -9,6 +9,10 @@ import javafx.scene.shape.Circle;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.Board;
 
+/**
+ * @author rakesh
+ *
+ */
 public class CoinPlacementService {
 
   public Color decidePlayerColorTurn(Board board) {

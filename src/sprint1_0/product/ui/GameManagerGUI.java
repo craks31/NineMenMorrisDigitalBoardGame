@@ -23,6 +23,10 @@ import sprint1_0.product.controller.GameController;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.PositionCircle;
 
+/**
+ * @author rakesh
+ *
+ */
 public class GameManagerGUI extends Application {
 
   Button decideButton;
