@@ -63,18 +63,16 @@ public class BoardVisualisationTest extends ApplicationTest{
     
     //checkDisplayText
     
+    //checkDisplayCircle
+    
     @Test
-    public void ifAllPositionsAreAvailable() {
-    	
-    }
-    @Test
-    public void checkifPositionsAreClickable() {
-    	 Button newGameButton = from(rootNode).lookup("#newGameButton").query();
-         Button decideButton = from(rootNode).lookup("#decideButton").query();
-         PositionCircle c = from(rootNode).lookup("#position1").query();
-         clickOn(newGameButton);
-        // assertEquals(GameConstants.BACKGROUNDCOLOR, c.getFill());
+    public void checkifAllPositionsAreAvailableAndNotClickable() {
+    	for(int i=0; i<GameConstants.NUM_POSITIONS_OF_BOARD;i++) {
+    		String pos = "#position"+String.valueOf(i);
+         PositionCircle c = from(rootNode).lookup(pos).query();
+         clickOn(c);
          assertEquals(false, c.isDisabled());
+    	}
     }
     
     

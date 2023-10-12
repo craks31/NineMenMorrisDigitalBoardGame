@@ -11,8 +11,6 @@ public class Board {
 	public Board() {
 		super();
 	}
-
-	public final int NUM_POSITIONS_OF_BOARD = 24;
 	
 	private List<Position> blankPositionList;
 	
@@ -56,10 +54,6 @@ public class Board {
 
 	public void setDisplayCircleTurn(Circle displayCircleTurn) {
 		this.displayCircleTurn = displayCircleTurn;
-	}
-
-	public int getNUM_POSITIONS_OF_BOARD() {
-		return NUM_POSITIONS_OF_BOARD;
 	}
 
 	public List<Position> getBlankPositionList() {

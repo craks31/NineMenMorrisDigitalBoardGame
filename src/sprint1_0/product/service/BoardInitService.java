@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
+import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.MasterPlayer;
 import sprint1_0.product.model.Position;
@@ -26,7 +27,7 @@ public class BoardInitService {
     List<PositionCircle> blankCircles = board.getPositionCircleList();
 
     List<Position> blankPositionList = new ArrayList<>();
-    for (int i = 0; i < board.NUM_POSITIONS_OF_BOARD; i++) {
+    for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
       PositionCircle blankPositionCircle = blankCircles.get(i);
       Position blankPosition = new Position();
       blankPosition.setPositionCircle(blankPositionCircle);
