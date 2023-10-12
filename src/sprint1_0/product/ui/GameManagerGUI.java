@@ -30,7 +30,6 @@ public class GameManagerGUI extends Application {
   Button resetGameButton;
   private Scene scene;
   EventHandler<MouseEvent> resetGameButtonEventHandler;
-
   public GameManagerGUI() {
     super();
   }
