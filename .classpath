@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/rakesh/Downloads/jar_files (1)/assertj-core-3.13.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rakesh/Downloads/jar_files (1)/hamcrest-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rakesh/Downloads/jar_files (1)/hamcrest-core-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rakesh/Downloads/jar_files (1)/junit-4.13-beta-3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rakesh/Downloads/jar_files (1)/org.osgi.core-6.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rakesh/Downloads/jar_files (1)/testfx-core-4.0.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rakesh/Downloads/jar_files (1)/testfx-junit-4.0.17.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -28,6 +28,7 @@ public class GameManagerGUI extends Application {
   Button decideButton;
   Button startNewGameButton;
   Button resetGameButton;
+  private Scene scene;
   EventHandler<MouseEvent> resetGameButtonEventHandler;
 
   public GameManagerGUI() {
@@ -37,7 +38,8 @@ public class GameManagerGUI extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
 
-    gameInit(primaryStage);
+    setScene(gameInit(primaryStage));
+    
   }
 
   public static void main(String[] args) {
@@ -92,6 +94,7 @@ public class GameManagerGUI extends Application {
 
     // outermost circle
     PositionCircle o1c1r1 = new PositionCircle(175.0d, 175.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    o1c1r1.setId("position1");
     PositionCircle o1c1r2 = new PositionCircle(175.0d, 175.0d * 2, 16.0d,  GameConstants.BACKGROUNDCOLOR);
     PositionCircle o1c1r3 = new PositionCircle(175.0d, 175.0d * 3, 16.0d,  GameConstants.BACKGROUNDCOLOR);
     PositionCircle o1c2r1 = new PositionCircle(175.0d * 2, 175.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
@@ -164,6 +167,10 @@ public class GameManagerGUI extends Application {
             displayCircle,
             displayText,
             imageView);
+    decideButton.setId("decideButton");
+    startNewGameButton.setId("newGameButton");
+    resetGameButton.setId("resetGameButton");
+    
     positionCircleList.forEach(boardGroup.getChildren()::add);
     for (int i = 0; i < 9; i++) {
       Circle c1;
@@ -203,7 +210,7 @@ public class GameManagerGUI extends Application {
     }
   }
 
-  public void gameInit(Stage primaryStage) throws Exception {
+  public Scene gameInit(Stage primaryStage) throws Exception {
     GameController gameController = new GameController();
 
     // Get a New Fresh Board Object
@@ -248,5 +255,12 @@ public class GameManagerGUI extends Application {
           }
         };
     resetGameButton.setOnMouseClicked(resetGameButtonEventHandler);
+  return scene;
   }
+
+public Scene getScene(){return scene;}
+
+public void setScene(Scene scene) {
+this.scene = scene;}
+
 }
