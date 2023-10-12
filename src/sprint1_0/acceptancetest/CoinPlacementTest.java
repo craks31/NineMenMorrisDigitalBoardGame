@@ -9,7 +9,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.controller.GameController;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.PositionCircle;
@@ -36,7 +35,7 @@ public class CoinPlacementTest extends ApplicationTest {
 	public void tearDown() throws Exception {
 	}
 
-	//clickable
+	//placecoin
 	@Test
 	public void testSuccessfulCoinPlacementonEmptyCell() {
 		PositionCircle c = from(rootNode).lookup("#position1").query();
@@ -45,5 +44,14 @@ public class CoinPlacementTest extends ApplicationTest {
 		
 	}
 	
-	//
+	//placecoinfalsecase
+	
+	//placecoinColorforplayer1
+	
+	//opp
+	
+	//placecoinColortest for player2
+	//opp
+	
+	//displaytest
 }
