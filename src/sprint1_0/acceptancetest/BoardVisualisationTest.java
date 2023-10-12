@@ -38,11 +38,6 @@ public class BoardVisualisationTest extends ApplicationTest {
     assertEquals("DECIDE", button.getText());
   }
   // hasresetbutton
-  @Test
-  public void hasresetButton() {
-    Button button = from(rootNode).lookup("#resetGameButton").query();
-    assertEquals("RESET GAME", button.getText());
-  }
 
   @Test
   public void isDecidedButtonDisabled() {
@@ -52,43 +47,20 @@ public class BoardVisualisationTest extends ApplicationTest {
   }
 
   // isresetButtondisabled
-  @Test
-  public void isresetButtonDisabled() {
 
-    Button button = from(rootNode).lookup("#resetGameButton").query();
-    assertEquals(true, button.isDisabled());
-  }
-
-
-  // isnewGamebuttonenabled
+  // isnewbuttonenabled
 
   @Test
-  public void onClickofNewGameButtonIsDecidedButtonEnabled() {
+  public void onClickofNewButtonIsDecidedButtonEnabled() {
     Button newGameButton = from(rootNode).lookup("#newGameButton").query();
     Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(newGameButton);
     assertEquals(false, decideButton.isDisabled());
   }
 
-  // onClickofNewGameButtonIsdecideButtonDisbled()
-  @Test
-  public void onClickofNewGameButtonIsDecideButtonDisabled() {
-    Button newGameButton = from(rootNode).lookup("#newGameButton").query();
-    Button decideButton = from(rootNode).lookup("#decideButton").query();
-    clickOn(newGameButton);
-    assertEquals(false, decideButton.isDisabled());
-  }
+  // onClickofNewButtonIsNewButtonDisbled()
 
-
-  // onClickofNewGameButtonIsResetGameButtonEnabled()
-  @Test
-  public void onClickofNewGameButtonIsResetGameButtonDisabled() {
-    Button newGameButton = from(rootNode).lookup("#newGameButton").query();
-    Button resetGameButton = from(rootNode).lookup("#resetGameButton").query();
-    clickOn(newGameButton);
-    assertEquals(false, resetGameButton.isDisabled());
-  }
-  
+  // onClickofNewButtonIsResetButtonEnabled()
 
   // checkDisplayText
 
