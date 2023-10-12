@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.controller.GameController;
 import sprint1_0.product.model.Board;
+import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.ui.GameManagerGUI;
 
 public class CoinPlacementTest extends ApplicationTest {
@@ -21,6 +22,7 @@ public class CoinPlacementTest extends ApplicationTest {
 	private GameManagerGUI gameManagerGUI = new GameManagerGUI();
 	
 	private Parent rootNode;
+	@Before
     @Override
     public void start(Stage stage) throws Exception {
     	gameManagerGUI.start(stage);
@@ -30,21 +32,18 @@ public class CoinPlacementTest extends ApplicationTest {
         rootNode = gameManagerGUI.getScene().getRoot();
     }
 
-	@Before
-	public void setUp() throws Exception {
-		board = new Board();
-		gameController = new GameController();
-		
-	}
-
 	@After
 	public void tearDown() throws Exception {
 	}
 
+	//clickable
 	@Test
 	public void testSuccessfulCoinPlacementonEmptyCell() {
-	gameController.startGame(board, GameConstants.PLAYER1COLOR);
-	assertEquals("", 1, 1);
+		PositionCircle c = from(rootNode).lookup("#position1").query();
+	      clickOn(c);
+	      assertEquals(false, c.isDisabled());
 		
 	}
+	
+	//
 }
