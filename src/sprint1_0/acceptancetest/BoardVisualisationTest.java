@@ -51,7 +51,7 @@ public class BoardVisualisationTest extends ApplicationTest {
     Button button = from(rootNode).lookup("#resetGameButton").query();
     assertEquals("RESET GAME", button.getText());
   }
-//is resetButtonDisabled
+//is decideButtonDisabled
   @Test
   public void isDecidedButtonDisabled() {
 
@@ -69,6 +69,14 @@ public class BoardVisualisationTest extends ApplicationTest {
 
 
   // isnewGamebuttonenabled
+  @Test
+  public void isNewGameButtonDisabled() {
+
+    Button button = from(rootNode).lookup("#newGameButton").query();
+    assertEquals(false, button.isDisabled());
+  }
+
+//onClickofNewGameButtonIsDecideButtonDisbled()
 
   @Test
   public void onClickofNewGameButtonIsDecidedButtonEnabled() {
@@ -78,13 +86,12 @@ public class BoardVisualisationTest extends ApplicationTest {
     assertEquals(false, decideButton.isDisabled());
   }
 
-  // onClickofNewGameButtonIsdecideButtonDisbled()
+  // onClickofNewGameButtonIsNewGameButtonDisbled()
   @Test
-  public void onClickofNewGameButtonIsDecideButtonDisabled() {
+  public void onClickofNewGameButtonIsNewGameButtonDisabled() {
     Button newGameButton = from(rootNode).lookup("#newGameButton").query();
-    Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(newGameButton);
-    assertEquals(false, decideButton.isDisabled());
+    assertEquals(true, newGameButton.isDisabled());
   }
 
 
