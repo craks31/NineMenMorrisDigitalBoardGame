@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/rakesh/eclipse-workspace/NineMenMorrisDigitalBoardGame/ExternalJars/assertj-core-3.13.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rakesh/eclipse-workspace/NineMenMorrisDigitalBoardGame/ExternalJars/hamcrest-2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rakesh/eclipse-workspace/NineMenMorrisDigitalBoardGame/ExternalJars/hamcrest-core-2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rakesh/eclipse-workspace/NineMenMorrisDigitalBoardGame/ExternalJars/junit-4.13-beta-3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rakesh/eclipse-workspace/NineMenMorrisDigitalBoardGame/ExternalJars/org.osgi.core-6.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rakesh/eclipse-workspace/NineMenMorrisDigitalBoardGame/ExternalJars/testfx-core-4.0.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rakesh/eclipse-workspace/NineMenMorrisDigitalBoardGame/ExternalJars/testfx-junit-4.0.17.jar"/>
+	<classpathentry kind="lib" path="ExternalJars/assertj-core-3.13.2.jar"/>
+	<classpathentry kind="lib" path="ExternalJars/hamcrest-2.1.jar"/>
+	<classpathentry kind="lib" path="ExternalJars/hamcrest-core-2.1.jar"/>
+	<classpathentry kind="lib" path="ExternalJars/junit-4.13-beta-3.jar"/>
+	<classpathentry kind="lib" path="ExternalJars/org.osgi.core-6.0.0.jar"/>
+	<classpathentry kind="lib" path="ExternalJars/testfx-core-4.0.17.jar"/>
+	<classpathentry kind="lib" path="ExternalJars/testfx-junit-4.0.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
