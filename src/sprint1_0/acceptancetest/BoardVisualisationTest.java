@@ -2,6 +2,7 @@ package sprint1_0.acceptancetest;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -26,6 +27,12 @@ public class BoardVisualisationTest extends ApplicationTest {
     rootNode = gameManagerGUI.getScene().getRoot();
   }
 
+	@After
+	public void tearDown() throws Exception {
+		Button button = from(rootNode).lookup("#resetGameButton").query();
+		clickOn(button);
+	}
+	
   @Test
   public void hasNewGameButton() {
     Button button = from(rootNode).lookup("#newGameButton").query();
@@ -69,10 +76,9 @@ public class BoardVisualisationTest extends ApplicationTest {
   @Test
   public void checkifAllPositionsAreAvailableAndNotClickable() {
     for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
-      String pos = "#position" + String.valueOf(i);
+      String pos = "#position" + String.valueOf(i+1);
       PositionCircle c = from(rootNode).lookup(pos).query();
-      clickOn(c);
-      assertEquals(false, c.isDisabled());
+      assertEquals(true, c.isDisabled());
     }
   }
 

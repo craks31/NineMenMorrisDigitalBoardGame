@@ -147,6 +147,11 @@ public class GameManagerGUI extends Application {
     positionCircleList.add(o3c3r1);
     positionCircleList.add(o3c3r2);
     positionCircleList.add(o3c3r3);
+    for(int i=0;i<positionCircleList.size();i++) {
+    	String position = "position"+String.valueOf(i+1);
+    	positionCircleList.get(i).setId(position);
+    	positionCircleList.get(i).setDisable(true);
+    }
     Text text1 = new Text();
     text1.setText("PLAYER 1");
     text1.setX(25);
