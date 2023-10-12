@@ -174,6 +174,11 @@ public class GameManagerGUI extends Application {
     decideButton.setId("decideButton");
     startNewGameButton.setId("newGameButton");
     resetGameButton.setId("resetGameButton");
+    displayCircle.setId("displayCircle");
+    displayText.setId("displayText");
+    text1.setId("player1Text");
+    text2.setId("player2Text");
+    
     
     positionCircleList.forEach(boardGroup.getChildren()::add);
     for (int i = 0; i < 9; i++) {

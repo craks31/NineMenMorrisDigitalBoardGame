@@ -1,5 +1,8 @@
 /bin/
 /target/
-bin/
+**/bin
+*.class
+*.class
+*.class
 *.class
 *.class
