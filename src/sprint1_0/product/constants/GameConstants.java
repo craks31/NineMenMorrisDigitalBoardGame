@@ -10,7 +10,7 @@ public class GameConstants {
 	public static final Color PLAYER1COLOR = Color.BLACK;
 	public static final Color PLAYER2COLOR = Color.DARKRED;
 	public static final Color BACKGROUNDCOLOR = Color.DARKCYAN;
-	public static final String PLAYER1TURNTEXT = "";
-	public static final String PLAYER2TURNTEXT = "";
+	public static final String PLAYER1TURNTEXT = "PLAYER 1'S TURN";
+	public static final String PLAYER2TURNTEXT = "PLAYER 2'S TURN";
 	public static final int NUM_POSITIONS_OF_BOARD = 24;
 }

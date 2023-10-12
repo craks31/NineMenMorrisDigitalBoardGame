@@ -110,19 +110,25 @@ public class CoinPlacementTest extends ApplicationTest {
   public void testDisplayColorAndTextAfterPlayer1Move() {
     PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
     Color displayColorBefore = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
-    Text displayTextBefore = from(rootNode).lookup("#displayText").query();
     clickOn(positionCircle);
-    if (displayColorBefore.equals(GameConstants.PLAYER1COLOR))
-      assertNotEquals(GameConstants.PLAYER2COLOR, positionCircle.getFill());
+    if (displayColorBefore.equals(GameConstants.PLAYER1COLOR)) {
+        Color displayColorAfter = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
+        Text displayTextAfter = from(rootNode).lookup("#displayText").query();
+      assertEquals(GameConstants.PLAYER2COLOR, displayColorAfter);
+      assertEquals(GameConstants.PLAYER2TURNTEXT, displayTextAfter);
+    }
   }
   @Test
   public void testDisplayColorAndTextAfterPlayer2Move() {
-    PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
-    Color displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
-    Text displayText = from(rootNode).lookup("#displayText").query();
-    clickOn(positionCircle);
-    if (displayColor.equals(GameConstants.PLAYER1COLOR))
-      assertNotEquals(GameConstants.PLAYER2COLOR, positionCircle.getFill());
+	    PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
+	    Color displayColorBefore = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
+	    clickOn(positionCircle);
+	    if (displayColorBefore.equals(GameConstants.PLAYER2COLOR)) {
+	        Color displayColorAfter = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
+	        Text displayTextAfter = from(rootNode).lookup("#displayText").query();
+	      assertEquals(GameConstants.PLAYER1COLOR, displayColorAfter);
+	      assertEquals(GameConstants.PLAYER1TURNTEXT, displayTextAfter);
+	    }
   }
   // displayAndColortestAfterPlacementForPlayer2
   
