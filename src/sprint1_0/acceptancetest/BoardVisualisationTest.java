@@ -1,6 +1,7 @@
 package sprint1_0.acceptancetest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Test;
@@ -8,7 +9,9 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import junit.framework.Assert;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.ui.GameManagerGUI;
@@ -51,7 +54,7 @@ public class BoardVisualisationTest extends ApplicationTest {
     Button button = from(rootNode).lookup("#resetGameButton").query();
     assertEquals("RESET GAME", button.getText());
   }
-//is resetButtonDisabled
+//is decideButtonDisabled
   @Test
   public void isDecidedButtonDisabled() {
 
@@ -69,6 +72,14 @@ public class BoardVisualisationTest extends ApplicationTest {
 
 
   // isnewGamebuttonenabled
+  @Test
+  public void isNewGameButtonDisabled() {
+
+    Button button = from(rootNode).lookup("#newGameButton").query();
+    assertEquals(false, button.isDisabled());
+  }
+
+//onClickofNewGameButtonIsDecideButtonDisbled()
 
   @Test
   public void onClickofNewGameButtonIsDecidedButtonEnabled() {
@@ -78,13 +89,12 @@ public class BoardVisualisationTest extends ApplicationTest {
     assertEquals(false, decideButton.isDisabled());
   }
 
-  // onClickofNewGameButtonIsdecideButtonDisbled()
+  // onClickofNewGameButtonIsNewGameButtonDisbled()
   @Test
-  public void onClickofNewGameButtonIsDecideButtonDisabled() {
+  public void onClickofNewGameButtonIsNewGameButtonDisabled() {
     Button newGameButton = from(rootNode).lookup("#newGameButton").query();
-    Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(newGameButton);
-    assertEquals(false, decideButton.isDisabled());
+    assertEquals(true, newGameButton.isDisabled());
   }
 
 
@@ -99,6 +109,14 @@ public class BoardVisualisationTest extends ApplicationTest {
   
 
   // checkDisplayText
+  @Test
+  public void checkDisplayText()
+  {
+	   Text displayText = from(rootNode).lookup("#displayText").query();
+	   @SuppressWarnings("unused")
+	String text = displayText.getText();
+	   assertEquals("Who's Turn ?",displayText);
+  }
 
   // checkDisplayCircle
 

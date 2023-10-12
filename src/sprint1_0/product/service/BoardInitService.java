@@ -156,7 +156,7 @@ public class BoardInitService {
 
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
-        	board.getDecideButton().setStyle("-fx-base:green;");
+//        	board.getDecideButton().setStyle("-fx-base:green;");
             board.getDecideButton().setDisable(false);
             board.getStartNewGameButton().setDisable(true);
             board.getResetGameButton().setDisable(false);

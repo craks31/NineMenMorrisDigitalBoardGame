@@ -48,13 +48,13 @@ public class GameManagerGUI extends Application {
   private Group boardGUIInit(Board board) throws FileNotFoundException {
 
     startNewGameButton = new Button("NEW GAME");
-	startNewGameButton.setStyle("-fx-base:green;");
+//	startNewGameButton.setStyle("-fx-base:green;");
     startNewGameButton.setLayoutX(15);
     startNewGameButton.setLayoutY(280);
     
 
     resetGameButton = new Button("RESET GAME");
-    resetGameButton.setStyle("-fx-base:Gray;");
+//    resetGameButton.setStyle("-fx-base:Gray;");
     resetGameButton.setLayoutX(15);
     resetGameButton.setLayoutY(320);
     resetGameButton.setDisable(true);
