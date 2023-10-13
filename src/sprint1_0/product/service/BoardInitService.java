@@ -11,6 +11,10 @@ import sprint1_0.product.model.MasterPlayer;
 import sprint1_0.product.model.Position;
 import sprint1_0.product.model.PositionCircle;
 
+/**
+ * @author rakesh
+ *
+ */
 public class BoardInitService {
 
   public Board giveNewBoard() {

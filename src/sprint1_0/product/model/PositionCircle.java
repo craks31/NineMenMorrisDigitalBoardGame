@@ -3,6 +3,10 @@ package sprint1_0.product.model;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
+/**
+ * @author rakesh
+ *
+ */
 public class PositionCircle extends Circle {
 
   public PositionCircle() {
