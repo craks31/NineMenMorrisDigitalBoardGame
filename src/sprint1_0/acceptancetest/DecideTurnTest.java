@@ -51,17 +51,18 @@ public class DecideTurnTest extends ApplicationTest {
   @Test
   public void onClickofDecideGameButtonIsDisplayTextAndColorChanged() {
     Button decideButton = from(rootNode).lookup("#decideButton").query();
-    Color  displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
+    Color displayColor =
+        (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
     String displayText = ((Text) from(rootNode).lookup("#displayText").query()).getText();
     clickOn(decideButton);
     assertEquals("Who's Turn ?", displayText);
     assertEquals(GameConstants.DISPLAYCIRCLECOLOR, displayColor);
   }
-  
+
   @Test
   public void checkifAllPositionsAreClickable() {
-	    Button decideButton = from(rootNode).lookup("#decideButton").query();
-	    clickOn(decideButton);
+    Button decideButton = from(rootNode).lookup("#decideButton").query();
+    clickOn(decideButton);
     for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
       String pos = "#position" + String.valueOf(i + 1);
       PositionCircle c = from(rootNode).lookup(pos).query();

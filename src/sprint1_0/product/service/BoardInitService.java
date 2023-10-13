@@ -11,10 +11,7 @@ import sprint1_0.product.model.MasterPlayer;
 import sprint1_0.product.model.Position;
 import sprint1_0.product.model.PositionCircle;
 
-/**
- * @author rakesh
- *
- */
+/** @author rakesh */
 public class BoardInitService {
 
   public Board giveNewBoard() {
@@ -143,11 +140,7 @@ public class BoardInitService {
             board.getDisplayCircleTurn().setFill(Color.BLACK);
             for (int i = 0; i < board.getPositionCircleList().size(); i++) {
               board.getPositionCircleList().get(i).setFill(Color.ROSYBROWN);
-              board
-                  .getPositionCircleList()
-                  .get(i)
-                  .setDisable(true);
-                  
+              board.getPositionCircleList().get(i).setDisable(true);
             }
           }
         };
@@ -160,7 +153,7 @@ public class BoardInitService {
 
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
-//        	board.getDecideButton().setStyle("-fx-base:green;");
+            //        	board.getDecideButton().setStyle("-fx-base:green;");
             board.getDecideButton().setDisable(false);
             board.getStartNewGameButton().setDisable(true);
             board.getResetGameButton().setDisable(false);
@@ -168,5 +161,4 @@ public class BoardInitService {
         };
     board.getStartNewGameButton().setOnMouseClicked(newGameButtonEventHandler);
   }
-  
 }

@@ -5,10 +5,7 @@ import sprint1_0.product.model.Board;
 import sprint1_0.product.service.BoardInitService;
 import sprint1_0.product.service.CoinPlacementService;
 
-/**
- * @author rakesh
- *
- */
+/** @author rakesh */
 public class GameController {
   Board board;
   BoardInitService boardInitService = new BoardInitService();
@@ -18,11 +15,10 @@ public class GameController {
     this.board = board;
     boardInitService.setUpBoard(board);
   }
-  
+
   public Board getExistingBoard() {
-	  return board;
+    return board;
   }
-  
 
   public void startGame(Board board, Color decideColor) {
     coinPlacementService.displayAndStartGameAfterDecide(board, decideColor);
