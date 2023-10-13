@@ -1,7 +1,6 @@
 package sprint1_0.acceptancetest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Test;
@@ -11,15 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import junit.framework.Assert;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.ui.GameManagerGUI;
 
-/**
- * @author rakesh
- *
- */
+/** @author rakesh */
 public class BoardVisualisationTest extends ApplicationTest {
   private GameManagerGUI gameManagerGUI = new GameManagerGUI();
 
@@ -34,19 +29,19 @@ public class BoardVisualisationTest extends ApplicationTest {
     rootNode = gameManagerGUI.getScene().getRoot();
   }
 
-	@After
-	public void tearDown() throws Exception {
-		Button button = from(rootNode).lookup("#resetGameButton").query();
-		clickOn(button);
-	}
-	
-//hasNewGmaeButton
+  @After
+  public void tearDown() throws Exception {
+    Button button = from(rootNode).lookup("#resetGameButton").query();
+    clickOn(button);
+  }
+
+  // hasNewGmaeButton
   @Test
   public void hasNewGameButton() {
     Button button = from(rootNode).lookup("#newGameButton").query();
     assertEquals("NEW GAME", button.getText());
   }
-//hasDecideButton
+  // hasDecideButton
   @Test
   public void hasDecideButton() {
     Button button = from(rootNode).lookup("#decideButton").query();
@@ -58,7 +53,7 @@ public class BoardVisualisationTest extends ApplicationTest {
     Button button = from(rootNode).lookup("#resetGameButton").query();
     assertEquals("RESET GAME", button.getText());
   }
-//is decideButtonDisabled
+  // is decideButtonDisabled
   @Test
   public void isDecidedButtonDisabled() {
 
@@ -74,7 +69,6 @@ public class BoardVisualisationTest extends ApplicationTest {
     assertEquals(true, button.isDisabled());
   }
 
-
   // isnewGamebuttonenabled
   @Test
   public void isNewGameButtonDisabled() {
@@ -83,7 +77,7 @@ public class BoardVisualisationTest extends ApplicationTest {
     assertEquals(false, button.isDisabled());
   }
 
-//onClickofNewGameButtonIsDecideButtonDisbled()
+  // onClickofNewGameButtonIsDecideButtonDisbled()
 
   @Test
   public void onClickofNewGameButtonIsDecidedButtonEnabled() {
@@ -101,7 +95,6 @@ public class BoardVisualisationTest extends ApplicationTest {
     assertEquals(true, newGameButton.isDisabled());
   }
 
-
   // onClickofNewGameButtonIsResetGameButtonEnabled()
   @Test
   public void onClickofNewGameButtonIsResetGameButtonDisabled() {
@@ -110,24 +103,22 @@ public class BoardVisualisationTest extends ApplicationTest {
     clickOn(newGameButton);
     assertEquals(false, resetGameButton.isDisabled());
   }
-  
 
   // checkDisplayText
   @Test
-  public void checkDisplayText()
-  {
-	   Text displayText = from(rootNode).lookup("#displayText").query();
-	   @SuppressWarnings("unused")
-	String text = displayText.getText();
-	   assertEquals("Who's Turn ?",displayText);
+  public void checkDisplayText() {
+    String displayText = ((Text) (from(rootNode).lookup("#displayText").query())).getText();
+    assertEquals("Who's Turn ?", displayText);
   }
 
   // checkDisplayCircle
+  @Test
+  public void checkDisplayCircle() {}
 
   @Test
   public void checkifAllPositionsAreAvailableAndNotClickable() {
     for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
-      String pos = "#position" + String.valueOf(i+1);
+      String pos = "#position" + String.valueOf(i + 1);
       PositionCircle c = from(rootNode).lookup(pos).query();
       assertEquals(true, c.isDisabled());
     }

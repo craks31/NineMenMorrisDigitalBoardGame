@@ -18,6 +18,11 @@ public class GameController {
     this.board = board;
     boardInitService.setUpBoard(board);
   }
+  
+  public Board getExistingBoard() {
+	  return board;
+  }
+  
 
   public void startGame(Board board, Color decideColor) {
     coinPlacementService.displayAndStartGameAfterDecide(board, decideColor);
