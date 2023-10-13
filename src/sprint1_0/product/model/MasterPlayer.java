@@ -5,10 +5,7 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-/**
- * @author rakesh
- *
- */
+/** @author rakesh */
 public class MasterPlayer {
   private Color playerColor;
   private List<Circle> coins;
@@ -35,7 +32,11 @@ public class MasterPlayer {
     return maxCoins;
   }
 
-public List<Position> getFilledPositions(){return filledPositions;}
+  public List<Position> getFilledPositions() {
+    return filledPositions;
+  }
 
-public void setFilledPositions(List<Position> filledPositions){this.filledPositions = filledPositions;}
+  public void setFilledPositions(List<Position> filledPositions) {
+    this.filledPositions = filledPositions;
+  }
 }

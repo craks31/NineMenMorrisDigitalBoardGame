@@ -2,10 +2,14 @@ package sprint1_0.acceptancetest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -111,10 +115,6 @@ public class BoardVisualisationTest extends ApplicationTest {
     assertEquals("Who's Turn ?", displayText);
   }
 
-  // checkDisplayCircle
-  @Test
-  public void checkDisplayCircle() {}
-
   @Test
   public void checkifAllPositionsAreAvailableAndNotClickable() {
     for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
@@ -125,11 +125,22 @@ public class BoardVisualisationTest extends ApplicationTest {
   }
 
   // checkifPlayer1andPlayer2 text is present
+  @Test
+  public void checkifPlayer1andPlayer2Text() {
+    String player1Text = ((Text) (from(rootNode).lookup("#player1Text").query())).getText();
+    assertEquals("PLAYER 1", player1Text);
+    String player2Text = ((Text) (from(rootNode).lookup("#player2Text").query())).getText();
+    assertEquals("PLAYER 2", player2Text);
+  }
 
-  // checkifPlayer1 has 9 same color coins
-
-  // checkifPlayer2 has 9 same color coins
-
-  // checkifColors are unique for both player1 and player2
-
+  // checkifPlayer1AndPlayer2 has 9 same color coins
+  @Test
+  public void checkifPlayer1andPlayer2Has9CoinsEach() {
+    List<Node> player1Coins =
+        ((Group) (from(rootNode).lookup("#player1CoinsGroup").query())).getChildren();
+    assertEquals(9, player1Coins.size());
+    List<Node> player2Coins =
+        ((Group) (from(rootNode).lookup("#player2CoinsGroup").query())).getChildren();
+    assertEquals(9, player2Coins.size());
+  }
 }
