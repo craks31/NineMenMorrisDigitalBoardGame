@@ -23,17 +23,16 @@ import sprint1_0.product.controller.GameController;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.PositionCircle;
 
-/**
- * @author rakesh
- *
- */
+/** @author rakesh */
 public class GameManagerGUI extends Application {
 
   Button decideButton;
   Button startNewGameButton;
   Button resetGameButton;
+  Board board;
   private Scene scene;
   EventHandler<MouseEvent> resetGameButtonEventHandler;
+
   public GameManagerGUI() {
     super();
   }
@@ -42,7 +41,6 @@ public class GameManagerGUI extends Application {
   public void start(Stage primaryStage) throws Exception {
 
     setScene(gameInit(primaryStage));
-    
   }
 
   public static void main(String[] args) {
@@ -52,13 +50,12 @@ public class GameManagerGUI extends Application {
   private Group boardGUIInit(Board board) throws FileNotFoundException {
 
     startNewGameButton = new Button("NEW GAME");
-//	startNewGameButton.setStyle("-fx-base:green;");
+    //	startNewGameButton.setStyle("-fx-base:green;");
     startNewGameButton.setLayoutX(15);
     startNewGameButton.setLayoutY(280);
-    
 
     resetGameButton = new Button("RESET GAME");
-//    resetGameButton.setStyle("-fx-base:Gray;");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
     resetGameButton.setLayoutX(15);
     resetGameButton.setLayoutY(320);
     resetGameButton.setDisable(true);
@@ -96,15 +93,23 @@ public class GameManagerGUI extends Application {
     List<Circle> player2Coins = new ArrayList<>();
 
     // outermost circle
-    PositionCircle o1c1r1 = new PositionCircle(175.0d, 175.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o1c1r1 =
+        new PositionCircle(175.0d, 175.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
     o1c1r1.setId("position1");
-    PositionCircle o1c1r2 = new PositionCircle(175.0d, 175.0d * 2, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o1c1r3 = new PositionCircle(175.0d, 175.0d * 3, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o1c2r1 = new PositionCircle(175.0d * 2, 175.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o1c2r3 = new PositionCircle(175.0d * 2, 175.0d * 3, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o1c3r1 = new PositionCircle(175.0d * 3, 175.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o1c3r2 = new PositionCircle(175.0d * 3, 175.0d * 2, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o1c3r3 = new PositionCircle(175.0d * 3, 175.0d * 3, 16.0d,  GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o1c1r2 =
+        new PositionCircle(175.0d, 175.0d * 2, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o1c1r3 =
+        new PositionCircle(175.0d, 175.0d * 3, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o1c2r1 =
+        new PositionCircle(175.0d * 2, 175.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o1c2r3 =
+        new PositionCircle(175.0d * 2, 175.0d * 3, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o1c3r1 =
+        new PositionCircle(175.0d * 3, 175.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o1c3r2 =
+        new PositionCircle(175.0d * 3, 175.0d * 2, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o1c3r3 =
+        new PositionCircle(175.0d * 3, 175.0d * 3, 16.0d, GameConstants.BACKGROUNDCOLOR);
 
     positionCircleList.add(o1c1r1);
     positionCircleList.add(o1c1r2);
@@ -115,14 +120,22 @@ public class GameManagerGUI extends Application {
     positionCircleList.add(o1c3r2);
     positionCircleList.add(o1c3r3);
 
-    PositionCircle o2c1r1 = new PositionCircle(235.0d, 235.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c1r2 = new PositionCircle(235.0d, 350.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c1r3 = new PositionCircle(235.0d, 465.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c2r1 = new PositionCircle(350.0d, 235.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c2r3 = new PositionCircle(350.0d, 465.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c3r1 = new PositionCircle(465.0d, 235.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c3r2 = new PositionCircle(465.0d, 350.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c3r3 = new PositionCircle(465.0d, 465.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o2c1r1 =
+        new PositionCircle(235.0d, 235.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o2c1r2 =
+        new PositionCircle(235.0d, 350.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o2c1r3 =
+        new PositionCircle(235.0d, 465.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o2c2r1 =
+        new PositionCircle(350.0d, 235.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o2c2r3 =
+        new PositionCircle(350.0d, 465.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o2c3r1 =
+        new PositionCircle(465.0d, 235.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o2c3r2 =
+        new PositionCircle(465.0d, 350.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o2c3r3 =
+        new PositionCircle(465.0d, 465.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
 
     positionCircleList.add(o2c1r1);
     positionCircleList.add(o2c1r2);
@@ -133,14 +146,22 @@ public class GameManagerGUI extends Application {
     positionCircleList.add(o2c3r2);
     positionCircleList.add(o2c3r3);
 
-    PositionCircle o3c1r1 = new PositionCircle(295.0d, 295.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o3c1r2 = new PositionCircle(295.0d, 350.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o3c1r3 = new PositionCircle(295.0d, 405.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o3c2r1 = new PositionCircle(350.0d, 295.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o3c2r3 = new PositionCircle(350.0d, 405.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o3c3r1 = new PositionCircle(405.0d, 295.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o3c3r2 = new PositionCircle(405.0d, 350.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o3c3r3 = new PositionCircle(405.0d, 405.0d, 16.0d,  GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o3c1r1 =
+        new PositionCircle(295.0d, 295.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o3c1r2 =
+        new PositionCircle(295.0d, 350.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o3c1r3 =
+        new PositionCircle(295.0d, 405.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o3c2r1 =
+        new PositionCircle(350.0d, 295.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o3c2r3 =
+        new PositionCircle(350.0d, 405.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o3c3r1 =
+        new PositionCircle(405.0d, 295.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o3c3r2 =
+        new PositionCircle(405.0d, 350.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
+    PositionCircle o3c3r3 =
+        new PositionCircle(405.0d, 405.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
 
     positionCircleList.add(o3c1r1);
     positionCircleList.add(o3c1r2);
@@ -150,10 +171,10 @@ public class GameManagerGUI extends Application {
     positionCircleList.add(o3c3r1);
     positionCircleList.add(o3c3r2);
     positionCircleList.add(o3c3r3);
-    for(int i=0;i<positionCircleList.size();i++) {
-    	String position = "position"+String.valueOf(i+1);
-    	positionCircleList.get(i).setId(position);
-    	positionCircleList.get(i).setDisable(true);
+    for (int i = 0; i < positionCircleList.size(); i++) {
+      String position = "position" + String.valueOf(i + 1);
+      positionCircleList.get(i).setId(position);
+      positionCircleList.get(i).setDisable(true);
     }
     Text text1 = new Text();
     text1.setText("PLAYER 1");
@@ -182,29 +203,35 @@ public class GameManagerGUI extends Application {
     displayText.setId("displayText");
     text1.setId("player1Text");
     text2.setId("player2Text");
-    
-    
+    Group player1CoinsGroup = new Group();
+    player1CoinsGroup.setId("player1CoinsGroup");
+    Group player2CoinsGroup = new Group();
+    player2CoinsGroup.setId("player2CoinsGroup");
+
     positionCircleList.forEach(boardGroup.getChildren()::add);
     for (int i = 0; i < 9; i++) {
       Circle c1;
       Circle c2;
       if (i < 5) {
-        c1 = new Circle(25.0d + (i * 25), 200.0d, 10.0d,  GameConstants.PLAYER1COLOR);
-        c2 = new Circle(25.0d + (i * 25), 420.0d, 10.0d,  GameConstants.PLAYER2COLOR);
+        c1 = new Circle(25.0d + (i * 25), 200.0d, 10.0d, GameConstants.PLAYER1COLOR);
+        c2 = new Circle(25.0d + (i * 25), 420.0d, 10.0d, GameConstants.PLAYER2COLOR);
       } else {
-        c1 = new Circle(25.0d + ((i - 5) * 25), 225.0d, 10.0d,  GameConstants.PLAYER1COLOR);
-        c2 = new Circle(25.0d + ((i - 5) * 25), 445.0d, 10.0d,  GameConstants.PLAYER2COLOR);
+        c1 = new Circle(25.0d + ((i - 5) * 25), 225.0d, 10.0d, GameConstants.PLAYER1COLOR);
+        c2 = new Circle(25.0d + ((i - 5) * 25), 445.0d, 10.0d, GameConstants.PLAYER2COLOR);
       }
       player1Coins.add(c1);
       player2Coins.add(c2);
     }
-    player1Coins.forEach(boardGroup.getChildren()::add);
-    player2Coins.forEach(boardGroup.getChildren()::add);
+
+    player1Coins.forEach(player1CoinsGroup.getChildren()::add);
+    boardGroup.getChildren().add(player1CoinsGroup);
+    player2Coins.forEach(player2CoinsGroup.getChildren()::add);
+    boardGroup.getChildren().add(player2CoinsGroup);
     board.setPositionCircleList(positionCircleList);
     board.getPlayer1().setCoins(player1Coins);
-    board.getPlayer1().setPlayerColor( GameConstants.PLAYER1COLOR);
+    board.getPlayer1().setPlayerColor(GameConstants.PLAYER1COLOR);
     board.getPlayer2().setCoins(player2Coins);
-    board.getPlayer2().setPlayerColor( GameConstants.PLAYER2COLOR);
+    board.getPlayer2().setPlayerColor(GameConstants.PLAYER2COLOR);
     board.setDisplayTextTurn(displayText);
     board.setDisplayCircleTurn(displayCircle);
     board.setDecideButton(decideButton);
@@ -217,7 +244,7 @@ public class GameManagerGUI extends Application {
     GameController gameController = new GameController();
 
     // Get a New Fresh Board Object
-    Board board = gameController.getNewBoard();
+    board = gameController.getNewBoard();
 
     // Setting title to Window Pop-up.
     primaryStage.setTitle("Nine Men Morris Digital Board Game");
@@ -226,7 +253,7 @@ public class GameManagerGUI extends Application {
     Scene scene = new Scene(boardGUIInit(board), 700, 600);
 
     // setting color to the scene
-    scene.setFill( GameConstants.BACKGROUNDCOLOR);
+    scene.setFill(GameConstants.BACKGROUNDCOLOR);
 
     primaryStage.setScene(scene);
     primaryStage.show();
@@ -258,12 +285,18 @@ public class GameManagerGUI extends Application {
           }
         };
     resetGameButton.setOnMouseClicked(resetGameButtonEventHandler);
-  return scene;
+    return scene;
   }
 
-public Scene getScene(){return scene;}
+  public Board getBoard() {
+    return board;
+  }
 
-public void setScene(Scene scene) {
-this.scene = scene;}
+  public Scene getScene() {
+    return scene;
+  }
 
+  public void setScene(Scene scene) {
+    this.scene = scene;
+  }
 }
