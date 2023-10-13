@@ -89,7 +89,7 @@ public class CoinPlacementService {
       board.getDisplayTextTurn().setText(GameConstants.PLAYER1TURNTEXT);
     } else {
       board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText(GameConstants.PLAYER1TURNTEXT);
+      board.getDisplayTextTurn().setText(GameConstants.PLAYER2TURNTEXT);
     }
   }
 }

@@ -213,16 +213,6 @@ public class GameManagerGUI extends Application {
     return boardGroup;
   }
 
-  public void displayPlayerTurn(Board board, Color color) {
-    if (color.equals( GameConstants.PLAYER1COLOR)) {
-      board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText("PLAYER 1'S TURN");
-    } else {
-      board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText("PLAYER 2'S TURN");
-    }
-  }
-
   public Scene gameInit(Stage primaryStage) throws Exception {
     GameController gameController = new GameController();
 
