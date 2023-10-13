@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -19,6 +20,10 @@ import sprint1_0.product.model.Board;
 import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.ui.GameManagerGUI;
 
+/**
+ * @author rakesh
+ *
+ */
 public class CoinPlacementTest extends ApplicationTest {
 
   private Board board;
@@ -42,9 +47,8 @@ public class CoinPlacementTest extends ApplicationTest {
 
   	@After
   	public void tearDown() throws Exception {
-  		PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
-  		positionCircle.setDisable(false);
-  		positionCircle.setFill(GameConstants.BACKGROUNDCOLOR);
+		Button button = from(rootNode).lookup("#resetGameButton").query();
+		clickOn(button);
   	}
 
   @Test
@@ -63,56 +67,31 @@ public class CoinPlacementTest extends ApplicationTest {
   }
 
   @Test
-  public void testColorOfPlayer1CoinOnFilledCircleAfterPlayer1Turn() {
+  public void testColorOfCircleOnFilledCircleAfterPlayerTurn() {
     PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
     Color displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
     clickOn(positionCircle);
     if (displayColor.equals(GameConstants.PLAYER1COLOR))
       assertEquals(GameConstants.PLAYER1COLOR, positionCircle.getFill());
-  }
-  
-  @Test
-  public void testColorOfPlayer2CoinOnFilledCircleAfterPlayer2Turn() {
-    PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
-    Color displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
-    clickOn(positionCircle);
-    if (displayColor.equals(GameConstants.PLAYER2COLOR))
+    else if (displayColor.equals(GameConstants.PLAYER2COLOR))
       assertEquals(GameConstants.PLAYER2COLOR, positionCircle.getFill());
   }
-  
-  @Test
-  public void testColorOfPlayer1CoinOnFilledCircleOnPlayer2Turn() {
-    PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
-    Color displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
-    clickOn(positionCircle);
-    if (displayColor.equals(GameConstants.PLAYER2COLOR))
-      assertNotEquals(GameConstants.PLAYER1COLOR, positionCircle.getFill());
-  }
-  
-  @Test
-  public void testColorOfPlayer2CoinOnFilledCircleOnPlayer1Turn() {
-    PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
-    Color displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
-    clickOn(positionCircle);
-    if (displayColor.equals(GameConstants.PLAYER1COLOR))
-      assertNotEquals(GameConstants.PLAYER2COLOR, positionCircle.getFill());
-  }
-  
-  
 
-  // displayAndColortestAfterPlacementForPlayer1
-  
   @Test
-  public void testDisplayColorAndTextAfrwePlayer1Move() {
-    PositionCircle positionCircle = from(rootNode).lookup("#position1").query();
-    Color displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
-    Text displayText = from(rootNode).lookup("#displayText").query();
-    clickOn(positionCircle);
-    if (displayColor.equals(GameConstants.PLAYER1COLOR))
-      assertNotEquals(GameConstants.PLAYER2COLOR, positionCircle.getFill());
+  public void testDisplayColorAndTextChangeAfterPlayerMove() {
+    PositionCircle positionCircle1 = from(rootNode).lookup("#position1").query();
+    clickOn(positionCircle1);
+    Color displayColorBefore =
+        (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
+    String displayTextBefore = ((Text)from(rootNode).lookup("#displayText").query()).getText();
+    PositionCircle positionCircle2 = from(rootNode).lookup("#position2").query();
+    clickOn(positionCircle2);
+    Color displayColorAfter =
+        (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
+    String displayTextAfter = ((Text)from(rootNode).lookup("#displayText").query()).getText();
+    assertNotEquals(displayColorBefore, displayColorAfter);
+    assertNotEquals(displayTextBefore, displayTextAfter);
   }
-  
-  // displayAndColortestAfterPlacementForPlayer2
   
   // player1 coin decrease test
   

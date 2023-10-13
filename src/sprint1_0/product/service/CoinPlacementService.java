@@ -9,6 +9,10 @@ import javafx.scene.shape.Circle;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.Board;
 
+/**
+ * @author rakesh
+ *
+ */
 public class CoinPlacementService {
 
   public Color decidePlayerColorTurn(Board board) {
@@ -82,10 +86,10 @@ public class CoinPlacementService {
   public void displayPlayerTurn(Board board, Color color) {
     if (color.equals(GameConstants.PLAYER1COLOR)) {
       board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText("PLAYER 1'S TURN");
+      board.getDisplayTextTurn().setText(GameConstants.PLAYER1TURNTEXT);
     } else {
       board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText("PLAYER 2'S TURN");
+      board.getDisplayTextTurn().setText(GameConstants.PLAYER2TURNTEXT);
     }
   }
 }

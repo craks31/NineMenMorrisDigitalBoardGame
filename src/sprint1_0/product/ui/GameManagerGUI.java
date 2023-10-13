@@ -23,6 +23,10 @@ import sprint1_0.product.controller.GameController;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.PositionCircle;
 
+/**
+ * @author rakesh
+ *
+ */
 public class GameManagerGUI extends Application {
 
   Button decideButton;
@@ -207,16 +211,6 @@ public class GameManagerGUI extends Application {
     board.setStartNewGameButton(startNewGameButton);
     board.setResetGameButton(resetGameButton);
     return boardGroup;
-  }
-
-  public void displayPlayerTurn(Board board, Color color) {
-    if (color.equals( GameConstants.PLAYER1COLOR)) {
-      board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText("PLAYER 1'S TURN");
-    } else {
-      board.getDisplayCircleTurn().setFill(color);
-      board.getDisplayTextTurn().setText("PLAYER 2'S TURN");
-    }
   }
 
   public Scene gameInit(Stage primaryStage) throws Exception {
