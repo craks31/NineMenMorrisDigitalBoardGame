@@ -8,6 +8,9 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.PositionCircle;
@@ -27,6 +30,8 @@ public class DecideTurnTest extends ApplicationTest {
     stage.show();
     stage.toFront();
     rootNode = gameManagerGUI.getScene().getRoot();
+    Button newGameButton = from(rootNode).lookup("#newGameButton").query();
+    clickOn(newGameButton);
   }
 
   @After
@@ -35,15 +40,24 @@ public class DecideTurnTest extends ApplicationTest {
     clickOn(button);
   }
 
-//  @Test
-//  public void onClickofDecideGameButtonIsDecidedButtonDisabled() {
-//    Button decideButton = from(rootNode).lookup("#decideButton").query();
-//    clickOn(decideButton);
-//    assertEquals(true, decideButton.isDisabled());
-//  }
+  @Test
+  public void onClickofDecideGameButtonIsDecidedButtonDisabled() {
+    Button decideButton = from(rootNode).lookup("#decideButton").query();
+    clickOn(decideButton);
+    assertEquals(true, decideButton.isDisabled());
+  }
 
   // onclick text and circle change
-
+  @Test
+  public void onClickofDecideGameButtonIsDisplayTextAndColorChanged() {
+    Button decideButton = from(rootNode).lookup("#decideButton").query();
+    Color  displayColor = (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
+    String displayText = ((Text) from(rootNode).lookup("#displayText").query()).getText();
+    clickOn(decideButton);
+    assertEquals("Who's Turn ?", displayText);
+    assertEquals(GameConstants.DISPLAYCIRCLECOLOR, displayColor);
+  }
+  
   @Test
   public void checkifAllPositionsAreClickable() {
 	    Button decideButton = from(rootNode).lookup("#decideButton").query();

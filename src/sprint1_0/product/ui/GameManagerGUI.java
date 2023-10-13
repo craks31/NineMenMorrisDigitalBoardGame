@@ -70,7 +70,7 @@ public class GameManagerGUI extends Application {
     displayText.setX(230);
     displayText.setY(80);
     displayText.setFont(Font.font(30));
-    Circle displayCircle = new Circle(185.0d, 70.0d, 16.0d, Color.TRANSPARENT);
+    Circle displayCircle = new Circle(185.0d, 70.0d, 16.0d, GameConstants.DISPLAYCIRCLECOLOR);
     Image myImage = new Image(new FileInputStream(".\\resources\\images\\nmbg.png"));
 
     // Setting the image view
