@@ -67,6 +67,7 @@ public class DecideTurnTest extends ApplicationTest {
     Color displayColor =
         (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
     String displayText = ((Text) from(rootNode).lookup("#displayText").query()).getText();
+    clickOn(decideButton);
     assertNotEquals("Who's Turn ?", displayText);
     assertNotEquals(GameConstants.DISPLAYCIRCLECOLOR, displayColor);
     if (displayColor.equals(GameConstants.PLAYER1COLOR))
