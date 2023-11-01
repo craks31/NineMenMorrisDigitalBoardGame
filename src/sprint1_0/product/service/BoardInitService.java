@@ -43,93 +43,95 @@ public class BoardInitService {
       positionList.add(position);
     }
 
-    positionList.get(0).setRight(positionList.get(1));
-    positionList.get(0).setDown(positionList.get(9));
+    positionList.get(0).setRight(positionList.get(3));
+    positionList.get(0).setDown(positionList.get(1));
 
-    positionList.get(1).setRight(positionList.get(2));
-    positionList.get(1).setLeft(positionList.get(0));
-    positionList.get(1).setDown(positionList.get(4));
+    positionList.get(1).setRight(positionList.get(9));
+    positionList.get(1).setUp(positionList.get(0));
+    positionList.get(1).setDown(positionList.get(2));
 
-    positionList.get(2).setLeft(positionList.get(1));
-    positionList.get(2).setDown(positionList.get(14));
+    positionList.get(2).setRight(positionList.get(4));
+    positionList.get(2).setUp(positionList.get(1));
 
-    positionList.get(3).setRight(positionList.get(4));
-    positionList.get(3).setDown(positionList.get(10));
+    positionList.get(3).setRight(positionList.get(5));
+    positionList.get(3).setLeft(positionList.get(0));
+    positionList.get(3).setDown(positionList.get(11));
 
-    positionList.get(4).setLeft(positionList.get(3));
-    positionList.get(4).setRight(positionList.get(5));
-    positionList.get(4).setUp(positionList.get(1));
-    positionList.get(4).setDown(positionList.get(7));
+    positionList.get(4).setLeft(positionList.get(2));
+    positionList.get(4).setRight(positionList.get(7));
+    positionList.get(4).setUp(positionList.get(12));
+ 
+    positionList.get(5).setLeft(positionList.get(3));
+    positionList.get(5).setDown(positionList.get(6));
+   
 
-    positionList.get(5).setLeft(positionList.get(4));
-    positionList.get(5).setDown(positionList.get(13));
+    positionList.get(6).setLeft(positionList.get(14));
+    positionList.get(6).setDown(positionList.get(7));
+    positionList.get(6).setUp(positionList.get(5));
 
-    positionList.get(6).setRight(positionList.get(7));
-    positionList.get(6).setDown(positionList.get(11));
+    positionList.get(7).setLeft(positionList.get(4));
+    positionList.get(7).setUp(positionList.get(6));
 
-    positionList.get(7).setLeft(positionList.get(6));
-    positionList.get(7).setRight(positionList.get(8));
-    positionList.get(7).setUp(positionList.get(4));
+    positionList.get(8).setRight(positionList.get(11));
+    positionList.get(8).setDown(positionList.get(9));
 
-    positionList.get(8).setLeft(positionList.get(7));
-    positionList.get(8).setDown(positionList.get(12));
+    positionList.get(9).setRight(positionList.get(17));
+    positionList.get(9).setUp(positionList.get(8));
+    positionList.get(9).setDown(positionList.get(10));
+    positionList.get(9).setLeft(positionList.get(1));
 
-    positionList.get(9).setRight(positionList.get(10));
-    positionList.get(9).setUp(positionList.get(0));
-    positionList.get(9).setDown(positionList.get(21));
+    positionList.get(10).setRight(positionList.get(12));
+    positionList.get(10).setUp(positionList.get(9));
 
-    positionList.get(10).setRight(positionList.get(11));
-    positionList.get(10).setLeft(positionList.get(9));
-    positionList.get(10).setUp(positionList.get(3));
-    positionList.get(10).setDown(positionList.get(18));
+    positionList.get(11).setLeft(positionList.get(8));
+    positionList.get(11).setUp(positionList.get(3));
+    positionList.get(11).setDown(positionList.get(19));
+    positionList.get(11).setRight(positionList.get(13));
 
-    positionList.get(11).setLeft(positionList.get(10));
-    positionList.get(11).setUp(positionList.get(6));
-    positionList.get(11).setDown(positionList.get(15));
 
-    positionList.get(12).setRight(positionList.get(13));
-    positionList.get(12).setUp(positionList.get(8));
-    positionList.get(12).setDown(positionList.get(17));
+    positionList.get(12).setRight(positionList.get(15));
+    positionList.get(12).setUp(positionList.get(20));
+    positionList.get(12).setDown(positionList.get(4));
+    positionList.get(12).setLeft(positionList.get(10));
 
-    positionList.get(13).setRight(positionList.get(14));
-    positionList.get(13).setLeft(positionList.get(12));
-    positionList.get(13).setUp(positionList.get(5));
-    positionList.get(13).setDown(positionList.get(20));
+    positionList.get(13).setLeft(positionList.get(11));
+    positionList.get(13).setDown(positionList.get(14));
 
-    positionList.get(14).setLeft(positionList.get(13));
-    positionList.get(14).setUp(positionList.get(2));
-    positionList.get(14).setDown(positionList.get(23));
+    positionList.get(14).setLeft(positionList.get(22));
+    positionList.get(14).setRight(positionList.get(6));
+    positionList.get(14).setUp(positionList.get(13));
+    positionList.get(14).setDown(positionList.get(15));
 
-    positionList.get(15).setRight(positionList.get(16));
-    positionList.get(15).setUp(positionList.get(11));
+    positionList.get(15).setLeft(positionList.get(12));
+    positionList.get(15).setUp(positionList.get(14));
 
-    positionList.get(16).setLeft(positionList.get(15));
-    positionList.get(16).setRight(positionList.get(17));
-    positionList.get(16).setDown(positionList.get(19));
+    positionList.get(16).setRight(positionList.get(19));
+    positionList.get(16).setDown(positionList.get(17));
 
-    positionList.get(17).setLeft(positionList.get(16));
-    positionList.get(17).setUp(positionList.get(12));
+    positionList.get(17).setLeft(positionList.get(9));
+    positionList.get(17).setUp(positionList.get(16));
+    positionList.get(17).setDown(positionList.get(18));
 
-    positionList.get(18).setRight(positionList.get(19));
-    positionList.get(18).setUp(positionList.get(10));
+    positionList.get(18).setRight(positionList.get(20));
+    positionList.get(18).setUp(positionList.get(17));
 
-    positionList.get(19).setRight(positionList.get(20));
-    positionList.get(19).setLeft(positionList.get(18));
-    positionList.get(19).setUp(positionList.get(16));
-    positionList.get(19).setDown(positionList.get(22));
+    positionList.get(19).setRight(positionList.get(21));
+    positionList.get(19).setLeft(positionList.get(16));
+    positionList.get(19).setUp(positionList.get(11));
 
-    positionList.get(20).setLeft(positionList.get(19));
-    positionList.get(20).setUp(positionList.get(13));
+    positionList.get(20).setLeft(positionList.get(18));
+    positionList.get(20).setRight(positionList.get(23));
+    positionList.get(20).setDown(positionList.get(12));
 
-    positionList.get(21).setRight(positionList.get(22));
-    positionList.get(21).setUp(positionList.get(9));
+    positionList.get(21).setLeft(positionList.get(19));
+    positionList.get(21).setDown(positionList.get(22));
 
-    positionList.get(22).setRight(positionList.get(23));
-    positionList.get(22).setLeft(positionList.get(21));
-    positionList.get(22).setUp(positionList.get(19));
+    positionList.get(22).setRight(positionList.get(14));
+    positionList.get(22).setDown(positionList.get(23));
+    positionList.get(22).setUp(positionList.get(21));
 
-    positionList.get(23).setLeft(positionList.get(22));
-    positionList.get(23).setUp(positionList.get(14));
+    positionList.get(23).setLeft(positionList.get(20));
+    positionList.get(23).setUp(positionList.get(22));
 
     List<Position> filledPositionList = new ArrayList<>();
     List<Position> blankPositionList = new ArrayList<>();
