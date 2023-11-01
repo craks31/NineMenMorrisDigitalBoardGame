@@ -17,7 +17,7 @@ import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.ui.GameManagerGUI;
 
-/** @author rakesh */
+/** @author ravali */
 public class CoinPlacementTest extends ApplicationTest {
   private GameManagerGUI gameManagerGUI = new GameManagerGUI();
 
