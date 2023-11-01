@@ -268,8 +268,9 @@ public class GameManagerGUI extends Application {
     Color decidedColor = gameController.decidePlayerTurn(board);
 
     // Start Game After Deciding
-    gameController.startGame(board, decidedColor);
-
+    gameController.startPhase1Game(board, decidedColor);
+   // if (board.getPlayer1().getCoins().isEmpty() && board.getPlayer1().getCoins().isEmpty())
+    	//gameController.startPhase2Game(board);
     resetGameButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
 

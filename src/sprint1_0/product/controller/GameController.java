@@ -4,12 +4,15 @@ import javafx.scene.paint.Color;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.service.BoardInitService;
 import sprint1_0.product.service.CoinPlacementService;
+import sprint1_0.product.service.GameService;
 
-/** @author rakesh */
+/** @author rakesh rekha ravali pujitha*/
 public class GameController {
   Board board;
   BoardInitService boardInitService = new BoardInitService();
   CoinPlacementService coinPlacementService = new CoinPlacementService();
+ 
+  GameService gameService = new GameService();
 
   public void init(Board board) {
     this.board = board;
@@ -21,9 +24,17 @@ public class GameController {
   }
 
   public void startGame(Board board, Color decideColor) {
-    coinPlacementService.displayAndStartGameAfterDecide(board, decideColor);
+	  gameService.startGame(board, decideColor);
   }
 
+  public void startPhase1Game(Board board, Color decideColor) {
+	  gameService.startGame(board, decideColor);
+  }
+
+  public void startPhase2Game(Board board) {
+	 // coinMovementService.makeMove(board);
+  }
+  
   public Color decidePlayerTurn(Board board) {
     return coinPlacementService.decidePlayerColorTurn(board);
   }
@@ -39,4 +50,5 @@ public class GameController {
   public void newGame(Board board) {
     boardInitService.newGame(board);
   }
+  
 }

@@ -11,122 +11,140 @@ import sprint1_0.product.model.MasterPlayer;
 import sprint1_0.product.model.Position;
 import sprint1_0.product.model.PositionCircle;
 
-/** @author rakesh */
+/** @author pujitha ravali rekha rakesh */
 public class BoardInitService {
 
   public Board giveNewBoard() {
     Board newBoard = new Board();
     MasterPlayer p1 = new MasterPlayer();
     MasterPlayer p2 = new MasterPlayer();
+    p1.setFilledPositions(new ArrayList<>());
+    p2.setFilledPositions(new ArrayList<>());
     newBoard.setPlayer1(p1);
     newBoard.setPlayer2(p2);
     return newBoard;
   }
 
+  /**
+   * This method is used to setup the board GUI to business logic
+   *
+   * @param board
+   */
   public void setUpBoard(Board board) {
 
-    List<PositionCircle> blankCircles = board.getPositionCircleList();
+    List<PositionCircle> allCirclesList = board.getPositionCircleList();
 
-    List<Position> blankPositionList = new ArrayList<>();
+    List<Position> positionList = new ArrayList<>();
     for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
-      PositionCircle blankPositionCircle = blankCircles.get(i);
-      Position blankPosition = new Position();
-      blankPosition.setPositionCircle(blankPositionCircle);
-      blankPositionList.add(blankPosition);
-      blankPosition.setPositionId(i);
+      PositionCircle positionCircle = allCirclesList.get(i);
+      Position position = new Position();
+      position.setPositionCircle(positionCircle);
+      position.setPositionId(i);
+      positionList.add(position);
     }
 
-    blankPositionList.get(0).setRight(blankPositionList.get(1));
-    blankPositionList.get(0).setDown(blankPositionList.get(9));
+    positionList.get(0).setRight(positionList.get(1));
+    positionList.get(0).setDown(positionList.get(9));
 
-    blankPositionList.get(1).setRight(blankPositionList.get(2));
-    blankPositionList.get(1).setLeft(blankPositionList.get(0));
-    blankPositionList.get(1).setDown(blankPositionList.get(4));
+    positionList.get(1).setRight(positionList.get(2));
+    positionList.get(1).setLeft(positionList.get(0));
+    positionList.get(1).setDown(positionList.get(4));
 
-    blankPositionList.get(2).setLeft(blankPositionList.get(1));
-    blankPositionList.get(2).setDown(blankPositionList.get(14));
+    positionList.get(2).setLeft(positionList.get(1));
+    positionList.get(2).setDown(positionList.get(14));
 
-    blankPositionList.get(3).setRight(blankPositionList.get(4));
-    blankPositionList.get(3).setDown(blankPositionList.get(10));
+    positionList.get(3).setRight(positionList.get(4));
+    positionList.get(3).setDown(positionList.get(10));
 
-    blankPositionList.get(4).setLeft(blankPositionList.get(3));
-    blankPositionList.get(4).setRight(blankPositionList.get(5));
-    blankPositionList.get(4).setUp(blankPositionList.get(1));
-    blankPositionList.get(4).setDown(blankPositionList.get(7));
+    positionList.get(4).setLeft(positionList.get(3));
+    positionList.get(4).setRight(positionList.get(5));
+    positionList.get(4).setUp(positionList.get(1));
+    positionList.get(4).setDown(positionList.get(7));
 
-    blankPositionList.get(5).setLeft(blankPositionList.get(4));
-    blankPositionList.get(5).setDown(blankPositionList.get(13));
+    positionList.get(5).setLeft(positionList.get(4));
+    positionList.get(5).setDown(positionList.get(13));
 
-    blankPositionList.get(6).setRight(blankPositionList.get(7));
-    blankPositionList.get(6).setDown(blankPositionList.get(11));
+    positionList.get(6).setRight(positionList.get(7));
+    positionList.get(6).setDown(positionList.get(11));
 
-    blankPositionList.get(7).setLeft(blankPositionList.get(6));
-    blankPositionList.get(7).setRight(blankPositionList.get(8));
-    blankPositionList.get(7).setUp(blankPositionList.get(4));
+    positionList.get(7).setLeft(positionList.get(6));
+    positionList.get(7).setRight(positionList.get(8));
+    positionList.get(7).setUp(positionList.get(4));
 
-    blankPositionList.get(8).setLeft(blankPositionList.get(7));
-    blankPositionList.get(8).setDown(blankPositionList.get(12));
+    positionList.get(8).setLeft(positionList.get(7));
+    positionList.get(8).setDown(positionList.get(12));
 
-    blankPositionList.get(9).setRight(blankPositionList.get(10));
-    blankPositionList.get(9).setUp(blankPositionList.get(0));
-    blankPositionList.get(9).setDown(blankPositionList.get(21));
+    positionList.get(9).setRight(positionList.get(10));
+    positionList.get(9).setUp(positionList.get(0));
+    positionList.get(9).setDown(positionList.get(21));
 
-    blankPositionList.get(10).setRight(blankPositionList.get(11));
-    blankPositionList.get(10).setLeft(blankPositionList.get(9));
-    blankPositionList.get(10).setUp(blankPositionList.get(3));
-    blankPositionList.get(10).setDown(blankPositionList.get(18));
+    positionList.get(10).setRight(positionList.get(11));
+    positionList.get(10).setLeft(positionList.get(9));
+    positionList.get(10).setUp(positionList.get(3));
+    positionList.get(10).setDown(positionList.get(18));
 
-    blankPositionList.get(11).setLeft(blankPositionList.get(10));
-    blankPositionList.get(11).setUp(blankPositionList.get(6));
-    blankPositionList.get(11).setDown(blankPositionList.get(15));
+    positionList.get(11).setLeft(positionList.get(10));
+    positionList.get(11).setUp(positionList.get(6));
+    positionList.get(11).setDown(positionList.get(15));
 
-    blankPositionList.get(12).setRight(blankPositionList.get(13));
-    blankPositionList.get(12).setUp(blankPositionList.get(8));
-    blankPositionList.get(12).setDown(blankPositionList.get(17));
+    positionList.get(12).setRight(positionList.get(13));
+    positionList.get(12).setUp(positionList.get(8));
+    positionList.get(12).setDown(positionList.get(17));
 
-    blankPositionList.get(13).setRight(blankPositionList.get(14));
-    blankPositionList.get(13).setLeft(blankPositionList.get(12));
-    blankPositionList.get(13).setUp(blankPositionList.get(5));
-    blankPositionList.get(13).setDown(blankPositionList.get(20));
+    positionList.get(13).setRight(positionList.get(14));
+    positionList.get(13).setLeft(positionList.get(12));
+    positionList.get(13).setUp(positionList.get(5));
+    positionList.get(13).setDown(positionList.get(20));
 
-    blankPositionList.get(14).setLeft(blankPositionList.get(13));
-    blankPositionList.get(14).setUp(blankPositionList.get(2));
-    blankPositionList.get(14).setDown(blankPositionList.get(23));
+    positionList.get(14).setLeft(positionList.get(13));
+    positionList.get(14).setUp(positionList.get(2));
+    positionList.get(14).setDown(positionList.get(23));
 
-    blankPositionList.get(15).setRight(blankPositionList.get(16));
-    blankPositionList.get(15).setUp(blankPositionList.get(11));
+    positionList.get(15).setRight(positionList.get(16));
+    positionList.get(15).setUp(positionList.get(11));
 
-    blankPositionList.get(16).setLeft(blankPositionList.get(15));
-    blankPositionList.get(16).setRight(blankPositionList.get(17));
-    blankPositionList.get(16).setDown(blankPositionList.get(19));
+    positionList.get(16).setLeft(positionList.get(15));
+    positionList.get(16).setRight(positionList.get(17));
+    positionList.get(16).setDown(positionList.get(19));
 
-    blankPositionList.get(17).setLeft(blankPositionList.get(16));
-    blankPositionList.get(17).setUp(blankPositionList.get(12));
+    positionList.get(17).setLeft(positionList.get(16));
+    positionList.get(17).setUp(positionList.get(12));
 
-    blankPositionList.get(18).setRight(blankPositionList.get(19));
-    blankPositionList.get(18).setUp(blankPositionList.get(10));
+    positionList.get(18).setRight(positionList.get(19));
+    positionList.get(18).setUp(positionList.get(10));
 
-    blankPositionList.get(19).setRight(blankPositionList.get(20));
-    blankPositionList.get(19).setLeft(blankPositionList.get(18));
-    blankPositionList.get(19).setUp(blankPositionList.get(16));
-    blankPositionList.get(19).setDown(blankPositionList.get(22));
+    positionList.get(19).setRight(positionList.get(20));
+    positionList.get(19).setLeft(positionList.get(18));
+    positionList.get(19).setUp(positionList.get(16));
+    positionList.get(19).setDown(positionList.get(22));
 
-    blankPositionList.get(20).setLeft(blankPositionList.get(19));
-    blankPositionList.get(20).setUp(blankPositionList.get(13));
+    positionList.get(20).setLeft(positionList.get(19));
+    positionList.get(20).setUp(positionList.get(13));
 
-    blankPositionList.get(21).setRight(blankPositionList.get(22));
-    blankPositionList.get(21).setUp(blankPositionList.get(9));
+    positionList.get(21).setRight(positionList.get(22));
+    positionList.get(21).setUp(positionList.get(9));
 
-    blankPositionList.get(22).setRight(blankPositionList.get(23));
-    blankPositionList.get(22).setLeft(blankPositionList.get(21));
-    blankPositionList.get(22).setUp(blankPositionList.get(19));
+    positionList.get(22).setRight(positionList.get(23));
+    positionList.get(22).setLeft(positionList.get(21));
+    positionList.get(22).setUp(positionList.get(19));
 
-    blankPositionList.get(23).setLeft(blankPositionList.get(22));
-    blankPositionList.get(23).setUp(blankPositionList.get(14));
+    positionList.get(23).setLeft(positionList.get(22));
+    positionList.get(23).setUp(positionList.get(14));
 
+    List<Position> filledPositionList = new ArrayList<>();
+    List<Position> blankPositionList = new ArrayList<>();
+    filledPositionList.addAll(positionList);
+    blankPositionList.addAll(positionList);
+    //positionList.forEach(position -> {filledPositionList.add(position.clone()));
+    board.setFilledPositionList(filledPositionList);
     board.setBlankPositionList(blankPositionList);
   }
 
+  /**
+   * This method is used to RESET the board when RESET button is clicked
+   *
+   * @param board
+   */
   public void resetGame(Board board) {
     EventHandler<javafx.scene.input.MouseEvent> resetGameButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
@@ -147,13 +165,17 @@ public class BoardInitService {
     board.getResetGameButton().setOnMouseClicked(resetGameButtonEventHandler);
   }
 
+  /**
+   * * This method is used to setup the NEW board GUI when NEW GAME BUTTON IS CLICKED
+   *
+   * @param board
+   */
   public void newGame(Board board) {
     EventHandler<javafx.scene.input.MouseEvent> newGameButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
 
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
-            //        	board.getDecideButton().setStyle("-fx-base:green;");
             board.getDecideButton().setDisable(false);
             board.getStartNewGameButton().setDisable(true);
             board.getResetGameButton().setDisable(false);
