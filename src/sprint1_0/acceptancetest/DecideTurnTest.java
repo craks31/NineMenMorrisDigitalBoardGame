@@ -63,14 +63,11 @@ public class DecideTurnTest extends ApplicationTest {
   // on click text and circle change
   @Test
   public void onClickofDecideGameButtonIsDisplayTextAndColorChanged() {
-    Button decideButton = from(rootNode).lookup("#decideButton").query();
+
     Color displayColor =
         (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
     String displayText = ((Text) from(rootNode).lookup("#displayText").query()).getText();
     clickOn(decideButton);
-    Color displayColor =
-        (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
-    String displayText = ((Text) from(rootNode).lookup("#displayText").query()).getText();
     assertNotEquals("Who's Turn ?", displayText);
     assertNotEquals(GameConstants.DISPLAYCIRCLECOLOR, displayColor);
     if (displayColor.equals(GameConstants.PLAYER1COLOR))
