@@ -64,6 +64,7 @@ public class DecideTurnTest extends ApplicationTest {
   @Test
   public void onClickofDecideGameButtonIsDisplayTextAndColorChanged() {
 
+	  Button decideButton = from(rootNode).lookup("#decideButton").query();
     Color displayColor =
         (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
     String displayText = ((Text) from(rootNode).lookup("#displayText").query()).getText();
