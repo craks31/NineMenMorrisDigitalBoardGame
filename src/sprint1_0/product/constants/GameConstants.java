@@ -11,4 +11,6 @@ public class GameConstants {
   public static final String PLAYER1TURNTEXT = "PLAYER 1'S TURN";
   public static final String PLAYER2TURNTEXT = "PLAYER 2'S TURN";
   public static final int NUM_POSITIONS_OF_BOARD = 24;
+  public static final String FILL = "FILL";
+  public static final String MOVE = "MOVE";
 }
