@@ -14,10 +14,10 @@ public class Board {
 	public Board() {
 		super();
 	}
-	
+	private String op;
 	private List<Position> blankPositionList;
 	
-	private List<Position> filledPositionList;
+	private List<Position> allPositionList;
 	
 	private MasterPlayer player1;
 	
@@ -67,12 +67,12 @@ public class Board {
 		this.blankPositionList = blankPositionList;
 	}
 
-	public List<Position> getFilledPositionList() {
-		return filledPositionList;
+	public List<Position> getAllPositionList() {
+		return allPositionList;
 	}
 
-	public void setFilledPositionList(List<Position> filledPositionList) {
-		this.filledPositionList = filledPositionList;
+	public void setAllPositionList(List<Position> filledPositionList) {
+		this.allPositionList = filledPositionList;
 	}
 
 	public MasterPlayer getPlayer1() {
@@ -114,6 +114,14 @@ public class Board {
 	public void setResetGameButton(Button resetGameButton) {
 		this.resetGameButton = resetGameButton;
 	}
+
+  public String getOp() {
+    return op;
+  }
+
+  public void setOp(String op) {
+    this.op = op;
+  }
 
 	
 }

@@ -138,7 +138,7 @@ public class BoardInitService {
     filledPositionList.addAll(positionList);
     blankPositionList.addAll(positionList);
     //positionList.forEach(position -> {filledPositionList.add(position.clone()));
-    board.setFilledPositionList(filledPositionList);
+    board.setAllPositionList(filledPositionList);
     board.setBlankPositionList(blankPositionList);
   }
 

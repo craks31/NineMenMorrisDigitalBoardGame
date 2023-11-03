@@ -3,14 +3,12 @@ package sprint1_0.product.controller;
 import javafx.scene.paint.Color;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.service.BoardInitService;
-import sprint1_0.product.service.CoinPlacementService;
 import sprint1_0.product.service.GameService;
 
 /** @author rakesh rekha ravali pujitha*/
 public class GameController {
   Board board;
   BoardInitService boardInitService = new BoardInitService();
-  CoinPlacementService coinPlacementService = new CoinPlacementService();
  
   GameService gameService = new GameService();
 
@@ -36,7 +34,7 @@ public class GameController {
   }
   
   public Color decidePlayerTurn(Board board) {
-    return coinPlacementService.decidePlayerColorTurn(board);
+    return gameService.decidePlayerColorTurn(board);
   }
 
   public Board getNewBoard() {
