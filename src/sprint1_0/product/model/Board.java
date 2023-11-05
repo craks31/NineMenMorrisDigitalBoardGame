@@ -6,114 +6,117 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
-/**
- * @author rakesh
- *
- */
-public class Board { 
-	public Board() {
-		super();
-	}
-	private String op;
-	private List<Position> blankPositionList;
-	
-	private List<Position> allPositionList;
-	
-	private MasterPlayer player1;
-	
-	private MasterPlayer player2;
-	
-	private List<PositionCircle> positionCircleList;
+/** @author rakesh */
+public class Board {
+  public Board() {
+    super();
+  }
 
-	private Text displayTextTurn;
+  private String op;
+  
+  private boolean phase2Started;
+  
+  private boolean phase3Started;
+  
+  private List<Position> blankPositionList;
 
-	private Circle displayCircleTurn;
-	
-	private Button decideButton;
-	
-	private Button startNewGameButton;
-	
-	private Button resetGameButton;
+  private List<Position> allPositionList;
 
-	public List<PositionCircle> getPositionCircleList() {
-		return positionCircleList;
-	}
+  private MasterPlayer player1;
 
-	public void setPositionCircleList(List<PositionCircle> positionCircleList) {
-		this.positionCircleList = positionCircleList;
-	}
+  private MasterPlayer player2;
 
-	public Text getDisplayTextTurn() {
-		return displayTextTurn;
-	}
+  private List<PositionCircle> positionCircleList;
 
-	public void setDisplayTextTurn(Text displayTextTurn) {
-		this.displayTextTurn = displayTextTurn;
-	}
+  private Text displayTextTurn;
 
-	public Circle getDisplayCircleTurn() {
-		return displayCircleTurn;
-	}
+  private Circle displayCircleTurn;
 
-	public void setDisplayCircleTurn(Circle displayCircleTurn) {
-		this.displayCircleTurn = displayCircleTurn;
-	}
+  private Button decideButton;
 
-	public List<Position> getBlankPositionList() {
-		return blankPositionList;
-	}
+  private Button startNewGameButton;
 
-	public void setBlankPositionList(List<Position> blankPositionList) {
-		this.blankPositionList = blankPositionList;
-	}
+  private Button resetGameButton;
 
-	public List<Position> getAllPositionList() {
-		return allPositionList;
-	}
+  public List<PositionCircle> getPositionCircleList() {
+    return positionCircleList;
+  }
 
-	public void setAllPositionList(List<Position> filledPositionList) {
-		this.allPositionList = filledPositionList;
-	}
+  public void setPositionCircleList(List<PositionCircle> positionCircleList) {
+    this.positionCircleList = positionCircleList;
+  }
 
-	public MasterPlayer getPlayer1() {
-		return player1;
-	}
+  public Text getDisplayTextTurn() {
+    return displayTextTurn;
+  }
 
-	public void setPlayer1(MasterPlayer player1) {
-		this.player1 = player1;
-	}
+  public void setDisplayTextTurn(Text displayTextTurn) {
+    this.displayTextTurn = displayTextTurn;
+  }
 
-	public MasterPlayer getPlayer2() {
-		return player2;
-	}
+  public Circle getDisplayCircleTurn() {
+    return displayCircleTurn;
+  }
 
-	public void setPlayer2(MasterPlayer player2) {
-		this.player2 = player2;
-	}
-	public Button getDecideButton()
-	{
-		return decideButton;
-	}
-	public void setDecideButton(Button decideButton)
-	{
-		this.decideButton=decideButton;
-	}
-	public Button getStartNewGameButton()
-	{
-		return startNewGameButton;
-	}
-	public void setStartNewGameButton(Button startNewGameButton)
-	{
-		this.startNewGameButton=startNewGameButton;
-	}
+  public void setDisplayCircleTurn(Circle displayCircleTurn) {
+    this.displayCircleTurn = displayCircleTurn;
+  }
 
-	public Button getResetGameButton() {
-		return resetGameButton;
-	}
+  public List<Position> getBlankPositionList() {
+    return blankPositionList;
+  }
 
-	public void setResetGameButton(Button resetGameButton) {
-		this.resetGameButton = resetGameButton;
-	}
+  public void setBlankPositionList(List<Position> blankPositionList) {
+    this.blankPositionList = blankPositionList;
+  }
+
+  public List<Position> getAllPositionList() {
+    return allPositionList;
+  }
+
+  public void setAllPositionList(List<Position> filledPositionList) {
+    this.allPositionList = filledPositionList;
+  }
+
+  public MasterPlayer getPlayer1() {
+    return player1;
+  }
+
+  public void setPlayer1(MasterPlayer player1) {
+    this.player1 = player1;
+  }
+
+  public MasterPlayer getPlayer2() {
+    return player2;
+  }
+
+  public void setPlayer2(MasterPlayer player2) {
+    this.player2 = player2;
+  }
+
+  public Button getDecideButton() {
+    return decideButton;
+  }
+
+  public void setDecideButton(Button decideButton) {
+    this.decideButton = decideButton;
+  }
+
+  public Button getStartNewGameButton() {
+    return startNewGameButton;
+  }
+
+  public void setStartNewGameButton(Button startNewGameButton) {
+    this.startNewGameButton = startNewGameButton;
+  }
+
+  public Button getResetGameButton() {
+    return resetGameButton;
+  }
+
+  public void setResetGameButton(Button resetGameButton) {
+    this.resetGameButton = resetGameButton;
+  }
 
   public String getOp() {
     return op;
@@ -123,5 +126,19 @@ public class Board {
     this.op = op;
   }
 
-	
+  public boolean isPhase3Started() {
+    return phase3Started;
+  }
+
+  public void setPhase3Started(boolean phase3Started) {
+    this.phase3Started = phase3Started;
+  }
+
+  public boolean isPhase2Started() {
+    return phase2Started;
+  }
+
+  public void setPhase2Started(boolean phase2Started) {
+    this.phase2Started = phase2Started;
+  }
 }

@@ -3,6 +3,8 @@ package sprint1_0.product.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.animation.StrokeTransition;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.Board;
@@ -10,16 +12,16 @@ import sprint1_0.product.model.Position;
 import sprint1_0.product.model.PositionCircle;
 
 public class CoinMovementService {
-  public void coinMoveEvent(Board board, Circle clickedCircle) {
+  public void coinMoveEvent(Board board, Circle clickedCircle, StrokeTransition strokeTransition) {
 
     if (board.getPlayer1().getCoins().isEmpty() && board.getPlayer1().getCoins().isEmpty()) {
 
       Position clickedPosition = board.getAllPositionList().get((int) clickedCircle.getUserData());
-
       if (board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER1COLOR)) {
         // IF PLAYER1 TURN
         if (enableNeighbors(
-            board, board.getAllPositionList().get((int) clickedCircle.getUserData()))) {
+            board, board.getAllPositionList().get((int) clickedCircle.getUserData()), strokeTransition)) {
+        	strokeTransition.stop();
           clickedPosition.setFilled(false);
           clickedCircle.setFill(GameConstants.BACKGROUNDCOLOR);
           clickedPosition.setFill(null);
@@ -30,7 +32,8 @@ public class CoinMovementService {
       } else {
         // IF PLAYER2 TURN
         if (enableNeighbors(
-            board, board.getAllPositionList().get((int) clickedCircle.getUserData()))) {
+            board, board.getAllPositionList().get((int) clickedCircle.getUserData()), strokeTransition)) {
+        	strokeTransition.stop();
           clickedPosition.setFilled(false);
           clickedCircle.setFill(GameConstants.BACKGROUNDCOLOR);
           clickedPosition.setFill(null);
@@ -42,25 +45,29 @@ public class CoinMovementService {
     }
   }
 
-  private boolean enableNeighbors(Board board, Position position) {
+  private boolean enableNeighbors(Board board, Position position, StrokeTransition strokeTransition) {
     if (position.getLeft() != null && !position.getLeft().isFilled()) {
       position.getLeft().getPositionCircle().setDisable(false);
       board.setOp("FILL");
-      //// position.getLeft().setOnMouseClicked(placerAndFillerEventHandler(board, "FILL"));
+      strokeTransition.setShape((Circle)position.getLeft().getPositionCircle());
+      ((Circle)position.getLeft().getPositionCircle()).setStroke(Color.TRANSPARENT); // Make the stroke transparent
+      ((Circle)position.getLeft().getPositionCircle()).setStrokeWidth(10);
+      strokeTransition.play();
     }
     if (position.getUp() != null && !position.getUp().isFilled()) {
       position.getUp().getPositionCircle().setDisable(false);
       board.setOp("FILL");
-      // position.getUp().setOnMouseClicked(placerAndFillerEventHandler(board, "FILL"));
+      strokeTransition.play();
     }
     if (position.getRight() != null && !position.getRight().isFilled()) {
       position.getRight().getPositionCircle().setDisable(false);
       board.setOp("FILL");
-      // position.getRight().setOnMouseClicked(placerAndFillerEventHandler(board, "FILL"));
+      strokeTransition.play();
     }
     if (position.getDown() != null && !position.getDown().isFilled()) {
       position.getDown().getPositionCircle().setDisable(false);
       board.setOp("FILL");
+      strokeTransition.play();
     }
     if (board.getOp().equals("FILL")) {
       return true;
