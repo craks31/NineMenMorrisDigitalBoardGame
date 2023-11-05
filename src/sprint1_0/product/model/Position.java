@@ -3,11 +3,10 @@ package sprint1_0.product.model;
 import javafx.scene.paint.Paint;
 
 /** @author rakesh */
-public class Position extends PositionCircle implements Cloneable {
+public class Position extends PositionCircle {
 
   private int positionId;
   private PositionCircle positionCircle;
-
   private Position up = null;
   private Position down = null;
   private Position left = null;

@@ -104,4 +104,21 @@ public class CoinPlacementTest extends ApplicationTest {
       assertEquals(player2sizeBefore, player2sizeAfter + 1);
     }
   }
+  
+  @Test
+  public void testIfBlankCirclesAreClickable() {
+	  int i=0;
+	  while(!gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty()
+              && !gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty()) {
+	      String pos = "#position" + String.valueOf(i + 1);
+	      PositionCircle c = from(rootNode).lookup(pos).query();
+	      clickOn(c);
+	      i++;
+	    }
+	    for (int j = 0; j < gameManagerGUI.getBoard().getBlankPositionList().size(); j++) {
+	        String pos = "#position" + String.valueOf(j + 1);
+	        PositionCircle c = from(rootNode).lookup(pos).query();
+	        assertEquals(true, c.isDisabled());
+	      }
+	  }
 }
