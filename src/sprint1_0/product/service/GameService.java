@@ -177,4 +177,33 @@ public class GameService {
     System.out.println("Ver" + verticalMillDecider);
     return millFormed;
   }
+  
+  public void placeCoinsSetup(Board board) {
+	    board.setOp("FILL");
+	    for (int i = 0; i < board.getBlankPositionList().size(); i++) {
+	      PositionCircle positionCircle = board.getBlankPositionList().get(i).getPositionCircle();
+	      // Adding the event handler
+	      positionCircle.setDisable(false);
+	      positionCircle.addEventHandler(MouseEvent.MOUSE_CLICKED, coinMouseEventHandler(board));
+	      positionCircle.setUserData(i);
+	    }
+	  }
+
+	  private EventHandler<MouseEvent> coinMouseEventHandler(Board board) {
+	    EventHandler<MouseEvent> coinMouseEventHandler =
+	        new EventHandler<javafx.scene.input.MouseEvent>() {
+
+	          @Override
+	          public void handle(javafx.scene.input.MouseEvent e) {
+	            Circle clickedCircle = (Circle) e.getSource();
+	            if (board.getOp().equals("FILL")) {
+	              coinPlacementService.coinFillEvent(board, clickedCircle);
+	            } else if (board.getOp().equals("MOVE")) {
+	              coinMovementService.coinMoveEvent(board, clickedCircle);
+	            }
+	            clickedCircle.setDisable(true);
+	          }
+	        };
+	    return coinMouseEventHandler;
+	  }
 }
