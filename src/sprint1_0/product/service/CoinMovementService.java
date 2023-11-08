@@ -77,7 +77,7 @@ public class CoinMovementService {
   }
 
   public void prepareForCoinMovement(Board board) {
-    board.getBlankPositionList().forEach(e -> ((Circle) e).setDisable(true));
+   // board.getBlankPositionList().forEach(e -> ((Circle) e).setDisable(true));
     List<Position> player1FilledPositions =
         board.getAllPositionList().stream()
             .filter(pos -> pos.isFilled() && pos.getFill().equals(GameConstants.PLAYER1COLOR))
@@ -89,6 +89,8 @@ public class CoinMovementService {
     board.getAllPositionList().stream()
         .filter(pos -> !pos.isFilled())
         .forEach(e -> e.getPositionCircle().setDisable(true));
+    board.getBlankPositionList().stream()
+    .forEach(e -> e.getPositionCircle().setDisable(true));
     board.getPlayer2().setFilledPositions(player2FilledPositions);
     board.getPlayer1().setFilledPositions(player1FilledPositions);
     if (board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER1COLOR)) {
