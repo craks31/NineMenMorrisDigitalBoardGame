@@ -18,6 +18,8 @@ public class Board {
   
   private boolean phase3Started;
   
+  private boolean millCheckByPassed;
+  
   private List<Position> blankPositionList;
 
   private List<Position> allPositionList;
@@ -141,4 +143,8 @@ public class Board {
   public void setPhase2Started(boolean phase2Started) {
     this.phase2Started = phase2Started;
   }
+
+public boolean isMillCheckByPassed(){return millCheckByPassed;}
+
+public void setMillCheckByPassed(boolean millCheckByPassed){this.millCheckByPassed = millCheckByPassed;}
 }

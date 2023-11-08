@@ -85,7 +85,7 @@ public class GameService {
               if (checkMill(
                   board,
                   board.getAllPositionList().get((int) clickedCircle.getUserData()),
-                  clickedCircle.getFill())) {
+                  clickedCircle.getFill()) && board.isMillCheckByPassed()) {
                 coinRemovalService.prepareForCoinRemoval(board, clickedCircle.getFill());
               }
               clickedCircle.setDisable(true);

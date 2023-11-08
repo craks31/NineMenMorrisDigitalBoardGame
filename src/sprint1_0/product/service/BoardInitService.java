@@ -140,6 +140,7 @@ public class BoardInitService {
     //positionList.forEach(position -> {filledPositionList.add(position.clone()));
     board.setAllPositionList(filledPositionList);
     board.setBlankPositionList(blankPositionList);
+    board.setMillCheckByPassed(false);
   }
 
   /**
