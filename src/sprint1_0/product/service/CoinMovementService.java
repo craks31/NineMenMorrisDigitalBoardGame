@@ -86,7 +86,7 @@ public class CoinMovementService {
         board.getAllPositionList().stream()
             .filter(pos -> pos.isFilled() && pos.getFill().equals(GameConstants.PLAYER2COLOR))
             .collect(Collectors.toList());
-    board.getAllPositionList().stream()
+    board.getAllPositionList().stream() 
         .filter(pos -> !pos.isFilled())
         .forEach(e -> e.getPositionCircle().setDisable(true));
     board.getPlayer2().setFilledPositions(player2FilledPositions);
