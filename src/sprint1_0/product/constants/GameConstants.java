@@ -15,4 +15,5 @@ public class GameConstants {
   public static final int NUM_POSITIONS_OF_BOARD = 24;
   public static final String FILL = "FILL";
   public static final String MOVE = "MOVE";
+  public static final String REMOVE = "REMOVE";
 }
