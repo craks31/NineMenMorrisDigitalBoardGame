@@ -28,7 +28,7 @@ public class CoinMovementService {
           board.getAllPositionList().stream()
               .filter(pos -> pos.isFilled())
               .forEach(pos -> pos.getPositionCircle().setDisable(true));
-        }
+        }  
       } else {
         // IF PLAYER2 TURN
         if (enableNeighbors(
@@ -72,7 +72,7 @@ public class CoinMovementService {
     if (board.getOp().equals("FILL")) {
       return true;
     } else {
-      return false;
+      return false;   
     }
   }
 
@@ -86,7 +86,7 @@ public class CoinMovementService {
         board.getAllPositionList().stream()
             .filter(pos -> pos.isFilled() && pos.getFill().equals(GameConstants.PLAYER2COLOR))
             .collect(Collectors.toList());
-    board.getAllPositionList().stream()
+    board.getAllPositionList().stream() 
         .filter(pos -> !pos.isFilled())
         .forEach(e -> e.getPositionCircle().setDisable(true));
     board.getBlankPositionList().stream()
@@ -98,6 +98,7 @@ public class CoinMovementService {
     } else {
       enablePlayerFilledPositions(board, player2FilledPositions, false);
     }
+    board.setPhase2Started(true);
     board.setOp("MOVE");
   }
 
