@@ -60,8 +60,8 @@ public class GameManagerGUI extends Application {
     resetGameButton.setLayoutY(320);
     resetGameButton.setDisable(true);
 
-    decideButton = new Button("DECIDE");
-    decideButton.setLayoutX(480);
+    decideButton = new Button("DECIDE"); 
+    decideButton.setLayoutX(100);
     decideButton.setLayoutY(55);
     decideButton.setDisable(true);
 
@@ -70,7 +70,7 @@ public class GameManagerGUI extends Application {
     displayText.setX(230);
     displayText.setY(80);
     displayText.setFont(Font.font(30));
-    Circle displayCircle = new Circle(185.0d, 70.0d, 16.0d, GameConstants.DISPLAYCIRCLECOLOR);
+    Circle displayCircle = new Circle(200.0d, 70.0d, 16.0d, GameConstants.DISPLAYCIRCLECOLOR);
     Image myImage = new Image(new FileInputStream(".\\resources\\images\\nmbg.png"));
 
     // Setting the image view

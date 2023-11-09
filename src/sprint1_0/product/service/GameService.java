@@ -20,6 +20,8 @@ public class GameService {
   CoinPlacementService coinPlacementService = new CoinPlacementService();
   CoinMovementService coinMovementService = new CoinMovementService();
   CoinRemovalService coinRemovalService = new CoinRemovalService();
+  CoinFlyService coinFlyService = new CoinFlyService();
+
   /**
    * This method is used to deicde a player turn randomly.
    *
@@ -28,7 +30,7 @@ public class GameService {
    */
   public Color decidePlayerColorTurn(Board board) {
     Random rand = new Random();
-    boolean isPlayer1 = rand.nextBoolean();
+    boolean isPlayer1 = rand.nextBoolean(); 
     if (isPlayer1) {
       return board.getPlayer1().getPlayerColor();
     } else {
@@ -85,9 +87,9 @@ public class GameService {
               if (checkMill(
                   board,
                   board.getAllPositionList().get((int) clickedCircle.getUserData()),
-                  clickedCircle.getFill()) && board.isMillCheckByPassed()) {
+                  clickedCircle.getFill()) && !board.isMillCheckByPassed()) {
                 coinRemovalService.prepareForCoinRemoval(board, clickedCircle.getFill());
-              }
+              }  
               clickedCircle.setDisable(true);
             } else if (board.getOp().equals("MOVE")) {
               coinMovementService.coinMoveEvent(board, clickedCircle, strokeTransition);
@@ -98,9 +100,10 @@ public class GameService {
               clickedCircle.setDisable(false);
             }
             else if (board.getOp().equals("FLY")) {
-               // coinRemovalService.coinRemoveEvent(board, clickedCircle, strokeTransition);
+                coinFlyService.coinFlyEvent(board, clickedCircle);
                 //clickedCircle.setDisable(false);
-            	//decide game
+               //decide game
+            	
             }
           }
         };
