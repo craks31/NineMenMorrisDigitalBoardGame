@@ -13,29 +13,30 @@ import sprint1_0.product.model.PositionCircle;
 public class CoinFlyService {
 	
 	public void prepareForCoinFlyMovement(Board board, Color playercolor) {
-		// TODO Auto-generated method stub
 		List<Position> player1FilledPositions = board.getAllPositionList().stream()
                 .filter(pos -> pos.isFilled() && pos.getFill().equals(GameConstants.PLAYER1COLOR))
                 .collect(Collectors.toList());
         List<Position> player2FilledPositions = board.getAllPositionList().stream()
                 .filter(pos -> pos.isFilled() && pos.getFill().equals(GameConstants.PLAYER2COLOR))
                 .collect(Collectors.toList());
+
+        board.getPlayer2().setFilledPositions(player2FilledPositions);
+        board.getPlayer1().setFilledPositions(player1FilledPositions);
         board.getAllPositionList().stream() 
         .filter(pos -> !pos.isFilled())
         .forEach(e -> e.getPositionCircle().setDisable(true)); 
         board.getBlankPositionList().stream()
                 .forEach(e -> e.getPositionCircle().setDisable(true));
-
-        board.getPlayer2().setFilledPositions(player2FilledPositions);
-        board.getPlayer1().setFilledPositions(player1FilledPositions);
-
         if (playercolor.equals(GameConstants.PLAYER1COLOR)) { 
+        	System.out.println("TRIGGERED FLY FOR PLAYER 1"); 
             enablePlayerFilledPositions(board, player1FilledPositions, false);
         } else  if (playercolor.equals(GameConstants.PLAYER2COLOR)) {
+        	System.out.println("TRIGGERED FLY FOR PLAYER 2"); 
             enablePlayerFilledPositions(board, player2FilledPositions, false);
         }
 
-        board.setOp("FLY");
+    	board.setPhase3Started(true);
+    	board.setOp("FLY");
     }
 
     private void enablePlayerFilledPositions(Board board, List<Position> playerFilledPositions, boolean enableFlag) {
@@ -45,21 +46,18 @@ public class CoinFlyService {
         }
     }
 
-	public void coinFlyEvent(Board board, Circle clickedCircle) {
-	      Position clickedPosition = board.getAllPositionList().get((int) clickedCircle.getUserData());
-	      clickedPosition.setFilled(false);
-          clickedCircle.setFill(GameConstants.BACKGROUNDCOLOR);
-          clickedPosition.setFill(null);
-          board.getAllPositionList().stream()
-              .filter(pos -> pos.isFilled())
-              .forEach(pos -> pos.getPositionCircle().setDisable(true));
-          board.getAllPositionList().stream() 
-          .filter(pos -> !pos.isFilled())
-          .forEach(e -> e.getPositionCircle().setDisable(false)); 
-          board.setOp("FILL");
-
-
-		
+  public void coinFlyEvent(Board board, Circle clickedCircle) {
+    Position clickedPosition = board.getAllPositionList().get((int) clickedCircle.getUserData());
+    clickedPosition.setFilled(false);
+    clickedCircle.setFill(GameConstants.BACKGROUNDCOLOR);
+    clickedPosition.setFill(null);
+    board.getAllPositionList().stream()
+        .filter(pos -> pos.isFilled())
+        .forEach(pos -> pos.getPositionCircle().setDisable(true));
+    board.getAllPositionList().stream()
+        .filter(pos -> !pos.isFilled())
+        .forEach(e -> e.getPositionCircle().setDisable(false));
+    board.setOp("FILL");
 	}
 
 	}
