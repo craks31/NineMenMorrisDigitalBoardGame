@@ -36,11 +36,8 @@ public class CoinMovementTest extends ApplicationTest {
     Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(newGameButton);
     clickOn(decideButton);
-
-    System.out.println("Yoss");
     if (gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty()
         && gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty()) {
-      System.out.println("Yo");
       gameManagerGUI.getBoard().setOp(GameConstants.FILL);
     }
   }

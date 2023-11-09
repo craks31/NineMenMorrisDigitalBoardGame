@@ -49,22 +49,26 @@ public class CoinRemovalService {
 			}
 			board.getAllPositionList().stream().filter(pos -> !pos.isFilled())
 					.forEach(e -> e.getPositionCircle().setDisable(true));
-			if (board.isPhase2Started() && board.getPlayer1().getFilledPositions().size() == 4) {
-				board.setPhase3Started(true);
-				coinFlyService.prepareForCoinFlyMovement(board, GameConstants.PLAYER1COLOR);
-			} else if (board.isPhase2Started() && board.getPlayer2().getFilledPositions().size() == 4) {
-				board.setPhase3Started(true);
-				coinFlyService.prepareForCoinFlyMovement(board, GameConstants.PLAYER2COLOR);
-			} else if (board.isPhase3Started() && board.getPlayer1().getFilledPositions().size() == 3) {
-				gameEndService.prepareForGameEnd(board, GameConstants.PLAYER1COLOR);
-			} else if (board.isPhase3Started() && board.getPlayer2().getFilledPositions().size() == 3) {
-				gameEndService.prepareForGameEnd(board, GameConstants.PLAYER2COLOR);
+			board.getBlankPositionList().add(clickedPosition);
+			PositionHelper.setPlayerPositionsList(board);
+			if (board.isPhase2Started()
+			        && board.getPlayer1().getFilledPositions().size() == 3){
+				
+			}
+			else if(board.isPhase2Started()
+			        && (board.getPlayer2().getFilledPositions().size() == 3)) {
+				System.out.println("Fly from Removal" ); 
+			      coinFlyService.prepareForCoinFlyMovement(board, GameConstants.REMOVE, 4);
+			    }
+			 else if (board.isPhase3Started() && (board.getPlayer1().getFilledPositions().size() == 3
+			            || board.getPlayer2().getFilledPositions().size() == 3)) {
+				gameEndService.prepareForGameEnd(board);
 			} else {
 				board.setOp("MOVE");
 			}
 		}
 
-		board.getBlankPositionList().add(clickedPosition);
+		
 	}
 
 	public void prepareForCoinRemoval(Board board, Paint color) {
