@@ -36,13 +36,6 @@ public class CoinMovementTest extends ApplicationTest {
     Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(newGameButton);
     clickOn(decideButton);
-
-    System.out.println("Yoss");
-    if (gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty()
-        && gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty()) {
-      System.out.println("Yo");
-      gameManagerGUI.getBoard().setOp(GameConstants.FILL);
-    }
   }
 
   @After
@@ -51,7 +44,7 @@ public class CoinMovementTest extends ApplicationTest {
     clickOn(button);
   }
 
-  //4.3
+  // 4.3
   @Test
   public void filledCirclesClickableTest() {
     int i = 0;
@@ -89,7 +82,7 @@ public class CoinMovementTest extends ApplicationTest {
     }
   }
 
-  //4.2
+  // 4.2
   @Test
   public void testifNonNeighborBlankCirclesAreDisabledAfterDecidingToMoveAnyCoin() {
     int i = 0;
@@ -164,7 +157,7 @@ public class CoinMovementTest extends ApplicationTest {
     }
   }
 
-  //4.6
+  // 4.6
   @Test
   public void testifBlankCirclesAreDisabledWithoutMovingAnyCoin() {
     int i = 0;
@@ -185,7 +178,7 @@ public class CoinMovementTest extends ApplicationTest {
       assertEquals(true, positionCircle.isDisabled());
     }
   }
-//4.1
+  // 4.1
   @Test
   public void testNeighborsOfClickedCircle() {
     int i = 0;
@@ -258,7 +251,7 @@ public class CoinMovementTest extends ApplicationTest {
     }
   }
 
-  //4.4
+  // 4.4
   @Test
   public void testSuccessfulMove() {
     int i = 0;
@@ -283,7 +276,7 @@ public class CoinMovementTest extends ApplicationTest {
     }
   }
 
-  //4.5
+  // 4.5
   @Test
   public void testConcurrentSuccessfulMoves() {
     int i = 0;
