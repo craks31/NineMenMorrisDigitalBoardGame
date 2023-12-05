@@ -209,9 +209,9 @@ public class BoardInitService {
             showOpponentChoiceDialog(board, primaryStage);
             updateBoardGUI(
                 primaryStage,
-                board.getPlayer1().getPlayerName(),
+                board.getPlayer1().getPlayerName(), 
                 board.getPlayer2().getPlayerName());
-          }
+          } 
         };
     board.getStartNewGameButton().setOnMouseClicked(newGameButtonEventHandler);
   }

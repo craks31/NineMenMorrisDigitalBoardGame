@@ -40,12 +40,29 @@ public class Board {
   private Button decideButton;
 
   private Button startNewGameButton;
-
+  
   private Button resetGameButton;
+  
+  private Button replayGameButton;
+  
+  private Button recordGameButton;
+  
+  private Button frontButton;
+  
+  private Button backwardButton;
+  
+  private Button forwardButton;
+  
+  private Button endButton;
 
-  private boolean isPlayer2Computer;
+ 
 
-  private ChoiceDialog<String> choiceDialog;
+
+private boolean isPlayer2Computer;
+
+  
+
+private ChoiceDialog<String> choiceDialog;
 
   private TextInputDialog name1Dialog;
 
@@ -55,15 +72,16 @@ public class Board {
 
   private List<Position> nonMillCoinsForComputer;
 
+
   public List<PositionCircle> getPositionCircleList() {
     return positionCircleList;
-  }
+  } 
 
   public void setPositionCircleList(List<PositionCircle> positionCircleList) {
     this.positionCircleList = positionCircleList;
   }
 
-  public Text getDisplayTextTurn() {
+  public Text getDisplayTextTurn() { 
     return displayTextTurn;
   }
 
@@ -101,7 +119,7 @@ public class Board {
 
   public void setPlayer1(MasterPlayer player1) {
     this.player1 = player1;
-  }
+  } 
 
   public MasterPlayer getPlayer2() {
     return player2;
@@ -114,6 +132,7 @@ public class Board {
   public Button getDecideButton() {
     return decideButton;
   }
+ 
 
   public void setDecideButton(Button decideButton) {
     this.decideButton = decideButton;
@@ -134,6 +153,53 @@ public class Board {
   public void setResetGameButton(Button resetGameButton) {
     this.resetGameButton = resetGameButton;
   }
+  public Button getFrontButton() {
+		return frontButton;
+	}
+
+	public void setFrontButton(Button frontButton) {
+		this.frontButton = frontButton;
+	}
+
+	public Button getReplayGameButton() {
+		return replayGameButton;
+	}
+
+	public Button getRecordGameButton() {
+		return recordGameButton;
+	}
+  
+  public void setRecordGameButton(Button recordGameButton) {
+	    this.recordGameButton = recordGameButton;
+	  } 
+  public Button getreplayGameButton() {
+	    return replayGameButton;
+	  }
+  public void setReplayGameButton(Button replayGameButton) {
+	    this.recordGameButton = replayGameButton;
+	  } 
+  public Button getBackwardButton() {
+		return backwardButton;
+	}
+
+public void setBackwardButton(Button backwardButton) {
+		this.backwardButton = backwardButton;
+	}
+public Button getForwardButton() {
+		return forwardButton;
+	}
+
+public void setForwardButton(Button forwardButton) {
+		this.forwardButton = forwardButton;
+	}
+
+public Button getEndButton() {
+		return endButton;
+	}
+
+public void setEndButton(Button endButton) {
+		this.endButton = endButton;
+	}
 
   public String getOp() {
     return op;
