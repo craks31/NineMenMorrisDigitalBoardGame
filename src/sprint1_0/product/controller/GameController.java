@@ -1,6 +1,9 @@
 package sprint1_0.product.controller;
 
+import java.util.concurrent.ExecutorService;
+
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.service.BoardInitService;
 import sprint1_0.product.service.GameService;
@@ -21,16 +24,8 @@ public class GameController {
     return board;
   }
 
-  public void startGame(Board board, Color decideColor) {
-	  gameService.startGame(board, decideColor);
-  }
-
-  public void startPhase1Game(Board board, Color decideColor) {
-	  gameService.startGame(board, decideColor);
-  }
-
-  public void startPhase2Game(Board board) {
-	 // coinMovementService.makeMove(board);
+  public void startGame(Board board, Color decideColor, ExecutorService executorService) {
+	  gameService.startGame(board, decideColor, executorService);
   }
   
   public Color decidePlayerTurn(Board board) {
@@ -45,8 +40,8 @@ public class GameController {
     boardInitService.resetGame(board);
   }
 
-  public void newGame(Board board) {
-    boardInitService.newGame(board);
+  public void newGame(Board board, Stage primaryStage) {
+    boardInitService.newGame(board, primaryStage);
   }
   
 }

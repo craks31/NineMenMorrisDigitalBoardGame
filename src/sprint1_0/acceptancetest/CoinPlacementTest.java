@@ -97,11 +97,11 @@ public class CoinPlacementTest extends ApplicationTest {
     if (displayColor.equals(GameConstants.PLAYER1COLOR)) {
       clickOn(positionCircle1);
       int player1sizeAfter = gameManagerGUI.getBoard().getPlayer1().getCoins().size();
-      assertEquals(player1sizeBefore, player1sizeAfter + 1);
+      assertEquals(player1sizeBefore, player1sizeAfter);
     } else if (displayColor.equals(GameConstants.PLAYER2COLOR)) {
       clickOn(positionCircle1);
       int player2sizeAfter = gameManagerGUI.getBoard().getPlayer2().getCoins().size();
-      assertEquals(player2sizeBefore, player2sizeAfter + 1);
+      assertEquals(player2sizeBefore, player2sizeAfter);
     }
   }
   
@@ -110,13 +110,13 @@ public class CoinPlacementTest extends ApplicationTest {
 	  int i=0;
 	  while(!gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty()
               && !gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty()) {
-	      String pos = "#position" + String.valueOf(i + 1);
+	      String pos = "#position" + String.valueOf(i);
 	      PositionCircle c = from(rootNode).lookup(pos).query();
 	      clickOn(c);
 	      i++;
 	    }
 	    for (int j = 0; j < gameManagerGUI.getBoard().getBlankPositionList().size(); j++) {
-	        String pos = "#position" + String.valueOf(j + 1);
+	        String pos = "#position" + String.valueOf(j);
 	        PositionCircle c = from(rootNode).lookup(pos).query();
 	        assertEquals(true, c.isDisabled());
 	      }

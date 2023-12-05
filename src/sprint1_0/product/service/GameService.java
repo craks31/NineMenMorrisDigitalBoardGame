@@ -1,16 +1,18 @@
 package sprint1_0.product.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
 
-import javafx.animation.Animation;
-import javafx.animation.StrokeTransition;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
+import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.helper.DisplayUtil;
+import sprint1_0.product.helper.PositionHelper;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.Position;
 import sprint1_0.product.model.PositionCircle;
@@ -21,6 +23,7 @@ public class GameService {
   CoinMovementService coinMovementService = new CoinMovementService();
   CoinRemovalService coinRemovalService = new CoinRemovalService();
   CoinFlyService coinFlyService = new CoinFlyService();
+  ComputerGamePlayService compGamePlayService = new ComputerGamePlayService();
 
   /**
    * This method is used to deicde a player turn randomly.
@@ -30,7 +33,7 @@ public class GameService {
    */
   public Color decidePlayerColorTurn(Board board) {
     Random rand = new Random();
-    boolean isPlayer1 = rand.nextBoolean(); 
+    boolean isPlayer1 = rand.nextBoolean();
     if (isPlayer1) {
       return board.getPlayer1().getPlayerColor();
     } else {
@@ -38,7 +41,8 @@ public class GameService {
     }
   }
 
-  public void initDisplayAndStartGame(Board board, Color decidedColor) {
+  public void initDisplayAndStartGame(
+      Board board, Color decidedColor, ExecutorService executorService) {
 
     EventHandler<javafx.scene.input.MouseEvent> decideButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
@@ -47,7 +51,10 @@ public class GameService {
           public void handle(javafx.scene.input.MouseEvent e) {
             displayUtil.displayPlayerTurn(board, decidedColor);
             board.getDecideButton().setDisable(true);
-            placeCoinsSetup(board);
+            placeCoinsSetup(board, executorService);
+            if (board.isPlayer2Computer() && decidedColor.equals(GameConstants.PLAYER2COLOR)) {
+              compGamePlayService.makeComputerFill(board.getBlankPositionList(), executorService);
+            }
           }
         };
 
@@ -55,55 +62,105 @@ public class GameService {
     board.getDecideButton().setOnMouseClicked(decideButtonEventHandler);
   }
 
-  public void startGame(Board board, Color decideColor) {
-    initDisplayAndStartGame(board, decideColor);
+  protected void playComputerGame(Board board, Color decideColor) {
+    if (decideColor.equals(GameConstants.PLAYER2COLOR)) {
+      // 1st Computer Turn
+    } else {
+
+    }
   }
 
-  public void placeCoinsSetup(Board board) {
+  public void startGame(Board board, Color decideColor, ExecutorService executorService) {
+    initDisplayAndStartGame(board, decideColor, executorService);
+  }
+
+  public void placeCoinsSetup(Board board, ExecutorService executorService) {
     board.setOp("FILL");
     for (int i = 0; i < board.getBlankPositionList().size(); i++) {
       PositionCircle positionCircle = board.getBlankPositionList().get(i).getPositionCircle();
       // Adding the event handler
       positionCircle.setDisable(false);
-      positionCircle.addEventHandler(MouseEvent.MOUSE_CLICKED, coinMouseEventHandler(board));
+      positionCircle.addEventHandler(
+          MouseEvent.MOUSE_CLICKED, coinMouseEventHandler(board, executorService));
       positionCircle.setUserData(i);
     }
   }
 
-  private EventHandler<MouseEvent> coinMouseEventHandler(Board board) {
-     
-    EventHandler<MouseEvent> coinMouseEventHandler =		
+  private EventHandler<MouseEvent> coinMouseEventHandler(
+      Board board, ExecutorService executorService) {
+
+    EventHandler<MouseEvent> coinMouseEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
 
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
             Circle clickedCircle = (Circle) e.getSource();
-            StrokeTransition strokeTransition = new StrokeTransition(Duration.seconds(10.5));
-            strokeTransition.setFromValue(Color.BLUE); // Initial outer color
-            strokeTransition.setToValue(Color.RED);     // Blinking outer color
-            strokeTransition.setCycleCount(Animation.INDEFINITE);
             if (board.getOp().equals("FILL")) {
-              coinPlacementService.coinFillEvent(board, clickedCircle);
+              coinPlacementService.coinFillEvent(board, clickedCircle, executorService);
               if (checkMill(
-                  board,
-                  board.getAllPositionList().get((int) clickedCircle.getUserData()),
-                  clickedCircle.getFill()) && !board.isMillCheckByPassed()) {
-                coinRemovalService.prepareForCoinRemoval(board, clickedCircle.getFill());
-              }  
-              clickedCircle.setDisable(true);
+                      board,
+                      board.getAllPositionList().get((int) clickedCircle.getUserData()),
+                      clickedCircle.getFill())
+                  && !board.isMillCheckByPassed()) {
+                coinRemovalService.prepareForCoinRemoval(
+                    board, clickedCircle.getFill(), executorService);
+              } else if (board.isPlayer2Computer()
+                  && board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER2COLOR)
+                  && !board.getPlayer2().getCoins().isEmpty()
+                  && !board.isPhase2Started()) {
+                System.out.println("DEBUG -- Initiating computer Fill after Human Fill in phase1");
+                board
+                    .getBlankPositionList()
+                    .remove(board.getAllPositionList().get((int) clickedCircle.getUserData()));
+                compGamePlayService.makeComputerFill(board.getBlankPositionList(), executorService);
+              } else if (board.isPlayer2Computer()
+                  && board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER2COLOR)
+                  && board.getOp().equals("MOVE")) {
+                System.out.println("DEBUG -- Initiating computer Move after Human Fill in phase2 ");
+                compGamePlayService.makeComputerFill(
+                    coinMovementService.findComputerCoinsWithEmptyNeighbors(
+                        board, PositionHelper.getPlayer2FilledCoins(board.getAllPositionList())),
+                    executorService);
+              } else if (board.isPlayer2Computer()
+                  && board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER2COLOR)
+                  && board.getOp().equals("FLY")) {
+                System.out.println("DEBUG -- Initiating computer Fly after Human Fill in phase3 ");
+                compGamePlayService.makeComputerFill(
+                    PositionHelper.getPlayer2FilledCoins(board.getAllPositionList()),
+                    executorService);
+              }
+
             } else if (board.getOp().equals("MOVE")) {
-              coinMovementService.coinMoveEvent(board, clickedCircle, strokeTransition);
+              coinMovementService.coinMoveEvent(board, clickedCircle, executorService);
               board.setPhase2Started(true);
               clickedCircle.setDisable(true);
+              if (board.isPlayer2Computer()
+                  && board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER2COLOR)) {
+                System.out.println(
+                    "Player 2 Coin has Neighbors - : "
+                        + board.getEmptyNeighborsForComputer().size());
+                for (Position p : board.getEmptyNeighborsForComputer()) {
+                  System.out.println(p.getPositionCircle().getId());
+                }
+                System.out.println(
+                    "DEBUG -- Initiating computer Fill after computer move in phase2");
+                compGamePlayService.makeComputerFill(
+                    board.getEmptyNeighborsForComputer(), executorService);
+                board.setOp("FILL");
+              }
             } else if (board.getOp().equals("REMOVE")) {
-              coinRemovalService.coinRemoveEvent(board, clickedCircle, strokeTransition);
+              coinRemovalService.coinRemoveEvent(board, clickedCircle, executorService);
               clickedCircle.setDisable(false);
-            }
-            else if (board.getOp().equals("FLY")) {
-                coinFlyService.coinFlyEvent(board, clickedCircle);
-                //clickedCircle.setDisable(false);
-               //decide game
-            	
+            } else if (board.getOp().equals("FLY")) {
+              coinFlyService.coinFlyEvent(board, clickedCircle);
+              if (board.isPlayer2Computer()
+                  && board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER2COLOR)
+                  && board.isPhase3Started()
+                  && board.isPhase3Started()) {
+                System.out.println(
+                    "DEBUG -- Initiating computer Fill after computer Fly in phase3");
+                compGamePlayService.makeComputerFill(board.getBlankPositionList(), executorService);
+              }
             }
           }
         };
@@ -118,28 +175,36 @@ public class GameService {
     boolean rightDecider = false;
     boolean upDecider = false;
     boolean downDecider = false;
+    List<Position> horMillList = new ArrayList<>();
+    List<Position> verMillList = new ArrayList<>();
+    horMillList.add(position);
+    verMillList.add(position);
     if (position.getLeft() != null
         && position.getLeft().isFilled()
         && position.getLeft().getFill().equals(color)) {
       horizontalMillDecider++;
+      horMillList.add(position.getLeft());
       leftDecider = true;
     }
     if (position.getUp() != null
         && position.getUp().isFilled()
         && position.getUp().getFill().equals(color)) {
       verticalMillDecider++;
+      verMillList.add(position.getUp());
       upDecider = true;
     }
     if (position.getRight() != null
         && position.getRight().isFilled()
         && position.getRight().getFill().equals(color)) {
       horizontalMillDecider++;
+      horMillList.add(position.getRight());
       rightDecider = true;
     }
     if (position.getDown() != null
         && position.getDown().isFilled()
         && position.getDown().getFill().equals(color)) {
       verticalMillDecider++;
+      verMillList.add(position.getDown());
       downDecider = true;
     }
 
@@ -149,12 +214,14 @@ public class GameService {
             && position.getLeft().getLeft().isFilled()
             && position.getLeft().getLeft().getFill().equals(color)) {
           horizontalMillDecider++;
+          horMillList.add(position.getLeft().getLeft());
         }
       } else if (rightDecider) {
         if (position.getRight().getRight() != null
             && position.getRight().getRight().isFilled()
             && position.getRight().getRight().getFill().equals(color)) {
           horizontalMillDecider++;
+          horMillList.add(position.getRight().getRight());
         }
       }
 
@@ -164,22 +231,37 @@ public class GameService {
             && position.getUp().getUp().isFilled()
             && position.getUp().getUp().getFill().equals(color)) {
           verticalMillDecider++;
+          verMillList.add(position.getUp().getUp());
         }
       } else if (downDecider) {
         if (position.getDown().getDown() != null
             && position.getDown().getDown().isFilled()
             && position.getDown().getDown().getFill().equals(color)) {
           verticalMillDecider++;
+          verMillList.add(position.getDown().getDown());
         }
       }
     }
-    if (horizontalMillDecider == 2 || verticalMillDecider == 2) {
+    if (horizontalMillDecider == 2) {
+      System.out.println("Horizontal Mill Formed");
       millFormed = true;
+      horMillList.forEach(
+          p -> {
+            p.setPartOfHorMill(true);
+            p.setHorMillFamily(horMillList);
+          });
+    }
+    if (verticalMillDecider == 2) {
+      System.out.println("Vertical Mill Formed");
+      millFormed = true;
+      verMillList.forEach(
+          p -> {
+            p.setPartOfVerMill(true);
+            p.setVerMillFamily(verMillList);
+          });
     }
     System.out.println("Hor" + horizontalMillDecider);
     System.out.println("Ver" + verticalMillDecider);
     return millFormed;
   }
-  
-
 }

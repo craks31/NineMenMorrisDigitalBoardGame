@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -29,9 +31,17 @@ public class GameManagerGUI extends Application {
   Button decideButton;
   Button startNewGameButton;
   Button resetGameButton;
+  Button recordGameButton;
+  Button replayGameButton;
+  Button replayButton;
+  Button frontButton;
+  Button backwardButton;
+  Button forwardButton;
+  Button endButton;
   Board board;
   private Scene scene;
   EventHandler<MouseEvent> resetGameButtonEventHandler;
+  ExecutorService executorService;
 
   public GameManagerGUI() {
     super();
@@ -59,12 +69,48 @@ public class GameManagerGUI extends Application {
     resetGameButton.setLayoutX(15);
     resetGameButton.setLayoutY(320);
     resetGameButton.setDisable(true);
+    
+    recordGameButton = new Button("RECORD");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    recordGameButton.setLayoutX(590); 
+    recordGameButton.setLayoutY(280); 
+    recordGameButton.setDisable(true); 
+    
+    replayGameButton = new Button("REPLAY ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    replayGameButton.setLayoutX(590);
+    replayGameButton.setLayoutY(350); 
+    replayGameButton.setDisable(true);
+    
+    frontButton = new Button("       <<       ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    frontButton.setLayoutX(170);
+    frontButton.setLayoutY(565); 
+    frontButton.setDisable(true);
+    
+    backwardButton = new Button("       <       ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    backwardButton.setLayoutX(268);
+    backwardButton.setLayoutY(565); 
+    backwardButton.setDisable(true);
+    
+    forwardButton = new Button("       >       ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    forwardButton.setLayoutX(356);
+    forwardButton.setLayoutY(565); 
+    forwardButton.setDisable(true);
+    
+    endButton = new Button("      >>      ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    endButton.setLayoutX(444);
+    endButton.setLayoutY(565); 
+    endButton.setDisable(true);
 
     decideButton = new Button("DECIDE"); 
     decideButton.setLayoutX(100);
     decideButton.setLayoutY(55);
     decideButton.setDisable(true);
-
+  
     Text displayText = new Text();
     displayText.setText("Who's Turn ?");
     displayText.setX(230);
@@ -75,7 +121,7 @@ public class GameManagerGUI extends Application {
 
     // Setting the image view
     ImageView imageView = new ImageView(myImage);
-
+ 
     imageView.setX(145);
     imageView.setY(145);
 
@@ -172,27 +218,33 @@ public class GameManagerGUI extends Application {
     positionCircleList.add(o3c3r2);
     positionCircleList.add(o3c3r3);
     for (int i = 0; i < positionCircleList.size(); i++) {
-      String position = "position" + String.valueOf(i + 1);
+      String position = "position" + String.valueOf(i);
       positionCircleList.get(i).setId(position);
       positionCircleList.get(i).setDisable(true);
     }
-    Text text1 = new Text();
-    text1.setText("PLAYER 1");
-    text1.setX(25);
-    text1.setY(180);
+    Text player1Text = new Text();
+    player1Text.setText("PLAYER 1");
+    player1Text.setX(25);
+    player1Text.setY(180);
 
-    Text text2 = new Text();
-    text2.setText("PLAYER 2");
-    text2.setX(25);
-    text2.setY(400);
+    Text player2Text = new Text();
+    player2Text.setText("PLAYER 2");
+    player2Text.setX(25);
+    player2Text.setY(400);
 
     Group boardGroup =
         new Group(
-            text1,
-            text2,
+            player1Text,
+            player2Text,
             startNewGameButton,
             resetGameButton,
             decideButton,
+            recordGameButton,
+            replayGameButton,
+            frontButton,
+            backwardButton,
+            forwardButton,
+            endButton,
             displayCircle,
             displayText,
             imageView);
@@ -201,8 +253,8 @@ public class GameManagerGUI extends Application {
     resetGameButton.setId("resetGameButton");
     displayCircle.setId("displayCircle");
     displayText.setId("displayText");
-    text1.setId("player1Text");
-    text2.setId("player2Text");
+    player1Text.setId("player1Text");
+    player2Text.setId("player2Text");
     Group player1CoinsGroup = new Group();
     player1CoinsGroup.setId("player1CoinsGroup");
     Group player2CoinsGroup = new Group();
@@ -262,15 +314,15 @@ public class GameManagerGUI extends Application {
     gameController.init(board);
 
     // New Game Initialization
-    gameController.newGame(board);
+    gameController.newGame(board, primaryStage);
 
     // Decide PlayerTurn
     Color decidedColor = gameController.decidePlayerTurn(board);
 
+    this.executorService = Executors.newSingleThreadExecutor();
+
     // Start Game After Deciding
-    gameController.startPhase1Game(board, decidedColor);
-   // if (board.getPlayer1().getCoins().isEmpty() && board.getPlayer1().getCoins().isEmpty())
-    	//gameController.startPhase2Game(board);
+    gameController.startGame(board, decidedColor, executorService);
     resetGameButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
 

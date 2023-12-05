@@ -1,5 +1,7 @@
 package sprint1_0.product.model;
 
+import java.util.List;
+
 import javafx.scene.paint.Paint;
 
 /** @author rakesh */
@@ -11,7 +13,11 @@ public class Position extends PositionCircle {
   private Position down = null;
   private Position left = null;
   private Position right = null;
+  private boolean isPartOfHorMill;
+  private boolean isPartOfVerMill;
   private boolean isFilled;
+  private List<Position> horMillFamily;
+  private List<Position> verMillFamily;
 
   public Position() {
     super();
@@ -97,4 +103,28 @@ public class Position extends PositionCircle {
   public void setFilled(boolean isFilled) {
     this.isFilled = isFilled;
   }
+
+  public List<Position> getHorMillFamily() {
+    return horMillFamily;
+  }
+
+  public void setHorMillFamily(List<Position> horMillFamily) {
+    this.horMillFamily = horMillFamily;
+  }
+
+  public List<Position> getVerMillFamily() {
+    return verMillFamily;
+  }
+
+  public void setVerMillFamily(List<Position> verMillFamily) {
+    this.verMillFamily = verMillFamily;
+  }
+
+public boolean isPartOfVerMill(){return isPartOfVerMill;}
+
+public void setPartOfVerMill(boolean isPartOfVerMill){this.isPartOfVerMill = isPartOfVerMill;}
+
+public boolean isPartOfHorMill(){return isPartOfHorMill;}
+
+public void setPartOfHorMill(boolean isPartOfHorMill){this.isPartOfHorMill = isPartOfHorMill;}
 }

@@ -7,6 +7,8 @@ import javafx.scene.shape.Circle;
 
 /** @author rakesh */
 public class MasterPlayer {
+
+  private String playerName;
   private Color playerColor;
   private List<Circle> coins;
   private List<Position> filledPositions;
@@ -39,4 +41,8 @@ public class MasterPlayer {
   public void setFilledPositions(List<Position> filledPositions) {
     this.filledPositions = filledPositions;
   }
+
+public String getPlayerName(){return playerName;}
+
+public void setPlayerName(String playerName){this.playerName = playerName;}
 }
