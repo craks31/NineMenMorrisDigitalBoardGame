@@ -16,4 +16,14 @@ public class GameEndService {
     }
     board.setOp("END");
   }
+  
+  public boolean decideGameEndCondition(Board board) {
+	  boolean gameEnd = false;
+	  if (board.isPhase3Started()
+	            && ((board.getPlayer2().getFilledPositions().size() == 2)
+	                || board.getPlayer1().getFilledPositions().size() == 2)) {
+		  gameEnd = true;
+	  }
+	  return gameEnd;
+  }
 }
