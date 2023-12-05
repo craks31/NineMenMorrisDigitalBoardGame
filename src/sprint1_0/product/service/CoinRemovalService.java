@@ -54,9 +54,7 @@ public class CoinRemovalService {
           coinFlyService.prepareForCoinFlyMovement(board, GameConstants.PLAYER2COLOR);
           displayUtil.displayPlayerTurn(board, GameConstants.PLAYER2COLOR);
         }
-        if (board.isPhase3Started()
-            && ((board.getPlayer2().getFilledPositions().size() == 2)
-                || board.getPlayer1().getFilledPositions().size() == 2)) {
+        if (gameEndService.decideGameEndCondition(board)) {
           System.out.println("END TRIGGERED");
           gameEndService.prepareForGameEnd(board);
         }
@@ -82,9 +80,7 @@ public class CoinRemovalService {
           coinFlyService.prepareForCoinFlyMovement(board, GameConstants.PLAYER1COLOR);
           displayUtil.displayPlayerTurn(board, GameConstants.PLAYER1COLOR);
         }
-        if (board.isPhase3Started()
-            && ((board.getPlayer2().getFilledPositions().size() == 2)
-                || board.getPlayer1().getFilledPositions().size() == 2)) {
+        if (gameEndService.decideGameEndCondition(board)) {
           System.out.println("END TRIGGERED");
           gameEndService.prepareForGameEnd(board);
         }
@@ -97,6 +93,7 @@ public class CoinRemovalService {
 
     board.getBlankPositionList().add(clickedPosition);
   }
+
 
   public void prepareForCoinRemoval(Board board, Paint color) {
     List<Position> player1FilledPositions =

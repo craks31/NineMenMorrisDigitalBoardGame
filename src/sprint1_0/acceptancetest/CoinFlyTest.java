@@ -58,6 +58,7 @@ public class CoinFlyTest extends ApplicationTest {
     clickOn(player2PositionCircle3);
 
     Color srcColor = (Color) srcPositionPlayer1.getFill();
+  //Initiate flying phase
     coinFlyService.prepareForCoinFlyMovement(gameManagerGUI.getBoard(), srcColor);
     clickOn(srcPositionPlayer1);
     PositionCircle destPosition = from(rootNode).lookup("#position7").query();
@@ -85,10 +86,34 @@ public class CoinFlyTest extends ApplicationTest {
 	    clickOn(player2PositionCircle3);
 
 	    Color srcColor = (Color) srcPositionPlayer1.getFill();
+	    //Initiate flying phase
 	    coinFlyService.prepareForCoinFlyMovement(gameManagerGUI.getBoard(), srcColor);
 	    clickOn(srcPositionPlayer1);
 	    assertTrue(destPositionPlayer2.isDisabled()); // MAKE SURE IT IS NOT CLICKABLE
 	    assertTrue(destPositionPlayer1.isDisabled()); // MAKE SURE IT IS NOT CLICKABLE
+
+  }
+  
+  @Test
+  public void priorToFlying() {
+	// Setting up the board with only 3 players of one player and 3 players of one player
+	    PositionCircle srcPositionPlayer1 = from(rootNode).lookup("#position1").query();
+	    clickOn(srcPositionPlayer1);
+	    PositionCircle destPositionPlayer2 = from(rootNode).lookup("#position2").query();
+	    clickOn(destPositionPlayer2);
+	    PositionCircle destPositionPlayer1 = from(rootNode).lookup("#position3").query();
+	    clickOn(destPositionPlayer1);
+	    PositionCircle player2PositionCircle2 = from(rootNode).lookup("#position14").query();
+	    clickOn(player2PositionCircle2);
+	    PositionCircle player1PositionCircle3 = from(rootNode).lookup("#position19").query();
+	    clickOn(player1PositionCircle3);
+	    PositionCircle player2PositionCircle3 = from(rootNode).lookup("#position16").query();
+	    clickOn(player2PositionCircle3);
+
+	    clickOn(srcPositionPlayer1);
+	    PositionCircle destPosition = from(rootNode).lookup("#position7").query();
+	    clickOn(destPosition);
+	    assertTrue(destPosition.isDisabled()); // MAKE SURE IT IS NOT CLICKABLE
 
   }
 }
