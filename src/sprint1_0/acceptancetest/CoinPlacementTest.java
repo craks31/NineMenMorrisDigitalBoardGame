@@ -15,11 +15,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.PositionCircle;
-import sprint1_0.product.ui.GameManagerGUI;
+import sprint1_0.product.ui.NineMenMorrisGameManagerGUI;
 
 /** @author ravali */
 public class CoinPlacementTest extends ApplicationTest {
-  private GameManagerGUI gameManagerGUI = new GameManagerGUI();
+  private NineMenMorrisGameManagerGUI gameManagerGUI = new NineMenMorrisGameManagerGUI();
 
   private Parent rootNode;
 

@@ -15,10 +15,10 @@ import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.service.CoinFlyService;
-import sprint1_0.product.ui.GameManagerGUI;
+import sprint1_0.product.ui.NineMenMorrisGameManagerGUI;
 
 public class CoinFlyTest extends ApplicationTest {
-  private GameManagerGUI gameManagerGUI = new GameManagerGUI();
+  private NineMenMorrisGameManagerGUI gameManagerGUI = new NineMenMorrisGameManagerGUI();
   CoinFlyService coinFlyService = new CoinFlyService();
   private Parent rootNode;
 
