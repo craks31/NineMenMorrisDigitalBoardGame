@@ -31,6 +31,13 @@ public class GameManagerGUI extends Application {
   Button decideButton;
   Button startNewGameButton;
   Button resetGameButton;
+  Button recordGameButton;
+  Button replayGameButton;
+  Button replayButton;
+  Button frontButton;
+  Button backwardButton;
+  Button forwardButton;
+  Button endButton;
   Board board;
   private Scene scene;
   EventHandler<MouseEvent> resetGameButtonEventHandler;
@@ -62,12 +69,48 @@ public class GameManagerGUI extends Application {
     resetGameButton.setLayoutX(15);
     resetGameButton.setLayoutY(320);
     resetGameButton.setDisable(true);
+    
+    recordGameButton = new Button("RECORD");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    recordGameButton.setLayoutX(590); 
+    recordGameButton.setLayoutY(280); 
+    recordGameButton.setDisable(true); 
+    
+    replayGameButton = new Button("REPLAY ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    replayGameButton.setLayoutX(590);
+    replayGameButton.setLayoutY(350); 
+    replayGameButton.setDisable(true);
+    
+    frontButton = new Button("       <<       ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    frontButton.setLayoutX(170);
+    frontButton.setLayoutY(565); 
+    frontButton.setDisable(true);
+    
+    backwardButton = new Button("       <       ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    backwardButton.setLayoutX(268);
+    backwardButton.setLayoutY(565); 
+    backwardButton.setDisable(true);
+    
+    forwardButton = new Button("       >       ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    forwardButton.setLayoutX(356);
+    forwardButton.setLayoutY(565); 
+    forwardButton.setDisable(true);
+    
+    endButton = new Button("      >>      ");
+    //    resetGameButton.setStyle("-fx-base:Gray;");
+    endButton.setLayoutX(444);
+    endButton.setLayoutY(565); 
+    endButton.setDisable(true);
 
-    decideButton = new Button("DECIDE");
+    decideButton = new Button("DECIDE"); 
     decideButton.setLayoutX(100);
     decideButton.setLayoutY(55);
     decideButton.setDisable(true);
-
+  
     Text displayText = new Text();
     displayText.setText("Who's Turn ?");
     displayText.setX(230);
@@ -78,7 +121,7 @@ public class GameManagerGUI extends Application {
 
     // Setting the image view
     ImageView imageView = new ImageView(myImage);
-
+ 
     imageView.setX(145);
     imageView.setY(145);
 
@@ -196,6 +239,12 @@ public class GameManagerGUI extends Application {
             startNewGameButton,
             resetGameButton,
             decideButton,
+            recordGameButton,
+            replayGameButton,
+            frontButton,
+            backwardButton,
+            forwardButton,
+            endButton,
             displayCircle,
             displayText,
             imageView);
