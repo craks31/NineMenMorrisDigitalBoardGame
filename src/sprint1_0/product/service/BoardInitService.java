@@ -2,9 +2,14 @@ package sprint1_0.product.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.MasterPlayer;
@@ -60,10 +65,9 @@ public class BoardInitService {
     positionList.get(4).setLeft(positionList.get(2));
     positionList.get(4).setRight(positionList.get(7));
     positionList.get(4).setUp(positionList.get(12));
- 
+
     positionList.get(5).setLeft(positionList.get(3));
     positionList.get(5).setDown(positionList.get(6));
-   
 
     positionList.get(6).setLeft(positionList.get(14));
     positionList.get(6).setDown(positionList.get(7));
@@ -87,7 +91,6 @@ public class BoardInitService {
     positionList.get(11).setUp(positionList.get(3));
     positionList.get(11).setDown(positionList.get(19));
     positionList.get(11).setRight(positionList.get(13));
-
 
     positionList.get(12).setRight(positionList.get(15));
     positionList.get(12).setUp(positionList.get(20));
@@ -137,10 +140,32 @@ public class BoardInitService {
     List<Position> blankPositionList = new ArrayList<>();
     filledPositionList.addAll(positionList);
     blankPositionList.addAll(positionList);
-    //positionList.forEach(position -> {filledPositionList.add(position.clone()));
+    // positionList.forEach(position -> {filledPositionList.add(position.clone()));
     board.setAllPositionList(filledPositionList);
     board.setBlankPositionList(blankPositionList);
     board.setMillCheckByPassed(false);
+    board.getAllPositionList().forEach(p -> p.setPartOfHorMill(false));
+    board.getBlankPositionList().forEach(p -> p.setPartOfHorMill(false));
+    board.getAllPositionList().forEach(p -> p.setPartOfVerMill(false));
+    board.getBlankPositionList().forEach(p -> p.setPartOfVerMill(false));
+
+    List<String> choices = new ArrayList<>();
+    choices.add("Human");
+    choices.add("Computer");
+
+    ChoiceDialog<String> dialog = new ChoiceDialog<>("Human", choices);
+    dialog.setTitle("Choose Opponent");
+    dialog.setHeaderText("Select the opponent type:");
+    dialog.setContentText("Opponent:");
+    dialog.getDialogPane().setId("choiceDialog");
+
+    board.setChoiceDialog(dialog);
+
+    TextInputDialog name1Dialog = new TextInputDialog("Player 1");
+    TextInputDialog name2Dialog = new TextInputDialog("Player 2");
+    board.setName1Dialog(name1Dialog);
+    board.setName2Dialog(name2Dialog);
+    board.setPlayer2Computer(false);
   }
 
   /**
@@ -173,17 +198,66 @@ public class BoardInitService {
    *
    * @param board
    */
-  public void newGame(Board board) {
+  public void newGame(Board board, Stage primaryStage) {
     EventHandler<javafx.scene.input.MouseEvent> newGameButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
-
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
             board.getDecideButton().setDisable(false);
             board.getStartNewGameButton().setDisable(true);
             board.getResetGameButton().setDisable(false);
+            showOpponentChoiceDialog(board, primaryStage);
+            updateBoardGUI(
+                primaryStage,
+                board.getPlayer1().getPlayerName(),
+                board.getPlayer2().getPlayerName());
           }
         };
     board.getStartNewGameButton().setOnMouseClicked(newGameButtonEventHandler);
+  }
+
+  private void showOpponentChoiceDialog(Board board, Stage primaryStage) {
+
+    Optional<String> result = board.getChoiceDialog().showAndWait();
+    result.ifPresent(
+        opponentType -> {
+          if (opponentType.equals("Human")) {
+            System.out.println("Human opponent selected");
+            TextInputDialog name1Dialog = board.getName1Dialog();
+            name1Dialog.setTitle("Enter Names");
+            name1Dialog.setHeaderText("Enter name for Player 1:");
+            name1Dialog.setContentText("Player 1:");
+            Optional<String> player1Result = name1Dialog.showAndWait();
+            player1Result.ifPresent(name -> board.getPlayer1().setPlayerName(name));
+            System.out.println(board.getPlayer1().getPlayerName());
+            TextInputDialog name2Dialog = board.getName2Dialog();
+            name2Dialog.setTitle("Enter Names");
+            name2Dialog.setHeaderText("Enter name for Player 2:");
+            name2Dialog.setContentText("Player 2:");
+            Optional<String> player2Result = name2Dialog.showAndWait();
+            player2Result.ifPresent(name -> board.getPlayer2().setPlayerName(name));
+            System.out.println(board.getPlayer2().getPlayerName());
+            board.setPlayer2Computer(false);
+
+          } else if (opponentType.equals("Computer")) {
+
+            System.out.println("Computer opponent selected");
+            TextInputDialog nameDialog = new TextInputDialog("Player 1");
+            nameDialog.setTitle("Enter Name");
+            nameDialog.setHeaderText("Enter a name for Player 1:");
+            Optional<String> player1Result = nameDialog.showAndWait();
+            player1Result.ifPresent(name -> board.getPlayer1().setPlayerName(name));
+            board.setPlayer2Computer(true);
+            board.getPlayer2().setPlayerName("Computer");
+          }
+        });
+  }
+
+  private void updateBoardGUI(Stage primaryStage, String player1Name, String player2Name) {
+    ((Text) primaryStage.getScene().getRoot().lookup("#player1Text"))
+        .setText(GameConstants.PLAYER1TEXT + player1Name);
+    ((Text) primaryStage.getScene().getRoot().lookup("#player2Text"))
+        .setText(GameConstants.PLAYER2TEXT + player2Name);
+    primaryStage.show();
   }
 }

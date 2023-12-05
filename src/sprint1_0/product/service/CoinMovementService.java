@@ -1,42 +1,48 @@
 package sprint1_0.product.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.concurrent.ExecutorService;
 
-import javafx.animation.StrokeTransition;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import sprint1_0.product.constants.GameConstants;
+import sprint1_0.product.helper.PositionHelper;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.Position;
-import sprint1_0.product.model.PositionCircle;
 
 public class CoinMovementService {
-  public void coinMoveEvent(Board board, Circle clickedCircle, StrokeTransition strokeTransition) {
+  CoinMillService coinMillService = new CoinMillService();
+  ComputerGamePlayService compGamePlayService = new ComputerGamePlayService();
 
-    if (board.getPlayer1().getCoins().isEmpty() && board.getPlayer1().getCoins().isEmpty()) {
+  public void coinMoveEvent(Board board, Circle clickedCircle, ExecutorService executorService) {
+
+    if (board.getPlayer1().getCoins().isEmpty() && board.getPlayer2().getCoins().isEmpty()) {
 
       Position clickedPosition = board.getAllPositionList().get((int) clickedCircle.getUserData());
       if (board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER1COLOR)) {
         // IF PLAYER1 TURN
         if (enableNeighbors(
-            board, board.getAllPositionList().get((int) clickedCircle.getUserData()), strokeTransition)) {
-        	strokeTransition.stop();
+            board, board.getAllPositionList().get((int) clickedCircle.getUserData()))) {
+          System.out.println("PLAYER 1 TURN");
+          PositionHelper.gameHistoryPrinterForPlayer1(clickedPosition, board.getOp());
           clickedPosition.setFilled(false);
           clickedCircle.setFill(GameConstants.BACKGROUNDCOLOR);
           clickedPosition.setFill(null);
+          coinMillService.breakTheMill(clickedPosition);
           board.getAllPositionList().stream()
               .filter(pos -> pos.isFilled())
               .forEach(pos -> pos.getPositionCircle().setDisable(true));
-        }  
+        }
       } else {
         // IF PLAYER2 TURN
         if (enableNeighbors(
-            board, board.getAllPositionList().get((int) clickedCircle.getUserData()), strokeTransition)) {
-        	strokeTransition.stop();
+            board, board.getAllPositionList().get((int) clickedCircle.getUserData()))) {
+          System.out.println("PLAYER 2 TURN");
+          PositionHelper.gameHistoryPrinterForPlayer2(clickedPosition, "MOVE");
           clickedPosition.setFilled(false);
           clickedCircle.setFill(GameConstants.BACKGROUNDCOLOR);
           clickedPosition.setFill(null);
+          coinMillService.breakTheMill(clickedPosition);
           board.getAllPositionList().stream()
               .filter(pos -> pos.isFilled())
               .forEach(pos -> pos.getPositionCircle().setDisable(true));
@@ -45,68 +51,80 @@ public class CoinMovementService {
     }
   }
 
-  private boolean enableNeighbors(Board board, Position position, StrokeTransition strokeTransition) {
+  private boolean enableNeighbors(Board board, Position position) {
+    List<Position> emptyNeighbors = new ArrayList<>();
     if (position.getLeft() != null && !position.getLeft().isFilled()) {
       position.getLeft().getPositionCircle().setDisable(false);
       board.setOp("FILL");
-      strokeTransition.setShape((Circle)position.getLeft().getPositionCircle());
-      ((Circle)position.getLeft().getPositionCircle()).setStroke(Color.TRANSPARENT); // Make the stroke transparent
-      ((Circle)position.getLeft().getPositionCircle()).setStrokeWidth(10);
-      strokeTransition.play();
+      emptyNeighbors.add(position.getLeft());
+      System.out.println("-------LEFT Neighbor READY For Fill-------");
     }
     if (position.getUp() != null && !position.getUp().isFilled()) {
       position.getUp().getPositionCircle().setDisable(false);
       board.setOp("FILL");
-      strokeTransition.play();
+      emptyNeighbors.add(position.getUp());
+      System.out.println("-------UP Neighbor READY For Fill-------");
     }
     if (position.getRight() != null && !position.getRight().isFilled()) {
       position.getRight().getPositionCircle().setDisable(false);
       board.setOp("FILL");
-      strokeTransition.play();
+      emptyNeighbors.add(position.getRight());
+      System.out.println("-------RIGHT Neighbor READY For Fill-------");
     }
     if (position.getDown() != null && !position.getDown().isFilled()) {
       position.getDown().getPositionCircle().setDisable(false);
       board.setOp("FILL");
-      strokeTransition.play();
+      emptyNeighbors.add(position.getDown());
+      System.out.println("-------DOWN Neighbor READY For Fill-------");
     }
     if (board.getOp().equals("FILL")) {
+      board.setEmptyNeighborsForComputer(emptyNeighbors);
       return true;
     } else {
-      return false;   
+      return false;
     }
   }
 
-  public void prepareForCoinMovement(Board board) {
-   // board.getBlankPositionList().forEach(e -> ((Circle) e).setDisable(true));
+  public void prepareForCoinMovement(Board board, ExecutorService executorService) {
     List<Position> player1FilledPositions =
-        board.getAllPositionList().stream()
-            .filter(pos -> pos.isFilled() && pos.getFill().equals(GameConstants.PLAYER1COLOR))
-            .collect(Collectors.toList());
+        PositionHelper.getPlayer1FilledCoins(board.getAllPositionList());
+
     List<Position> player2FilledPositions =
-        board.getAllPositionList().stream()
-            .filter(pos -> pos.isFilled() && pos.getFill().equals(GameConstants.PLAYER2COLOR))
-            .collect(Collectors.toList());
-    board.getAllPositionList().stream() 
+        PositionHelper.getPlayer2FilledCoins(board.getAllPositionList());
+
+    board.getAllPositionList().stream()
         .filter(pos -> !pos.isFilled())
         .forEach(e -> e.getPositionCircle().setDisable(true));
-    board.getBlankPositionList().stream()
-    .forEach(e -> e.getPositionCircle().setDisable(true));
+    board.getBlankPositionList().stream().forEach(e -> e.getPositionCircle().setDisable(true));
     board.getPlayer2().setFilledPositions(player2FilledPositions);
     board.getPlayer1().setFilledPositions(player1FilledPositions);
     if (board.getDisplayCircleTurn().getFill().equals(GameConstants.PLAYER1COLOR)) {
-      enablePlayerFilledPositions(board, player1FilledPositions, false);
+      PositionHelper.enablePositions(player1FilledPositions);
+      PositionHelper.disablePositions(player2FilledPositions);
+      board.setPhase2Started(true);
+      board.setOp("MOVE");
+      System.out.println("-------Board is set for Move For Player 1-------");
     } else {
-      enablePlayerFilledPositions(board, player2FilledPositions, false);
+      PositionHelper.enablePositions(player2FilledPositions);
+      PositionHelper.disablePositions(player1FilledPositions);
+      board.setPhase2Started(true);
+      board.setOp("MOVE");
+      System.out.println("-------Board is set for Move For Player 2-------");
     }
-    board.setPhase2Started(true);
-    board.setOp("MOVE");
   }
 
-  private void enablePlayerFilledPositions(
-      Board board, List<Position> playerFilledPositions, boolean enableFlag) {
-    for (int i = 0; i < playerFilledPositions.size(); i++) {
-      PositionCircle positionCircle = playerFilledPositions.get(i).getPositionCircle();
-      positionCircle.setDisable(enableFlag);
+  public List<Position> findComputerCoinsWithEmptyNeighbors(
+      Board board, List<Position> positionList) {
+    List<Position> computerCoinsWithEmptyNeighbors = new ArrayList<>();
+    for (Position p : positionList) {
+  	  board.setOp("MOVE");
+      if (enableNeighbors(board, p)) {
+        computerCoinsWithEmptyNeighbors.add(p);
+      }
     }
+    System.out.println(
+        "Player 2 Coins Ready For Movemement : " + computerCoinsWithEmptyNeighbors.size());
+    board.setOp("MOVE");
+    return computerCoinsWithEmptyNeighbors;
   }
 }

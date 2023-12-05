@@ -1,8 +1,11 @@
 package sprint1_0.product.model;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -13,13 +16,13 @@ public class Board {
   }
 
   private String op;
-  
+
   private boolean phase2Started;
-  
+
   private boolean phase3Started;
-  
+
   private boolean millCheckByPassed;
-  
+
   private List<Position> blankPositionList;
 
   private List<Position> allPositionList;
@@ -39,6 +42,18 @@ public class Board {
   private Button startNewGameButton;
 
   private Button resetGameButton;
+
+  private boolean isPlayer2Computer;
+
+  private ChoiceDialog<String> choiceDialog;
+
+  private TextInputDialog name1Dialog;
+
+  private TextInputDialog name2Dialog;
+
+  private List<Position> emptyNeighborsForComputer;
+
+  private List<Position> nonMillCoinsForComputer;
 
   public List<PositionCircle> getPositionCircleList() {
     return positionCircleList;
@@ -144,7 +159,59 @@ public class Board {
     this.phase2Started = phase2Started;
   }
 
-public boolean isMillCheckByPassed(){return millCheckByPassed;}
+  public boolean isMillCheckByPassed() {
+    return millCheckByPassed;
+  }
 
-public void setMillCheckByPassed(boolean millCheckByPassed){this.millCheckByPassed = millCheckByPassed;}
+  public void setMillCheckByPassed(boolean millCheckByPassed) {
+    this.millCheckByPassed = millCheckByPassed;
+  }
+
+  public boolean isPlayer2Computer() {
+    return isPlayer2Computer;
+  }
+
+  public void setPlayer2Computer(boolean isPlayer2Computer) {
+    this.isPlayer2Computer = isPlayer2Computer;
+  }
+
+  public ChoiceDialog<String> getChoiceDialog() {
+    return choiceDialog;
+  }
+
+  public void setChoiceDialog(ChoiceDialog<String> choiceDialog) {
+    this.choiceDialog = choiceDialog;
+  }
+
+  public TextInputDialog getName1Dialog() {
+    return name1Dialog;
+  }
+
+  public void setName1Dialog(TextInputDialog name1Dialog) {
+    this.name1Dialog = name1Dialog;
+  }
+
+  public TextInputDialog getName2Dialog() {
+    return name2Dialog;
+  }
+
+  public void setName2Dialog(TextInputDialog name2Dialog) {
+    this.name2Dialog = name2Dialog;
+  }
+
+  public List<Position> getEmptyNeighborsForComputer() {
+    return emptyNeighborsForComputer;
+  }
+
+  public void setEmptyNeighborsForComputer(List<Position> emptyNeighborsForComputer) {
+    this.emptyNeighborsForComputer = emptyNeighborsForComputer;
+  }
+
+  public List<Position> getNonMillCoinsForComputer() {
+    return nonMillCoinsForComputer;
+  }
+
+  public void setNonMillCoinsForComputer(List<Position> nonMillCoinsForComputer) {
+    this.nonMillCoinsForComputer = nonMillCoinsForComputer;
+  }
 }

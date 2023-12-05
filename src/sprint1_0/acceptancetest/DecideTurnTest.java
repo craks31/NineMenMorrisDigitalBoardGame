@@ -82,7 +82,7 @@ public class DecideTurnTest extends ApplicationTest {
     Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(decideButton);
     for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
-      String pos = "#position" + String.valueOf(i + 1);
+      String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       assertEquals(false, c.isDisabled());
     }

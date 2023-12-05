@@ -8,10 +8,14 @@ import org.junit.After;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
@@ -88,6 +92,20 @@ public class BoardVisualisationTest extends ApplicationTest {
     Button newGameButton = from(rootNode).lookup("#newGameButton").query();
     Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(newGameButton);
+    ChoiceDialog<String> choiceDialog = gameManagerGUI.getBoard().getChoiceDialog();
+    TextInputDialog name1Dialog = gameManagerGUI.getBoard().getName1Dialog();
+    TextInputDialog name2Dialog = gameManagerGUI.getBoard().getName2Dialog();
+    Platform.runLater(
+        () -> {
+          choiceDialog.setSelectedItem("Human");
+          ((Button) choiceDialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+        });
+    Platform.runLater(
+            () -> {
+              ((Button) name1Dialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+              ((Button) name2Dialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+            });
+   
     assertEquals(false, decideButton.isDisabled());
   }
 
@@ -96,6 +114,19 @@ public class BoardVisualisationTest extends ApplicationTest {
   public void onClickofNewGameButtonIsNewGameButtonDisabled() {
     Button newGameButton = from(rootNode).lookup("#newGameButton").query();
     clickOn(newGameButton);
+    ChoiceDialog<String> choiceDialog = gameManagerGUI.getBoard().getChoiceDialog();
+    TextInputDialog name1Dialog = gameManagerGUI.getBoard().getName1Dialog();
+    TextInputDialog name2Dialog = gameManagerGUI.getBoard().getName2Dialog();
+    Platform.runLater(
+        () -> {
+          choiceDialog.setSelectedItem("Human");
+          ((Button) choiceDialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+        });
+    Platform.runLater(
+            () -> {
+              ((Button) name1Dialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+              ((Button) name2Dialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+            });
     assertEquals(true, newGameButton.isDisabled());
   }
 
@@ -105,6 +136,19 @@ public class BoardVisualisationTest extends ApplicationTest {
     Button newGameButton = from(rootNode).lookup("#newGameButton").query();
     Button resetGameButton = from(rootNode).lookup("#resetGameButton").query();
     clickOn(newGameButton);
+    ChoiceDialog<String> choiceDialog = gameManagerGUI.getBoard().getChoiceDialog();
+    TextInputDialog name1Dialog = gameManagerGUI.getBoard().getName1Dialog();
+    TextInputDialog name2Dialog = gameManagerGUI.getBoard().getName2Dialog();
+    Platform.runLater(
+        () -> {
+          choiceDialog.setSelectedItem("Human");
+          ((Button) choiceDialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+        });
+    Platform.runLater(
+            () -> {
+              ((Button) name1Dialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+              ((Button) name2Dialog.getDialogPane().lookupButton(ButtonType.OK)).fire();
+            });
     assertEquals(false, resetGameButton.isDisabled());
   }
 
@@ -118,7 +162,7 @@ public class BoardVisualisationTest extends ApplicationTest {
   @Test
   public void checkifAllPositionsAreAvailableAndNotClickable() {
     for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
-      String pos = "#position" + String.valueOf(i + 1);
+      String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       assertEquals(true, c.isDisabled());
     }
