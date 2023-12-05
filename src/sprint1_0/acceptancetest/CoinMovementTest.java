@@ -52,7 +52,7 @@ public class CoinMovementTest extends ApplicationTest {
         (Color) ((Circle) from(rootNode).lookup("#displayCircle").query()).getFill();
     while ((!gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty())
         || (!gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty())) {
-      String pos = "#position" + String.valueOf(i + 1);
+      String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       clickOn(c);
       i++;
@@ -91,7 +91,7 @@ public class CoinMovementTest extends ApplicationTest {
     gameManagerGUI.getBoard().setMillCheckByPassed(true);
     while ((!gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty())
         || (!gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty())) {
-      String pos = "#position" + String.valueOf(i + 1);
+      String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       clickOn(c);
       i++;
@@ -164,7 +164,7 @@ public class CoinMovementTest extends ApplicationTest {
     gameManagerGUI.getBoard().setMillCheckByPassed(true);
     while ((!gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty())
         || (!gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty())) {
-      String pos = "#position" + String.valueOf(i + 1);
+      String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       clickOn(c);
       i++;
@@ -187,7 +187,7 @@ public class CoinMovementTest extends ApplicationTest {
     gameManagerGUI.getBoard().setMillCheckByPassed(true);
     while ((!gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty())
         || (!gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty())) {
-      String pos = "#position" + String.valueOf(i + 1);
+      String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       clickOn(c);
       i++;
@@ -260,7 +260,7 @@ public class CoinMovementTest extends ApplicationTest {
     gameManagerGUI.getBoard().setMillCheckByPassed(true);
     while ((!gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty())
         || (!gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty())) {
-      String pos = "#position" + String.valueOf(i + 1);
+      String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       clickOn(c);
       i++;
@@ -285,7 +285,7 @@ public class CoinMovementTest extends ApplicationTest {
     gameManagerGUI.getBoard().setMillCheckByPassed(true);
     while ((!gameManagerGUI.getBoard().getPlayer2().getCoins().isEmpty())
         || (!gameManagerGUI.getBoard().getPlayer1().getCoins().isEmpty())) {
-      String pos = "#position" + String.valueOf(i + 1);
+      String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       clickOn(c);
       i++;
