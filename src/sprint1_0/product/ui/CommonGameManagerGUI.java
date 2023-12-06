@@ -20,17 +20,18 @@ import sprint1_0.product.controller.GameController;
 import sprint1_0.product.model.Board;
 
 public class CommonGameManagerGUI {
-  Button decideButton;
-  Button startNewGameButton;
-  Button resetGameButton;
-  Button recordGameButton;
-  Button replayGameButton;
-  Button replayButton;
-  Button frontButton;
-  Button backwardButton;
-  Button forwardButton;
-  Button endButton;
+  private Button decideButton;
+  private Button startNewGameButton;
+  private Button resetGameButton;
+  private Button recordGameButton;
+  private Button replayGameButton;
+  private Button frontButton;
+  private Button backwardButton;
+  private Button forwardButton;
+  private Button endButton;
   ExecutorService executorService;
+  private Scene gameScene;
+  private Stage gameInitStage;
 
   public Group getOuterWindowUI(Board board, String filePath) throws FileNotFoundException {
 
@@ -50,7 +51,6 @@ public class CommonGameManagerGUI {
     recordGameButton.setDisable(true);
 
     replayGameButton = new Button("REPLAY ");
-
     replayGameButton.setLayoutX(590);
     replayGameButton.setLayoutY(350);
     replayGameButton.setDisable(true);
@@ -131,6 +131,12 @@ public class CommonGameManagerGUI {
     decideButton.setId("decideButton");
     startNewGameButton.setId("newGameButton");
     resetGameButton.setId("resetGameButton");
+    recordGameButton.setId("recordGameButton");
+    replayGameButton.setId("replayGameButton");
+    forwardButton.setId("forwardGameButton");
+    backwardButton.setId("backwardButton");
+    frontButton.setId("frontButton");
+    endButton.setId("endButton");
     displayCircle.setId("displayCircle");
     displayText.setId("displayText");
     player1Text.setId("player1Text");
@@ -160,6 +166,7 @@ public class CommonGameManagerGUI {
     scene.setFill(GameConstants.BACKGROUNDCOLOR);
 
     primaryStage.setScene(scene);
+    setGameInitStage(primaryStage);
     primaryStage.show();
 
     // Initialize board GUI to implement business logic
@@ -177,5 +184,21 @@ public class CommonGameManagerGUI {
     gameController.startGame(board, decidedColor, executorService);
 
     return scene;
+  }
+
+  public Scene getGameScene() {
+    return gameScene;
+  }
+
+  public void setGameScene(Scene gameScene) {
+    this.gameScene = gameScene;
+  }
+
+  public Stage getGameInitStage() {
+    return gameInitStage;
+  }
+
+  public void setGameInitStage(Stage gameInitStage) {
+    this.gameInitStage = gameInitStage;
   }
 }

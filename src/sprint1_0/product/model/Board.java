@@ -1,13 +1,13 @@
 package sprint1_0.product.model;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import sprint1_0.product.service.RecordReplayService;
 
 /** @author rakesh */
 public class Board {
@@ -40,29 +40,24 @@ public class Board {
   private Button decideButton;
 
   private Button startNewGameButton;
-  
+
   private Button resetGameButton;
-  
+
   private Button replayGameButton;
-  
+
   private Button recordGameButton;
-  
+
   private Button frontButton;
-  
+
   private Button backwardButton;
-  
+
   private Button forwardButton;
-  
+
   private Button endButton;
 
- 
+  private boolean isPlayer2Computer;
 
-
-private boolean isPlayer2Computer;
-
-  
-
-private ChoiceDialog<String> choiceDialog;
+  private ChoiceDialog<String> choiceDialog;
 
   private TextInputDialog name1Dialog;
 
@@ -72,16 +67,19 @@ private ChoiceDialog<String> choiceDialog;
 
   private List<Position> nonMillCoinsForComputer;
 
+  private boolean recordingEnabled;
 
+  private RecordReplayService recordReplayService;
+  
   public List<PositionCircle> getPositionCircleList() {
     return positionCircleList;
-  } 
+  }
 
   public void setPositionCircleList(List<PositionCircle> positionCircleList) {
     this.positionCircleList = positionCircleList;
   }
 
-  public Text getDisplayTextTurn() { 
+  public Text getDisplayTextTurn() {
     return displayTextTurn;
   }
 
@@ -119,7 +117,7 @@ private ChoiceDialog<String> choiceDialog;
 
   public void setPlayer1(MasterPlayer player1) {
     this.player1 = player1;
-  } 
+  }
 
   public MasterPlayer getPlayer2() {
     return player2;
@@ -132,7 +130,6 @@ private ChoiceDialog<String> choiceDialog;
   public Button getDecideButton() {
     return decideButton;
   }
- 
 
   public void setDecideButton(Button decideButton) {
     this.decideButton = decideButton;
@@ -153,53 +150,38 @@ private ChoiceDialog<String> choiceDialog;
   public void setResetGameButton(Button resetGameButton) {
     this.resetGameButton = resetGameButton;
   }
+
   public Button getFrontButton() {
-		return frontButton;
-	}
+    return frontButton;
+  }
 
-	public void setFrontButton(Button frontButton) {
-		this.frontButton = frontButton;
-	}
+  public void setFrontButton(Button frontButton) {
+    this.frontButton = frontButton;
+  }
 
-	public Button getReplayGameButton() {
-		return replayGameButton;
-	}
-
-	public Button getRecordGameButton() {
-		return recordGameButton;
-	}
-  
-  public void setRecordGameButton(Button recordGameButton) {
-	    this.recordGameButton = recordGameButton;
-	  } 
-  public Button getreplayGameButton() {
-	    return replayGameButton;
-	  }
-  public void setReplayGameButton(Button replayGameButton) {
-	    this.recordGameButton = replayGameButton;
-	  } 
   public Button getBackwardButton() {
-		return backwardButton;
-	}
+    return backwardButton;
+  }
 
-public void setBackwardButton(Button backwardButton) {
-		this.backwardButton = backwardButton;
-	}
-public Button getForwardButton() {
-		return forwardButton;
-	}
+  public void setBackwardButton(Button backwardButton) {
+    this.backwardButton = backwardButton;
+  }
 
-public void setForwardButton(Button forwardButton) {
-		this.forwardButton = forwardButton;
-	}
+  public Button getForwardButton() {
+    return forwardButton;
+  }
 
-public Button getEndButton() {
-		return endButton;
-	}
+  public void setForwardButton(Button forwardButton) {
+    this.forwardButton = forwardButton;
+  }
 
-public void setEndButton(Button endButton) {
-		this.endButton = endButton;
-	}
+  public Button getEndButton() {
+    return endButton;
+  }
+
+  public void setEndButton(Button endButton) {
+    this.endButton = endButton;
+  }
 
   public String getOp() {
     return op;
@@ -280,4 +262,32 @@ public void setEndButton(Button endButton) {
   public void setNonMillCoinsForComputer(List<Position> nonMillCoinsForComputer) {
     this.nonMillCoinsForComputer = nonMillCoinsForComputer;
   }
+
+  public Button getReplayGameButton() {
+    return replayGameButton;
+  }
+
+  public void setReplayGameButton(Button replayGameButton) {
+    this.replayGameButton = replayGameButton;
+  }
+
+  public Button getRecordGameButton() {
+    return recordGameButton;
+  }
+
+  public void setRecordGameButton(Button recordGameButton) {
+    this.recordGameButton = recordGameButton;
+  }
+
+  public boolean isRecordingEnabled() {
+    return recordingEnabled;
+  }
+
+  public void setRecordingEnabled(boolean recordingEnabled) {
+    this.recordingEnabled = recordingEnabled;
+  }
+
+public RecordReplayService getRecordReplayService(){return recordReplayService;}
+
+public void setRecordReplayService(RecordReplayService recordReplayService){this.recordReplayService = recordReplayService;}
 }

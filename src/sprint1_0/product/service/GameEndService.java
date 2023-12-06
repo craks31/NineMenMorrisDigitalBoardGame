@@ -4,6 +4,7 @@ import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.Board;
 
 public class GameEndService {
+	
   public void prepareForGameEnd(Board board) {
     board.getAllPositionList().stream().forEach(e -> e.getPositionCircle().setDisable(true));
     board.getBlankPositionList().stream().forEach(e -> e.getPositionCircle().setDisable(true));
@@ -15,6 +16,11 @@ public class GameEndService {
       board.getDisplayTextTurn().setText(GameConstants.PLAYER1WONTEXT);
     }
     board.setOp("END");
+    if (board.isRecordingEnabled()) {
+      RecordReplayService recordReplayService = new RecordReplayService();
+      recordReplayService.finishRecording();
+      recordReplayService.replayGame(board);
+    }
   }
   
   public boolean decideGameEndCondition(Board board) {

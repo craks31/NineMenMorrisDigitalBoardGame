@@ -3,13 +3,11 @@ package sprint1_0.product.ui;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -433,6 +431,9 @@ public class NineMenMorrisGameManagerGUI extends Application {
     scene =
         commonGameManagerGUI.gameInit(
             primaryStage, "Nine Men Morris Digital Board Game", board, scene);
+    
+    commonGameManagerGUI.setGameScene(scene);
+    
     resetGameButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
 

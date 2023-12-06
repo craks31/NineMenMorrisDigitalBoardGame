@@ -52,6 +52,8 @@ public class GameService {
             displayUtil.displayPlayerTurn(board, decidedColor);
             board.getDecideButton().setDisable(true);
             placeCoinsSetup(board, executorService);
+            board.getRecordGameButton().setDisable(false);
+            recordGame(board);
             if (board.isPlayer2Computer() && decidedColor.equals(GameConstants.PLAYER2COLOR)) {
               compGamePlayService.makeComputerFill(board.getBlankPositionList(), executorService);
             }
@@ -95,6 +97,9 @@ public class GameService {
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
             Circle clickedCircle = (Circle) e.getSource();
+            if(board.isRecordingEnabled()) {
+            	board.getRecordReplayService().recordMove((Color) board.getDisplayCircleTurn().getFill(), clickedCircle);
+            }
             if (board.getOp().equals("FILL")) {
               coinPlacementService.coinFillEvent(board, clickedCircle, executorService);
               if (checkMill(
@@ -264,4 +269,47 @@ public class GameService {
     System.out.println("Ver" + verticalMillDecider);
     return millFormed;
   }
+  
+  /**
+   * This method is used to RESET the board when RESET button is clicked
+   *
+   * @param board
+   */
+  public void resetGame(Board board) {
+    EventHandler<javafx.scene.input.MouseEvent> resetGameButtonEventHandler =
+        new EventHandler<javafx.scene.input.MouseEvent>() {
+
+          @Override
+          public void handle(javafx.scene.input.MouseEvent e) {
+            board.getDecideButton().setDisable(true);
+            board.getStartNewGameButton().setDisable(false);
+            board.getResetGameButton().setDisable(true);
+            board.getDisplayTextTurn().setText("Who's Turn?");
+            board.getDisplayCircleTurn().setFill(Color.BLACK);
+            for (int i = 0; i < board.getPositionCircleList().size(); i++) {
+              board.getPositionCircleList().get(i).setFill(Color.ROSYBROWN);
+              board.getPositionCircleList().get(i).setDisable(true);
+            }
+          }
+        };
+    board.getResetGameButton().setOnMouseClicked(resetGameButtonEventHandler);
+  }
+
+  /**
+   * * This method is used to setup the NEW board GUI when NEW GAME BUTTON IS CLICKED
+   *
+   * @param board
+   */
+  public void recordGame(Board board) {
+    EventHandler<javafx.scene.input.MouseEvent> recordButtonEventHandler =
+        new EventHandler<javafx.scene.input.MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent e) {
+        	  board.setRecordingEnabled(true);
+        	  board.setRecordReplayService(new RecordReplayService());
+        }
+    };
+    board.getRecordGameButton().setOnMouseClicked(recordButtonEventHandler);
+  }
+
 }

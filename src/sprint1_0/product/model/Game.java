@@ -1,13 +1,26 @@
 package sprint1_0.product.model;
 
-public class Game {
-  private boolean phase1Started;
+import java.util.Queue;
 
-  public boolean isPhase1Started() {
-    return phase1Started;
+public class Game {
+
+  private boolean replayEnabled;
+
+  private Queue<RecordedMove> moveQueue;
+
+  public boolean isReplayEnabled() {
+    return replayEnabled;
   }
 
-  public void setPhase1Started(boolean phase1Started) {
-    this.phase1Started = phase1Started;
+  public void setReplayEnabled(boolean replayEnabled) {
+    this.replayEnabled = replayEnabled;
+  }
+
+  public Queue<RecordedMove> getMoveQueue() {
+    return moveQueue;
+  }
+
+  public void setMoveQueue(Queue<RecordedMove> moveQueue) {
+    this.moveQueue = moveQueue;
   }
 }
