@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.helper.DisplayUtil;
 import sprint1_0.product.helper.PositionHelper;
@@ -20,7 +21,7 @@ public class CoinRemovalService {
   ComputerGamePlayService compGamePlayService = new ComputerGamePlayService();
   CoinMovementService coinMovementService = new CoinMovementService();
 
-  public void coinRemoveEvent(Board board, Circle clickedCircle, ExecutorService executorService) {
+  public void coinRemoveEvent(Board board, Circle clickedCircle, ExecutorService executorService, Stage stage) {
     System.out.println("REMOVE TRIGGERED");
     clickedCircle.setFill(GameConstants.BACKGROUNDCOLOR);
     Position clickedPosition = board.getAllPositionList().get((int) clickedCircle.getUserData());
@@ -76,11 +77,14 @@ public class CoinRemovalService {
         }
         if (gameEndService.decideGameEndCondition(board)) {
           System.out.println("END TRIGGERED");
-          gameEndService.prepareForGameEnd(board);
+          gameEndService.prepareForGameEnd(board, stage);
         }
         if (board.getOp().equals("REMOVE")) {
           board.setOp("MOVE");
+          clickedCircle.setDisable(true);
+          clickedPosition.getPositionCircle().setDisable(true);
           displayUtil.displayPlayerTurn(board, GameConstants.PLAYER2COLOR);
+          board.getBlankPositionList().add(clickedPosition);
           coinMoveService.prepareForCoinMovement(board, executorService);
           // Computer turn after Computer Coin removal by Human
           if (board.isPlayer2Computer()) {
@@ -111,11 +115,13 @@ public class CoinRemovalService {
         }
         if (gameEndService.decideGameEndCondition(board)) {
           System.out.println("END TRIGGERED");
-          gameEndService.prepareForGameEnd(board);
+          gameEndService.prepareForGameEnd(board, stage);
         }
         if (board.getOp().equals("REMOVE")) {
-          clickedCircle.setDisable(false);
+          clickedCircle.setDisable(true);
+          clickedPosition.getPositionCircle().setDisable(true);
           board.setOp("MOVE");
+          board.getBlankPositionList().add(clickedPosition);
           displayUtil.displayPlayerTurn(board, GameConstants.PLAYER1COLOR);
           coinMoveService.prepareForCoinMovement(board, executorService);
         }

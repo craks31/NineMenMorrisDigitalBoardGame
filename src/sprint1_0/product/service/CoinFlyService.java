@@ -46,6 +46,7 @@ public class CoinFlyService {
     coinMillService.breakTheMill(clickedPosition);
     PositionHelper.disableFilledPositions(board.getAllPositionList());
     PositionHelper.enableUnFilledPositions(board.getAllPositionList());
+    clickedCircle.setDisable(true);
     board.setOp("FILL");
     System.out.println("-------Board is set for Fill AFTER Flying-------");
   }

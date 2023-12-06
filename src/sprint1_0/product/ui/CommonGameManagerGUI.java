@@ -100,6 +100,7 @@ public class CommonGameManagerGUI {
 
     // Setting the preserve ratio of the image view
     imageView.setPreserveRatio(true);
+    imageView.setId("imageView");
 
     Text player1Text = new Text();
     player1Text.setText("PLAYER 1");
@@ -166,7 +167,6 @@ public class CommonGameManagerGUI {
     scene.setFill(GameConstants.BACKGROUNDCOLOR);
 
     primaryStage.setScene(scene);
-    setGameInitStage(primaryStage);
     primaryStage.show();
 
     // Initialize board GUI to implement business logic
@@ -181,7 +181,7 @@ public class CommonGameManagerGUI {
     this.executorService = Executors.newSingleThreadExecutor();
 
     // Start Game After Deciding
-    gameController.startGame(board, decidedColor, executorService);
+    gameController.startGame(board, decidedColor, executorService, primaryStage);
 
     return scene;
   }

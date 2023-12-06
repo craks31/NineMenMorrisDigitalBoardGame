@@ -120,11 +120,19 @@ public class Position extends PositionCircle {
     this.verMillFamily = verMillFamily;
   }
 
-public boolean isPartOfVerMill(){return isPartOfVerMill;}
+  public boolean isPartOfVerMill() {
+    return isPartOfVerMill;
+  }
 
-public void setPartOfVerMill(boolean isPartOfVerMill){this.isPartOfVerMill = isPartOfVerMill;}
+  public void setPartOfVerMill(boolean isPartOfVerMill) {
+    this.isPartOfVerMill = isPartOfVerMill;
+  }
 
-public boolean isPartOfHorMill(){return isPartOfHorMill;}
+  public boolean isPartOfHorMill() {
+    return isPartOfHorMill;
+  }
 
-public void setPartOfHorMill(boolean isPartOfHorMill){this.isPartOfHorMill = isPartOfHorMill;}
+  public void setPartOfHorMill(boolean isPartOfHorMill) {
+    this.isPartOfHorMill = isPartOfHorMill;
+  }
 }

@@ -70,7 +70,7 @@ public class Board {
   private boolean recordingEnabled;
 
   private RecordReplayService recordReplayService;
-  
+
   public List<PositionCircle> getPositionCircleList() {
     return positionCircleList;
   }
@@ -287,7 +287,11 @@ public class Board {
     this.recordingEnabled = recordingEnabled;
   }
 
-public RecordReplayService getRecordReplayService(){return recordReplayService;}
+  public RecordReplayService getRecordReplayService() {
+    return recordReplayService;
+  }
 
-public void setRecordReplayService(RecordReplayService recordReplayService){this.recordReplayService = recordReplayService;}
+  public void setRecordReplayService(RecordReplayService recordReplayService) {
+    this.recordReplayService = recordReplayService;
+  }
 }

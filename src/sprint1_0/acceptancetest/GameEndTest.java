@@ -126,7 +126,7 @@ public class GameEndTest extends ApplicationTest {
 
 		gameManagerGUI.getBoard().setPhase3Started(true);
 		if (gameEndService.decideGameEndCondition(gameManagerGUI.getBoard())) {
-			gameEndService.prepareForGameEnd(gameManagerGUI.getBoard());
+			gameEndService.prepareForGameEnd(gameManagerGUI.getBoard(), null);
 		}
 		assertTrue(player1PositionCircle3.isDisabled()); // player1 filled check
 		assertTrue(player2PositionCircle1.isDisabled()); // player2 filled check
@@ -171,7 +171,7 @@ public class GameEndTest extends ApplicationTest {
 		}
 		gameManagerGUI.getBoard().setPhase3Started(true);
 		if (gameEndService.decideGameEndCondition(gameManagerGUI.getBoard())) {
-			gameEndService.prepareForGameEnd(gameManagerGUI.getBoard());
+			gameEndService.prepareForGameEnd(gameManagerGUI.getBoard(), null);
 		}
 		String displayText = ((Text) (from(rootNode).lookup("#displayText").query())).getText();
 		if (displayColor.equals(GameConstants.PLAYER1COLOR)) {

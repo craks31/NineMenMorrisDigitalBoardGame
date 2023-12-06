@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.helper.DisplayUtil;
 import sprint1_0.product.helper.PositionHelper;
@@ -42,7 +43,7 @@ public class GameService {
   }
 
   public void initDisplayAndStartGame(
-      Board board, Color decidedColor, ExecutorService executorService) {
+      Board board, Color decidedColor, ExecutorService executorService, Stage stage) {
 
     EventHandler<javafx.scene.input.MouseEvent> decideButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
@@ -51,7 +52,7 @@ public class GameService {
           public void handle(javafx.scene.input.MouseEvent e) {
             displayUtil.displayPlayerTurn(board, decidedColor);
             board.getDecideButton().setDisable(true);
-            placeCoinsSetup(board, executorService);
+            placeCoinsSetup(board, executorService, stage);
             board.getRecordGameButton().setDisable(false);
             recordGame(board);
             if (board.isPlayer2Computer() && decidedColor.equals(GameConstants.PLAYER2COLOR)) {
@@ -72,24 +73,25 @@ public class GameService {
     }
   }
 
-  public void startGame(Board board, Color decideColor, ExecutorService executorService) {
-    initDisplayAndStartGame(board, decideColor, executorService);
+  public void startGame(
+      Board board, Color decideColor, ExecutorService executorService, Stage stage) {
+    initDisplayAndStartGame(board, decideColor, executorService, stage);
   }
 
-  public void placeCoinsSetup(Board board, ExecutorService executorService) {
+  public void placeCoinsSetup(Board board, ExecutorService executorService, Stage stage) {
     board.setOp("FILL");
     for (int i = 0; i < board.getBlankPositionList().size(); i++) {
       PositionCircle positionCircle = board.getBlankPositionList().get(i).getPositionCircle();
       // Adding the event handler
       positionCircle.setDisable(false);
       positionCircle.addEventHandler(
-          MouseEvent.MOUSE_CLICKED, coinMouseEventHandler(board, executorService));
+          MouseEvent.MOUSE_CLICKED, coinMouseEventHandler(board, executorService, stage));
       positionCircle.setUserData(i);
     }
   }
 
   private EventHandler<MouseEvent> coinMouseEventHandler(
-      Board board, ExecutorService executorService) {
+      Board board, ExecutorService executorService, Stage stage) {
 
     EventHandler<MouseEvent> coinMouseEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
@@ -97,8 +99,8 @@ public class GameService {
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
             Circle clickedCircle = (Circle) e.getSource();
-            if(board.isRecordingEnabled()) {
-            	board.getRecordReplayService().recordMove((Color) board.getDisplayCircleTurn().getFill(), clickedCircle);
+            if (board.isRecordingEnabled()) {
+              board.getRecordReplayService().captureScreen(stage, board);
             }
             if (board.getOp().equals("FILL")) {
               coinPlacementService.coinFillEvent(board, clickedCircle, executorService);
@@ -154,8 +156,8 @@ public class GameService {
                 board.setOp("FILL");
               }
             } else if (board.getOp().equals("REMOVE")) {
-              coinRemovalService.coinRemoveEvent(board, clickedCircle, executorService);
-              clickedCircle.setDisable(false);
+              coinRemovalService.coinRemoveEvent(board, clickedCircle, executorService, stage);
+          //    clickedCircle.setDisable(false);
             } else if (board.getOp().equals("FLY")) {
               coinFlyService.coinFlyEvent(board, clickedCircle);
               if (board.isPlayer2Computer()
@@ -269,7 +271,7 @@ public class GameService {
     System.out.println("Ver" + verticalMillDecider);
     return millFormed;
   }
-  
+
   /**
    * This method is used to RESET the board when RESET button is clicked
    *
@@ -305,11 +307,11 @@ public class GameService {
         new EventHandler<javafx.scene.input.MouseEvent>() {
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
-        	  board.setRecordingEnabled(true);
-        	  board.setRecordReplayService(new RecordReplayService());
-        }
-    };
+            board.setRecordingEnabled(true);
+            board.setRecordReplayService(new RecordReplayService());
+            board.getRecordGameButton().setDisable(true);
+          }
+        };
     board.getRecordGameButton().setOnMouseClicked(recordButtonEventHandler);
   }
-
 }

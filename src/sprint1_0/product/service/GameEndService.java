@@ -1,11 +1,12 @@
 package sprint1_0.product.service;
 
+import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.Board;
 
 public class GameEndService {
 	
-  public void prepareForGameEnd(Board board) {
+  public void prepareForGameEnd(Board board, Stage stage) {
     board.getAllPositionList().stream().forEach(e -> e.getPositionCircle().setDisable(true));
     board.getBlankPositionList().stream().forEach(e -> e.getPositionCircle().setDisable(true));
     if (board.getPlayer1().getFilledPositions().size() == 2) {
@@ -17,9 +18,8 @@ public class GameEndService {
     }
     board.setOp("END");
     if (board.isRecordingEnabled()) {
-      RecordReplayService recordReplayService = new RecordReplayService();
-      recordReplayService.finishRecording();
-      recordReplayService.replayGame(board);
+      board.getRecordReplayService().captureScreen(stage, board);        
+      board.getRecordReplayService().replayGame(board, stage);
     }
   }
   
