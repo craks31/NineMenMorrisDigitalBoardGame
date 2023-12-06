@@ -21,10 +21,10 @@ import sprint1_0.product.model.Position;
 import sprint1_0.product.model.PositionCircle;
 import sprint1_0.product.service.CoinFlyService;
 import sprint1_0.product.service.GameEndService;
-import sprint1_0.product.ui.GameManagerGUI;
+import sprint1_0.product.ui.NineMenMorrisGameManagerGUI;
 
 public class GameEndTest extends ApplicationTest {
-	private GameManagerGUI gameManagerGUI = new GameManagerGUI();
+	private NineMenMorrisGameManagerGUI gameManagerGUI = new NineMenMorrisGameManagerGUI();
 	CoinFlyService coinFlyService = new CoinFlyService();
 	GameEndService gameEndService = new GameEndService();
 	private Parent rootNode;
@@ -126,7 +126,7 @@ public class GameEndTest extends ApplicationTest {
 
 		gameManagerGUI.getBoard().setPhase3Started(true);
 		if (gameEndService.decideGameEndCondition(gameManagerGUI.getBoard())) {
-			gameEndService.prepareForGameEnd(gameManagerGUI.getBoard());
+			gameEndService.prepareForGameEnd(gameManagerGUI.getBoard(), null);
 		}
 		assertTrue(player1PositionCircle3.isDisabled()); // player1 filled check
 		assertTrue(player2PositionCircle1.isDisabled()); // player2 filled check
@@ -171,7 +171,7 @@ public class GameEndTest extends ApplicationTest {
 		}
 		gameManagerGUI.getBoard().setPhase3Started(true);
 		if (gameEndService.decideGameEndCondition(gameManagerGUI.getBoard())) {
-			gameEndService.prepareForGameEnd(gameManagerGUI.getBoard());
+			gameEndService.prepareForGameEnd(gameManagerGUI.getBoard(), null);
 		}
 		String displayText = ((Text) (from(rootNode).lookup("#displayText").query())).getText();
 		if (displayColor.equals(GameConstants.PLAYER1COLOR)) {

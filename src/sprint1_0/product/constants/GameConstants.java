@@ -19,4 +19,6 @@ public class GameConstants {
   public static final String FILL = "FILL";
   public static final String MOVE = "MOVE";
   public static final String REMOVE = "REMOVE";
+  public static final double SixMenCircleDiameter = 18;
+
 }

@@ -24,8 +24,8 @@ public class GameController {
     return board;
   }
 
-  public void startGame(Board board, Color decideColor, ExecutorService executorService) {
-	  gameService.startGame(board, decideColor, executorService);
+  public void startGame(Board board, Color decideColor, ExecutorService executorService, Stage stage) {
+	  gameService.startGame(board, decideColor, executorService, stage);
   }
   
   public Color decidePlayerTurn(Board board) {
