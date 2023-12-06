@@ -110,6 +110,13 @@ public class CommonGameManagerGUI {
     player2Text.setText("PLAYER 2");
     player2Text.setX(25);
     player2Text.setY(400);
+    
+    Text recordText = new Text();
+    recordText.setText("Record");
+    recordText.setX(600);
+    recordText.setY(60);
+    recordText.setFont(Font.font(20));
+
 
     Group boardGroup =
         new Group(
@@ -124,6 +131,7 @@ public class CommonGameManagerGUI {
             backwardButton,
             forwardButton,
             endButton,
+            recordText,
             displayCircle,
             displayText,
             imageView);
