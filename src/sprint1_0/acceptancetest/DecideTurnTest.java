@@ -81,7 +81,7 @@ public class DecideTurnTest extends ApplicationTest {
   public void checkifAllPositionsAreClickable() {
     Button decideButton = from(rootNode).lookup("#decideButton").query();
     clickOn(decideButton);
-    for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
+    for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_NINE_BOARD; i++) {
       String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       assertEquals(false, c.isDisabled());

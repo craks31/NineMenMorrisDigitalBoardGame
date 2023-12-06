@@ -161,7 +161,7 @@ public class BoardVisualisationTest extends ApplicationTest {
 
   @Test
   public void checkifAllPositionsAreAvailableAndNotClickable() {
-    for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
+    for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_NINE_BOARD; i++) {
       String pos = "#position" + String.valueOf(i);
       PositionCircle c = from(rootNode).lookup(pos).query();
       assertEquals(true, c.isDisabled());

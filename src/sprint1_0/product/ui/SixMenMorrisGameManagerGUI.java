@@ -11,7 +11,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.controller.GameController;
@@ -27,7 +26,7 @@ public class SixMenMorrisGameManagerGUI extends Application {
   CommonGameManagerGUI commonGameManagerGUI = new CommonGameManagerGUI();
 
   public SixMenMorrisGameManagerGUI() {
-    super(); 
+    super();
   }
 
   @Override
@@ -41,8 +40,8 @@ public class SixMenMorrisGameManagerGUI extends Application {
   }
 
   private Group boardGUIInit(Board board) throws FileNotFoundException {
-	  
-	String filePath = ".\\resources\\images\\sixmen.png";
+
+    String filePath = ".\\resources\\images\\sixmen.png";
 
     Group boardGroup = commonGameManagerGUI.getOuterWindowUI(board, filePath);
 
@@ -51,80 +50,67 @@ public class SixMenMorrisGameManagerGUI extends Application {
     List<Circle> player1Coins = new ArrayList<>();
 
     List<Circle> player2Coins = new ArrayList<>();
-    
-    
-    
 
     // outermost circle
     PositionCircle o1c1r1 =
-        new PositionCircle(190.0d, 185.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            190.0d, 185.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     o1c1r1.setId("position1");
     PositionCircle o1c1r2 =
-        new PositionCircle(186.0d, 175.0d * 2, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            186.0d, 175.0d * 2, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o1c1r3 =
-        new PositionCircle(190.0d, 169.0d * 3, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            190.0d, 169.0d * 3, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o1c2r1 =
-        new PositionCircle(175.0d * 2, 185.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            175.0d * 2, 185.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o1c2r3 =
-        new PositionCircle(175.0d * 2, 170.0d * 3, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            175.0d * 2, 170.0d * 3, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o1c3r1 =
-        new PositionCircle(170.0d * 3, 185.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            170.0d * 3, 185.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o1c3r2 =
-        new PositionCircle(170.0d * 3, 175.0d * 2, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            170.0d * 3, 175.0d * 2, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o1c3r3 =
-        new PositionCircle(170.0d * 3, 170.0d * 3, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            170.0d * 3, 170.0d * 3, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
 
     positionCircleList.add(o1c1r1);
     positionCircleList.add(o1c1r2);
-    positionCircleList.add(o1c1r3); 
+    positionCircleList.add(o1c1r3);
     positionCircleList.add(o1c2r1);
     positionCircleList.add(o1c2r3);
     positionCircleList.add(o1c3r1);
     positionCircleList.add(o1c3r2);
     positionCircleList.add(o1c3r3);
 
-    PositionCircle o2c1r1 =
-        new PositionCircle(235.0d, 235.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c1r2 =
-        new PositionCircle(235.0d, 350.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c1r3 =
-        new PositionCircle(235.0d, 465.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c2r1 =
-        new PositionCircle(350.0d, 235.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c2r3 =
-        new PositionCircle(350.0d, 465.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c3r1 =
-        new PositionCircle(465.0d, 235.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c3r2 =
-        new PositionCircle(465.0d, 350.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
-    PositionCircle o2c3r3 =
-        new PositionCircle(465.0d, 465.0d, 16.0d, GameConstants.BACKGROUNDCOLOR);
-
-    positionCircleList.add(o2c1r1);
-    positionCircleList.add(o2c1r2);
-    positionCircleList.add(o2c1r3);
-    positionCircleList.add(o2c2r1);
-    positionCircleList.add(o2c2r3);
-    positionCircleList.add(o2c3r1);
-    positionCircleList.add(o2c3r2);
-    positionCircleList.add(o2c3r3);
-
     PositionCircle o3c1r1 =
-        new PositionCircle(270.0d, 270.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            270.0d, 270.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o3c1r2 =
-        new PositionCircle(270.0d, 350.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            270.0d, 350.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o3c1r3 =
-        new PositionCircle(270.0d, 430.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            270.0d, 430.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o3c2r1 =
-        new PositionCircle(350.0d, 270.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            350.0d, 270.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o3c2r3 =
-        new PositionCircle(350.0d, 430.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            350.0d, 430.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o3c3r1 =
-        new PositionCircle(430.0d, 270.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            430.0d, 270.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o3c3r2 =
-        new PositionCircle(430.0d, 350.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            430.0d, 350.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
     PositionCircle o3c3r3 =
-        new PositionCircle(430.0d, 430.0d, GameConstants.SixMenCircleDiameter, GameConstants.BACKGROUNDCOLOR);
+        new PositionCircle(
+            430.0d, 430.0d, GameConstants.SIXMENRADIUS, GameConstants.BACKGROUNDCOLOR);
 
     positionCircleList.add(o3c1r1);
     positionCircleList.add(o3c1r2);
@@ -146,7 +132,7 @@ public class SixMenMorrisGameManagerGUI extends Application {
     player2CoinsGroup.setId("player2CoinsGroup");
 
     positionCircleList.forEach(boardGroup.getChildren()::add);
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 6; i++) {
       Circle c1;
       Circle c2;
       if (i < 5) {
@@ -183,10 +169,14 @@ public class SixMenMorrisGameManagerGUI extends Application {
     Scene scene = new Scene(boardGUIInit(board), 700, 600);
     scene =
         commonGameManagerGUI.gameInit(
-            primaryStage, "Six Men Morris Digital Board Game", board, scene);
+            primaryStage,
+            "Six Men Morris Digital Board Game",
+            board,
+            scene,
+            GameConstants.SIXVARIANT);
     resetGameButtonEventHandler =
         new EventHandler<javafx.scene.input.MouseEvent>() {
- 
+
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
             try {

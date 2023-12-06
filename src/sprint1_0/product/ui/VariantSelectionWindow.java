@@ -43,7 +43,7 @@ public class VariantSelectionWindow extends Application {
           }
         });
 
-    VBox root = new VBox(10, nineMenMorrisButton);
+    VBox root = new VBox(10, nineMenMorrisButton,sixMenMorrisButton );
     Scene scene = new Scene(root, 300, 200);
 
     primaryStage.setScene(scene);
@@ -57,6 +57,6 @@ public class VariantSelectionWindow extends Application {
 
   private void openSixMenMorrisWindow() throws Exception {
     // Launch the NineMenMorris window
-    new NineMenMorrisGameManagerGUI().start(new Stage());
+    new SixMenMorrisGameManagerGUI().start(new Stage());
   }
 }
