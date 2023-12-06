@@ -26,6 +26,7 @@ public class VariantSelectionWindow extends Application {
         event -> {
           try {
             openNineMenMorrisWindow();
+            primaryStage.close();
           } catch (Exception e) {
             
             e.printStackTrace();
@@ -37,6 +38,7 @@ public class VariantSelectionWindow extends Application {
         event -> {
           try {
             openSixMenMorrisWindow();
+            primaryStage.close();
           } catch (Exception e) {
             
             e.printStackTrace();
