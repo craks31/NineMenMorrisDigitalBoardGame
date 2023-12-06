@@ -99,7 +99,7 @@ public class Board {
     return blankPositionList;
   }
 
-  public void setBlankPositionList(List<Position> blankPositionList) {
+  public void setBlankPositionList(List<Position> blankPositionList) { 
     this.blankPositionList = blankPositionList;
   }
 
