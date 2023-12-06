@@ -16,4 +16,8 @@ public class DisplayUtil {
       board.getDisplayTextTurn().setText(GameConstants.PLAYER2TURNTEXT);
     }
   }
+
+  public void displayOperation(Board board) {
+    board.getDisplayPlainText().setText(board.getOp() + "ED");
+  }
 }

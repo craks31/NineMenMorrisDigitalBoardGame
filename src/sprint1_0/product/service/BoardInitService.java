@@ -35,12 +35,12 @@ public class BoardInitService {
    *
    * @param board
    */
-  public void setUpBoard(Board board) {
+  public void setUpNineBoard(Board board) {
 
     List<PositionCircle> allCirclesList = board.getPositionCircleList();
 
     List<Position> positionList = new ArrayList<>();
-    for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_BOARD; i++) {
+    for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_NINE_BOARD; i++) {
       PositionCircle positionCircle = allCirclesList.get(i);
       Position position = new Position();
       position.setPositionCircle(positionCircle);
@@ -168,6 +168,110 @@ public class BoardInitService {
     board.setPlayer2Computer(false);
   }
 
+  public void setUpSixBoard(Board board) {
+
+    List<PositionCircle> allCirclesList = board.getPositionCircleList();
+
+    List<Position> positionList = new ArrayList<>();
+    for (int i = 0; i < GameConstants.NUM_POSITIONS_OF_SIX_BOARD; i++) {
+      PositionCircle positionCircle = allCirclesList.get(i);
+      Position position = new Position();
+      position.setPositionCircle(positionCircle);
+      position.setPositionId(i);
+      positionList.add(position);
+    }
+
+    positionList.get(0).setRight(positionList.get(3));
+    positionList.get(0).setDown(positionList.get(1));
+
+    positionList.get(1).setRight(positionList.get(9));
+    positionList.get(1).setUp(positionList.get(0));
+    positionList.get(1).setDown(positionList.get(2));
+
+    positionList.get(2).setRight(positionList.get(4));
+    positionList.get(2).setUp(positionList.get(1));
+
+    positionList.get(3).setRight(positionList.get(5));
+    positionList.get(3).setLeft(positionList.get(0));
+    positionList.get(3).setDown(positionList.get(11));
+
+    positionList.get(4).setLeft(positionList.get(2));
+    positionList.get(4).setRight(positionList.get(7));
+    positionList.get(4).setUp(positionList.get(12));
+
+    positionList.get(5).setLeft(positionList.get(3));
+    positionList.get(5).setDown(positionList.get(6));
+
+    positionList.get(6).setLeft(positionList.get(14));
+    positionList.get(6).setDown(positionList.get(7));
+    positionList.get(6).setUp(positionList.get(5));
+
+    positionList.get(7).setLeft(positionList.get(4));
+    positionList.get(7).setUp(positionList.get(6));
+
+    positionList.get(8).setRight(positionList.get(11));
+    positionList.get(8).setDown(positionList.get(9));
+
+    positionList.get(9).setUp(positionList.get(8));
+    positionList.get(9).setDown(positionList.get(10));
+    positionList.get(9).setLeft(positionList.get(1));
+
+    positionList.get(10).setRight(positionList.get(12));
+    positionList.get(10).setUp(positionList.get(9));
+
+    positionList.get(11).setLeft(positionList.get(8));
+    positionList.get(11).setUp(positionList.get(3));
+    positionList.get(11).setRight(positionList.get(13));
+
+    positionList.get(12).setRight(positionList.get(15));
+    positionList.get(12).setDown(positionList.get(4));
+    positionList.get(12).setLeft(positionList.get(10));
+
+    positionList.get(13).setLeft(positionList.get(11));
+    positionList.get(13).setDown(positionList.get(14));
+
+    positionList.get(14).setRight(positionList.get(6));
+    positionList.get(14).setUp(positionList.get(13));
+    positionList.get(14).setDown(positionList.get(15));
+
+    positionList.get(15).setLeft(positionList.get(12));
+    positionList.get(15).setUp(positionList.get(14));
+
+    List<Position> filledPositionList = new ArrayList<>();
+    List<Position> blankPositionList = new ArrayList<>();
+    filledPositionList.addAll(positionList);
+    blankPositionList.addAll(positionList);
+    // positionList.forEach(position -> {filledPositionList.add(position.clone()));
+    board.setAllPositionList(filledPositionList);
+    board.setBlankPositionList(blankPositionList);
+    board.setMillCheckByPassed(false);
+    board.getAllPositionList().forEach(p -> p.setPartOfHorMill(false));
+    board.getBlankPositionList().forEach(p -> p.setPartOfHorMill(false));
+    board.getAllPositionList().forEach(p -> p.setPartOfVerMill(false));
+    board.getBlankPositionList().forEach(p -> p.setPartOfVerMill(false));
+    setDialogs(board);
+  }
+
+  private void setDialogs(Board board) {
+    List<String> choices = new ArrayList<>();
+    choices.add("Human");
+    choices.add("Computer");
+
+    ChoiceDialog<String> dialog = new ChoiceDialog<>("Human", choices);
+    dialog.setTitle("Choose Opponent");
+    dialog.setHeaderText("Select the opponent type:");
+    dialog.setContentText("Opponent:");
+    dialog.getDialogPane().setId("choiceDialog");
+
+    board.setChoiceDialog(dialog);
+
+    TextInputDialog name1Dialog = new TextInputDialog("Player 1");
+    TextInputDialog name2Dialog = new TextInputDialog("Player 2");
+    board.setName1Dialog(name1Dialog);
+    board.setName2Dialog(name2Dialog);
+    board.setPlayer2Computer(false);
+  }
+
   /**
    * This method is used to RESET the board when RESET button is clicked
    *
@@ -209,9 +313,9 @@ public class BoardInitService {
             showOpponentChoiceDialog(board, primaryStage);
             updateBoardGUI(
                 primaryStage,
-                board.getPlayer1().getPlayerName(), 
+                board.getPlayer1().getPlayerName(),
                 board.getPlayer2().getPlayerName());
-          } 
+          }
         };
     board.getStartNewGameButton().setOnMouseClicked(newGameButtonEventHandler);
   }

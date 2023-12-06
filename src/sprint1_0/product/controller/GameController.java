@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sprint1_0.product.constants.GameConstants;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.service.BoardInitService;
 import sprint1_0.product.service.GameService;
@@ -15,9 +16,12 @@ public class GameController {
  
   GameService gameService = new GameService();
 
-  public void init(Board board) {
+  public void init(Board board, String variant) {
     this.board = board;
-    boardInitService.setUpBoard(board);
+    if(variant.equals(GameConstants.NINEVARIANT))
+    	boardInitService.setUpNineBoard(board);
+    else if(variant.equals(GameConstants.SIXVARIANT))
+    	boardInitService.setUpSixBoard(board);
   }
 
   public Board getExistingBoard() {

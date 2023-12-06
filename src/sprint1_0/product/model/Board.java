@@ -35,6 +35,8 @@ public class Board {
 
   private Text displayTextTurn;
 
+  private Text displayPlainText;
+
   private Circle displayCircleTurn;
 
   private Button decideButton;
@@ -99,7 +101,7 @@ public class Board {
     return blankPositionList;
   }
 
-  public void setBlankPositionList(List<Position> blankPositionList) { 
+  public void setBlankPositionList(List<Position> blankPositionList) {
     this.blankPositionList = blankPositionList;
   }
 
@@ -293,5 +295,13 @@ public class Board {
 
   public void setRecordReplayService(RecordReplayService recordReplayService) {
     this.recordReplayService = recordReplayService;
+  }
+
+  public Text getDisplayPlainText() {
+    return displayPlainText;
+  }
+
+  public void setDisplayPlainText(Text displayPlainText) {
+    this.displayPlainText = displayPlainText;
   }
 }

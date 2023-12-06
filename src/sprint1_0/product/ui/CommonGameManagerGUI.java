@@ -113,16 +113,18 @@ public class CommonGameManagerGUI {
     player2Text.setY(400);
     
     Text recordText = new Text();
-    recordText.setText("Record");
+    recordText.setText("");
     recordText.setX(600);
     recordText.setY(60);
     recordText.setFont(Font.font(20));
+    recordText.setId("recordText");
     
     Text plainText = new Text();
-    plainText.setText("Plain");
+    plainText.setText("");
     plainText.setX(160);
-    plainText.setY(30);
+    plainText.setY(40);
     plainText.setFont(Font.font(20));
+    plainText.setId("plainText");
 
     Group boardGroup =
         new Group(
@@ -167,10 +169,11 @@ public class CommonGameManagerGUI {
     board.setBackwardButton(backwardButton);
     board.setFrontButton(frontButton);
     board.setEndButton(endButton);
+    board.setDisplayPlainText(plainText);
     return boardGroup;
   }
 
-  public Scene gameInit(Stage primaryStage, String title, Board board, Scene scene)
+  public Scene gameInit(Stage primaryStage, String title, Board board, Scene scene, String variant)
       throws Exception {
     GameController gameController = new GameController();
 
@@ -184,7 +187,7 @@ public class CommonGameManagerGUI {
     primaryStage.show();
 
     // Initialize board GUI to implement business logic
-    gameController.init(board);
+    gameController.init(board, variant);
 
     // New Game Initialization
     gameController.newGame(board, primaryStage);

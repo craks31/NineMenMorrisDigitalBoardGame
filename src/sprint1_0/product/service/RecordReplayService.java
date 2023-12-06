@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import sprint1_0.product.helper.DisplayUtil;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.ImageList;
 
@@ -31,7 +32,7 @@ public class RecordReplayService {
   private String folder;
 
   public RecordReplayService() {
-   createFolder();
+    createFolder();
   }
 
   public void createFolder() {
@@ -40,6 +41,8 @@ public class RecordReplayService {
   }
 
   public void captureScreen(Stage stage, Board board) {
+    DisplayUtil displayUtil = new DisplayUtil();
+    displayUtil.displayOperation(board);
     WritableImage snapshot =
         new WritableImage(
             (int) stage.getScene().getWidth(), (int) stage.getScene().getHeight() - 10);
@@ -78,7 +81,6 @@ public class RecordReplayService {
             slideshowButtons(board, stage);
             showReplayPopup();
             board.getReplayGameButton().setDisable(true);
-
           }
         };
     board.getReplayGameButton().setOnMouseClicked(replayButtonEventHandler);
@@ -152,8 +154,7 @@ public class RecordReplayService {
     File[] screenshotFiles = screenshotDirectory.listFiles();
 
     if (screenshotFiles != null) {
-    	Arrays.sort(screenshotFiles, Comparator.comparingInt(this::extractIndex));
-
+      Arrays.sort(screenshotFiles, Comparator.comparingInt(this::extractIndex));
 
       for (File file : screenshotFiles) {
         screenshots.addImage(new Image(file.toURI().toString()));
@@ -162,7 +163,7 @@ public class RecordReplayService {
   }
 
   private void showNextImage() {
-	screenshots.moveForward();
+    screenshots.moveForward();
     Image currentImage = screenshots.getCurrentImage();
 
     if (currentImage != null) {
@@ -174,7 +175,7 @@ public class RecordReplayService {
       // Optionally show the stage if not already visible
       if (!popupStage.isShowing()) {
         popupStage.show();
-      }    
+      }
     }
   }
 
@@ -191,12 +192,11 @@ public class RecordReplayService {
 
       popupStage.setScene(popupScene);
       popupStage.show();
-
     }
   }
 
   private void showPreviousImage() {
-	screenshots.moveBackward();
+    screenshots.moveBackward();
     Image currentImage = screenshots.getCurrentImage();
 
     if (currentImage != null) {
@@ -208,19 +208,19 @@ public class RecordReplayService {
       // Optionally show the stage if not already visible
       if (!popupStage.isShowing()) {
         popupStage.show();
-      }    
+      }
     }
   }
 
   private int extractIndex(File file) {
-	    // Extract the numeric index from the file name
-	    Pattern pattern = Pattern.compile("\\d+");
-	    Matcher matcher = pattern.matcher(file.getName());
+    // Extract the numeric index from the file name
+    Pattern pattern = Pattern.compile("\\d+");
+    Matcher matcher = pattern.matcher(file.getName());
 
-	    if (matcher.find()) {
-	        return Integer.parseInt(matcher.group());
-	    } else {
-	        return Integer.MAX_VALUE; // Default value if no numeric part found
-	    }
-	}
+    if (matcher.find()) {
+      return Integer.parseInt(matcher.group());
+    } else {
+      return Integer.MAX_VALUE; // Default value if no numeric part found
+    }
+  }
 }
