@@ -76,16 +76,16 @@ public class CommonGameManagerGUI {
     endButton.setDisable(true);
 
     decideButton = new Button("DECIDE");
-    decideButton.setLayoutX(100);
+    decideButton.setLayoutX(50);
     decideButton.setLayoutY(55);
     decideButton.setDisable(true);
 
     Text displayText = new Text();
     displayText.setText("Who's Turn ?");
-    displayText.setX(230);
+    displayText.setX(200);
     displayText.setY(80);
     displayText.setFont(Font.font(30));
-    Circle displayCircle = new Circle(200.0d, 70.0d, 16.0d, GameConstants.DISPLAYCIRCLECOLOR);
+    Circle displayCircle = new Circle(170.0d, 70.0d, 16.0d, GameConstants.DISPLAYCIRCLECOLOR);
     Image myImage = new Image(new FileInputStream(filePath));
 
     // Setting the image view
@@ -116,7 +116,12 @@ public class CommonGameManagerGUI {
     recordText.setX(600);
     recordText.setY(60);
     recordText.setFont(Font.font(20));
-
+    
+    Text plainText = new Text();
+    plainText.setText("Plain");
+    plainText.setX(160);
+    plainText.setY(30);
+    plainText.setFont(Font.font(20));
 
     Group boardGroup =
         new Group(
@@ -131,6 +136,7 @@ public class CommonGameManagerGUI {
             backwardButton,
             forwardButton,
             endButton,
+            plainText,
             recordText,
             displayCircle,
             displayText,
