@@ -85,7 +85,7 @@ public class CommonGameManagerGUI {
     displayText.setText("Who's Turn ?");
     displayText.setX(200);
     displayText.setY(80);
-    displayText.setFont(Font.font("Times New Roman", FontWeight.BOLD,30));
+    displayText.setFont(Font.font(30));
     Circle displayCircle = new Circle(170.0d, 70.0d, 16.0d, GameConstants.DISPLAYCIRCLECOLOR);
     Image myImage = new Image(new FileInputStream(filePath));
 
