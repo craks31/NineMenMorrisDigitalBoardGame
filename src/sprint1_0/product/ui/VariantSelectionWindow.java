@@ -56,7 +56,6 @@ public class VariantSelectionWindow extends Application {
           try {
             openSixMenMorrisWindow();
             primaryStage.close();
-
           } catch (Exception e) {
             
             e.printStackTrace();
