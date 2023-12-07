@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
@@ -84,7 +85,7 @@ public class CommonGameManagerGUI {
     displayText.setText("Who's Turn ?");
     displayText.setX(200);
     displayText.setY(80);
-    displayText.setFont(Font.font(30));
+    displayText.setFont(Font.font("Times New Roman", FontWeight.BOLD,30));
     Circle displayCircle = new Circle(170.0d, 70.0d, 16.0d, GameConstants.DISPLAYCIRCLECOLOR);
     Image myImage = new Image(new FileInputStream(filePath));
 
