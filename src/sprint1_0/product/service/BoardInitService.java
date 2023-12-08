@@ -292,6 +292,7 @@ public class BoardInitService {
               board.getPositionCircleList().get(i).setFill(Color.ROSYBROWN);
               board.getPositionCircleList().get(i).setDisable(true);
             }
+
           }
         };
     board.getResetGameButton().setOnMouseClicked(resetGameButtonEventHandler);

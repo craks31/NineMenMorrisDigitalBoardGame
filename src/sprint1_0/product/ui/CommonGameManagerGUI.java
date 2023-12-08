@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sprint1_0.product.constants.GameConstants;
@@ -30,6 +29,7 @@ public class CommonGameManagerGUI {
   private Button backwardButton;
   private Button forwardButton;
   private Button endButton;
+  private Button autoReplayGameButton;
   ExecutorService executorService;
   private Scene gameScene;
   private Stage gameInitStage;
@@ -55,6 +55,12 @@ public class CommonGameManagerGUI {
     replayGameButton.setLayoutX(590);
     replayGameButton.setLayoutY(350);
     replayGameButton.setDisable(true);
+    
+    autoReplayGameButton = new Button(" AUTO REPLAY ");
+    autoReplayGameButton.setLayoutX(590);
+    autoReplayGameButton.setLayoutY(380);
+    autoReplayGameButton.setDisable(true);
+
 
     frontButton = new Button("       <<       ");
     frontButton.setLayoutX(170);
@@ -136,6 +142,7 @@ public class CommonGameManagerGUI {
             decideButton,
             recordGameButton,
             replayGameButton,
+            autoReplayGameButton,
             frontButton,
             backwardButton,
             forwardButton,
@@ -151,6 +158,7 @@ public class CommonGameManagerGUI {
     resetGameButton.setId("resetGameButton");
     recordGameButton.setId("recordGameButton");
     replayGameButton.setId("replayGameButton");
+    autoReplayGameButton.setId("autoReplayButton");
     forwardButton.setId("forwardGameButton");
     backwardButton.setId("backwardButton");
     frontButton.setId("frontButton");
@@ -171,6 +179,7 @@ public class CommonGameManagerGUI {
     board.setFrontButton(frontButton);
     board.setEndButton(endButton);
     board.setDisplayPlainText(plainText);
+    board.setAutoReplayButton(autoReplayGameButton);
     return boardGroup;
   }
 
@@ -179,7 +188,7 @@ public class CommonGameManagerGUI {
     GameController gameController = new GameController();
 
     // Setting title to Window Pop-up.
-    primaryStage.setTitle("Nine Men Morris Digital Board Game");
+    primaryStage.setTitle(title);
 
     // setting color to the scene
     scene.setFill(GameConstants.BACKGROUNDCOLOR);

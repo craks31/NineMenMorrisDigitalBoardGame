@@ -1,6 +1,11 @@
 package sprint1_0.product.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -157,7 +162,7 @@ public class GameService {
               }
             } else if (board.getOp().equals("REMOVE")) {
               coinRemovalService.coinRemoveEvent(board, clickedCircle, executorService, stage);
-          //    clickedCircle.setDisable(false);
+              //    clickedCircle.setDisable(false);
             } else if (board.getOp().equals("FLY")) {
               coinFlyService.coinFlyEvent(board, clickedCircle);
               if (board.isPlayer2Computer()
@@ -310,8 +315,30 @@ public class GameService {
             board.setRecordingEnabled(true);
             board.setRecordReplayService(new RecordReplayService());
             board.getRecordGameButton().setDisable(true);
+            saveToTxtFile();
           }
         };
     board.getRecordGameButton().setOnMouseClicked(recordButtonEventHandler);
+  }
+
+  private void saveToTxtFile() {
+    try {
+
+      // Create a timestamp for the file name
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmm");
+      String timestamp = dateFormat.format(new Date());
+      // Create a new file for output
+      File outputFile = new File(timestamp + "recordedGamePlay.txt");
+
+      // Redirect System.out to the file
+      PrintStream fileOut = new PrintStream(new FileOutputStream(outputFile));
+      System.setOut(fileOut);
+
+      // Your code with console prints
+      System.out.println("This will be written to the file.");
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

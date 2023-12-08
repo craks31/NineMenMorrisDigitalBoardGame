@@ -73,6 +73,8 @@ public class Board {
 
   private RecordReplayService recordReplayService;
 
+  private Button autoReplayButton;
+
   public List<PositionCircle> getPositionCircleList() {
     return positionCircleList;
   }
@@ -303,5 +305,13 @@ public class Board {
 
   public void setDisplayPlainText(Text displayPlainText) {
     this.displayPlainText = displayPlainText;
+  }
+
+  public Button getAutoReplayButton() {
+    return autoReplayButton;
+  }
+
+  public void setAutoReplayButton(Button autoReplayButton) {
+    this.autoReplayButton = autoReplayButton;
   }
 }
