@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -19,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import sprint1_0.product.helper.DisplayUtil;
 import sprint1_0.product.model.Board;
 import sprint1_0.product.model.ImageList;
@@ -77,13 +80,59 @@ public class RecordReplayService {
             board.getBackwardButton().setDisable(false);
             board.getFrontButton().setDisable(false);
             board.getEndButton().setDisable(false);
+            board.getAutoReplayButton().setDisable(false);
             loadScreenshots(folder);
             slideshowButtons(board, stage);
-            showReplayPopup();
+            showReplayPopup(board);
             board.getReplayGameButton().setDisable(true);
           }
         };
     board.getReplayGameButton().setOnMouseClicked(replayButtonEventHandler);
+  }
+
+  public void autoReplayButton(Board board, Image currentImage) {
+    EventHandler<javafx.scene.input.MouseEvent> autoReplayButtonEventHandler =
+        new EventHandler<javafx.scene.input.MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent e) {
+        	  autoReplay(currentImage);
+              board.getForwardButton().setDisable(true);
+              board.getBackwardButton().setDisable(true);
+              board.getFrontButton().setDisable(true);
+              board.getEndButton().setDisable(true);
+          }
+        };
+    board.getAutoReplayButton().setOnMouseClicked(autoReplayButtonEventHandler);
+  }
+
+  private void autoReplay(Image currentImage) {
+
+    if (currentImage != null) {
+      ImageView imageView = new ImageView(currentImage);
+      StackPane popupRoot = new StackPane(imageView);
+      popupRoot.setId("stackPane");
+      Scene popupScene = new Scene(popupRoot, popupWidth, popupHeight);
+      popupStage.setScene(popupScene);
+      Timeline timeline =
+          new Timeline(new KeyFrame(Duration.seconds(2), event -> showNextImageAuto()));
+      timeline.setCycleCount(Timeline.INDEFINITE);
+      timeline.play();
+
+      // Optionally show the stage if not already visible
+      if (!popupStage.isShowing()) {
+        popupStage.show();
+      }
+    }
+  }
+
+  private void showNextImageAuto() {
+    screenshots.moveForward();
+    Image currentImage = screenshots.getCurrentImage();
+    if (currentImage != null) {
+      ImageView imageView =
+          (ImageView) popupStage.getScene().getRoot().getChildrenUnmodifiable().get(0);
+      imageView.setImage(currentImage);
+    }
   }
 
   public void slideshowButtons(Board board, Stage stage) {
@@ -93,6 +142,7 @@ public class RecordReplayService {
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
             showNextImage();
+            board.getAutoReplayButton().setDisable(true);
           }
         };
     board.getForwardButton().setOnMouseClicked(forwardButtonEventHandler);
@@ -101,6 +151,7 @@ public class RecordReplayService {
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
             showPreviousImage();
+            board.getAutoReplayButton().setDisable(true);
           }
         };
     board.getBackwardButton().setOnMouseClicked(backwardButtonEventHandler);
@@ -108,7 +159,7 @@ public class RecordReplayService {
         new EventHandler<javafx.scene.input.MouseEvent>() {
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
-
+        	  board.getAutoReplayButton().setDisable(true);
             Image currentImage = screenshots.getFirstImage();
 
             if (currentImage != null) {
@@ -130,6 +181,7 @@ public class RecordReplayService {
         new EventHandler<javafx.scene.input.MouseEvent>() {
           @Override
           public void handle(javafx.scene.input.MouseEvent e) {
+        	  board.getAutoReplayButton().setDisable(true);
             Image currentImage = screenshots.getLastImage();
 
             if (currentImage != null) {
@@ -179,7 +231,7 @@ public class RecordReplayService {
     }
   }
 
-  private void showReplayPopup() {
+  private void showReplayPopup(Board board) {
     popupStage = new Stage();
     popupStage.setTitle("Replay Popup");
 
@@ -193,6 +245,8 @@ public class RecordReplayService {
       popupStage.setScene(popupScene);
       popupStage.show();
     }
+    
+    autoReplayButton(board, initialImage);
   }
 
   private void showPreviousImage() {
